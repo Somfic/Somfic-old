@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Somfic.Logging
 {
     public class Line
     {
-        private int OrgLeft = -1;
-        private int OrgUp = -1;
+        private readonly int OrgLeft = -1;
+        private readonly int OrgUp = -1;
 
         internal Line(string s)
         {
             //Go to the original position if we've updated before.
-            if(OrgLeft != -1 && OrgUp != -1)
+            if (OrgLeft != -1 && OrgUp != -1)
             {
                 Console.SetCursorPosition(OrgLeft, OrgUp);
             }
@@ -48,26 +44,25 @@ namespace Somfic.Logging
             //Go to the position.
             Console.SetCursorPosition(Left, UpStart);
 
-                        return;
-
             //Write the additional text.
-            Console.Write(value.Trim());
+            Console.Write(value);
 
             //Save the horizontal position in case we want to update it.
             Left = Console.CursorLeft;
-
-            //Go back to original position.
-            Console.SetCursorPosition(OrgLeft, OrgUp);
-        } 
+        }
 
         public void EraseAndUpdate(string value)
         {
             //Erase the line.
-            //Go to the starting position.
-            Console.SetCursorPosition(LeftStart, UpStart);
 
-            //Clear everything that has been written by this line.
-            Console.Write(new string(' ', Left - LeftStart));
+            //Set the new left.
+            Left = LeftStart;
+
+            //If the new text is shorter than the old text, add spaces to clear the old text.
+            if (value.Length < Text.Length)
+            {
+                value += new string(' ', Text.Length - value.Length);
+            }
 
             //Clear the text.
             Text = string.Empty;
