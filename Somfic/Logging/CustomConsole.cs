@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace Somfic.Logging
 {
     public static class CustomConsole
     {
-        public static void HideCursor(bool value = true) => Console.CursorVisible = !value;
+        public static void HideCursor(bool value = true)
+        {
+            Console.CursorVisible = !value;
+        }
 
-        public static Line Write(object value) => Write(value, Console.CursorLeft);
+        public static Line Write(object value)
+        {
+            return Write(value, Console.CursorLeft);
+        }
 
         public static Line Write(object value, int left)
         {
@@ -20,7 +21,7 @@ namespace Somfic.Logging
             Console.CursorLeft = left;
 
             //Convert the object to a string and get the line object.
-            var line = new Line(value.ToString());
+            Line line = new Line(value.ToString());
 
             //Return the line.
             return line;

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace Somfic.Logging.Themes
 {
@@ -27,7 +22,7 @@ namespace Somfic.Logging.Themes
         }
 
         public Color Foreground { get; set; }
-        
+
         public Color Background { get; set; }
     }
 }
