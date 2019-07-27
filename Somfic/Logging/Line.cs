@@ -48,8 +48,10 @@ namespace Somfic.Logging
             //Go to the position.
             Console.SetCursorPosition(Left, UpStart);
 
+                        return;
+
             //Write the additional text.
-            Console.Write(value);
+            Console.Write(value.Trim());
 
             //Save the horizontal position in case we want to update it.
             Left = Console.CursorLeft;
