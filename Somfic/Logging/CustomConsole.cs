@@ -16,6 +16,18 @@ namespace Somfic.Logging
 
         public static Line Write(object value, int left)
         {
+            //Set offset.
+            Console.CursorLeft = left;
+
+            //Convert the object to a string and get the line object.
+            var line = new Line(value.ToString());
+
+            //Return the line.
+            return line;
+        }
+
+        internal static string ToString(object value)
+        {
             //Get the type name.
             string typeName = value.GetType().FullName;
 
@@ -34,14 +46,7 @@ namespace Somfic.Logging
                 catch { }
             }
 
-            //Set offset.
-            Console.CursorLeft = left;
-
-            //Convert the object to a string and get the line object.
-            var line = new Line(value.ToString());
-
-            //Return the line.
-            return line;
+            return value.ToString();
         }
     }
 }

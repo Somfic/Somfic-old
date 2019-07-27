@@ -2,6 +2,9 @@
 
 namespace Somfic.Logging
 {
+    /// <summary>
+    /// Class that holds methods to update lines in the console.
+    /// </summary>
     public class Line
     {
         private readonly int OrgLeft = -1;
@@ -36,8 +39,15 @@ namespace Somfic.Logging
             OrgUp = Console.CursorTop;
         }
 
-        public void Update(string value)
+        /// <summary>
+        /// Add a piece of text to the line.
+        /// </summary>
+        /// <param name="value">Value to be added to the line.</param>
+        public void Update(object value)
         {
+            //Turn the object into a string.
+            value = CustomConsole.ToString(value);
+
             //Update the text.
             Text += value;
 
@@ -51,20 +61,26 @@ namespace Somfic.Logging
             Left = Console.CursorLeft;
         }
 
-        public void EraseAndUpdate(string value)
+        /// <summary>
+        /// Replace the line by a new string.
+        /// </summary>
+        /// <param name="value">Replacement string.</param>
+        public void Replace(object value)
         {
-            //Erase the line.
+            //Turn the object into a string.
+            value = CustomConsole.ToString(value);
+            int stringLenght = value.ToString().Length;
 
             //Set the new left.
             Left = LeftStart;
 
             //If the new text is shorter than the old text, add spaces to clear the old text.
-            if (value.Length < Text.Length)
+            if (stringLenght < Text.Length)
             {
-                value += new string(' ', Text.Length - value.Length);
+                value += new string(' ', Text.Length - stringLenght);
             }
 
-            //Clear the text.
+            //Clear text.
             Text = string.Empty;
 
             //Update the line.

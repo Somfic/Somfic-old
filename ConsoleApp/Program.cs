@@ -8,16 +8,6 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            CustomConsole.HideCursor();
-
-            var time = CustomConsole.Write(DateTime.Now, 1);
-
-            CustomConsole.Write("my name jeff");
-
-            while(true)
-            {
-                time.EraseAndUpdate(DateTime.Now.ToString());
-            }
         }
     }
 }
