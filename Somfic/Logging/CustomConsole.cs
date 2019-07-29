@@ -12,16 +12,17 @@ namespace Somfic.Logging
 
         public static Line Write(object value)
         {
-            return Write(value, Console.CursorLeft);
+            return Write(value, Console.CursorLeft, Console.CursorTop);
         }
 
-        public static Line Write(object value, int left)
+        public static Line Write(object value, int left, int up)
         {
             //Set offset.
             Console.CursorLeft = left;
+            Console.CursorTop = up;
 
             //Convert the object to a string and get the line object.
-            Line line = new Line(value.ToString());
+            Line line = new Line(ToString(value));
 
             //Return the line.
             return line;
@@ -30,7 +31,7 @@ namespace Somfic.Logging
         internal static string ToString(object value)
         {
             //Get the type name.
-            string typeName = value.GetType().FullName;
+            string typeName = value.GetType().Namespace;
 
             //Check whether the object is a custom class.
             if (!typeName.StartsWith("System"))

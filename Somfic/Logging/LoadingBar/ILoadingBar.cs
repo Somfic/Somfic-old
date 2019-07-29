@@ -8,9 +8,19 @@ namespace Somfic.Logging.LoadingBar
     public interface ILoadingBar
     {
         /// <summary>
+        /// Whether the task behind the loading bar has been completed.
+        /// </summary>
+        bool HasFinished { get; }
+
+        /// <summary>
         /// The current task, or step, the loading bar is in.
         /// </summary>
         int Current { get; }
+
+        /// <summary>
+        /// The maximum amount of characters for the Item.
+        /// </summary>
+        int TextWidth { get; }
 
         /// <summary>
         /// The maximum amount of tasks, or steps, the loading bar has.
