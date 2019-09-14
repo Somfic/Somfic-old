@@ -51,6 +51,7 @@
     <Compile Include="Logging\Line.cs" />
     <Compile Include="Logging\LoadingBar\ILoadingBar.cs" />
     <Compile Include="Logging\LoadingBar\SlimLoadingBar.cs" />
+    <Compile Include="Logging\Logger.cs" />
     <Compile Include="Logging\Themes\ITheme.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
