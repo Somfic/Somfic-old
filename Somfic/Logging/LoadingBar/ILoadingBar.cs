@@ -1,4 +1,4 @@
-﻿using Somfic.Logging.Themes;
+﻿using Somfic.Logging.Theme;
 
 namespace Somfic.Logging.LoadingBar
 {
@@ -61,6 +61,5 @@ namespace Somfic.Logging.LoadingBar
         /// </summary>
         /// <param name="theme">The theme to be applied.</param>
         void UseTheme(ITheme theme);
-
     }
 }

@@ -1,4 +1,4 @@
-﻿using Somfic.Logging.Themes;
+﻿using Somfic.Logging.Theme;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

@@ -52,8 +52,10 @@
     <Compile Include="Logging\LoadingBar\ILoadingBar.cs" />
     <Compile Include="Logging\LoadingBar\SlimLoadingBar.cs" />
     <Compile Include="Logging\Logger.cs" />
-    <Compile Include="Logging\Themes\ITheme.cs" />
+    <Compile Include="Logging\Theme\ITheme.cs" />
+    <Compile Include="Logging\Theme\Themes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Version\VersionChecker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
