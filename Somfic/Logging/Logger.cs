@@ -9,22 +9,22 @@ using System.Threading;
 
 namespace Somfic.Logging
 {
-    public static class Logger
+    public class Logger
     {
-        private static string DirectoryPath = "";
-        private static string LogFile = "";
-        private static Severity MinType = Severity.Debug;
-        private static ITheme Theme = Themes.Dark;
-        private static bool SoftWrap = false;
-        private static bool Format = false;
+        private string DirectoryPath = "";
+        private string LogFile = "";
+        private Severity MinType = Severity.Debug;
+        private ITheme Theme = Themes.Dark;
+        private bool SoftWrap = false;
+        private bool Format = false;
 
-        private static int maxLenght => Console.WindowWidth - 11;
+        private int maxLenght => Console.WindowWidth - 11;
 
         /// <summary>
         /// Creates a new log entry with a severity of Info.
         /// </summary>
         /// <param name="s">The content of the log.</param>
-        public static void Log(object s)
+        public void Log(object s)
         {
             if (Format) { s = DoFormat(s); }
             LogEvent?.Invoke(null, new LogMessage(s.ToString(), Severity.Info));
@@ -35,7 +35,7 @@ namespace Somfic.Logging
         /// </summary>
         /// <param name="s">The content of the log.</param>
         /// <param name="ex">The linked exception that caused the log.</param>
-        public static void Log(object s, Exception ex)
+        public void Log(object s, Exception ex)
         {
             if (Format) { s = DoFormat(s); }
             LogEvent?.Invoke(null, new LogMessage(s.ToString(), Severity.Info, ex));
@@ -45,7 +45,7 @@ namespace Somfic.Logging
         /// Creates a new log entry with a severity of Success.
         /// </summary>
         /// <param name="s">The content of the log.</param>
-        public static void Success(object s)
+        public void Success(object s)
         {
             if (Format) { s = DoFormat(s); }
             LogEvent?.Invoke(null, new LogMessage(s.ToString(), Severity.Success));
@@ -56,7 +56,7 @@ namespace Somfic.Logging
         /// </summary>
         /// <param name="s">The content of the log.</param>
         /// <param name="ex">The linked exception that caused the log.</param>
-        public static void Success(object s, Exception ex)
+        public void Success(object s, Exception ex)
         {
             if (Format) { s = DoFormat(s); }
             LogEvent?.Invoke(null, new LogMessage(s.ToString(), Severity.Success, ex));
@@ -66,7 +66,7 @@ namespace Somfic.Logging
         /// Creates a new log entry with a severity of Warning.
         /// </summary>
         /// <param name="s">The content of the log.</param>
-        public static void Warning(object s)
+        public void Warning(object s)
         {
             if (Format) { s = DoFormat(s); }
             LogEvent?.Invoke(null, new LogMessage(s.ToString(), Severity.Warning));
@@ -77,7 +77,7 @@ namespace Somfic.Logging
         /// </summary>
         /// <param name="s">The content of the log.</param>
         /// <param name="ex">The linked exception that caused the warning.</param>
-        public static void Warning(object s, Exception ex)
+        public void Warning(object s, Exception ex)
         {
             if (Format) { s = DoFormat(s); }
             LogEvent?.Invoke(null, new LogMessage(s.ToString(), Severity.Warning, ex));
@@ -87,7 +87,7 @@ namespace Somfic.Logging
         /// Creates a new log entry with a severity of Error.
         /// </summary>
         /// <param name="s">The content of the log.</param>
-        public static void Error(object s)
+        public void Error(object s)
         {
             if (Format) { s = DoFormat(s); }
             LogEvent?.Invoke(null, new LogMessage(s.ToString(), Severity.Error));
@@ -98,7 +98,7 @@ namespace Somfic.Logging
         /// </summary>
         /// <param name="s">The content of the log.</param>
         /// <param name="ex">The linked exception that caused the error.</param>
-        public static void Error(object s, Exception ex)
+        public void Error(object s, Exception ex)
         {
             if (Format) { s = DoFormat(s); }
             LogEvent?.Invoke(null, new LogMessage(s.ToString(), Severity.Error, ex));
@@ -108,7 +108,7 @@ namespace Somfic.Logging
         /// Creates a new log entry with a severity of Debug.
         /// </summary>
         /// <param name="s">The content of the log.</param>
-        public static void Debug(object s)
+        public void Debug(object s)
         {
             if (Format) { s = DoFormat(s); }
             LogEvent?.Invoke(null, new LogMessage(s.ToString(), Severity.Debug));
@@ -120,7 +120,7 @@ namespace Somfic.Logging
         /// </summary>
         /// <param name="s">The content of the log.</param>
         /// <param name="ex">The linked exception that caused the debug.</param>
-        public static void Debug(object s, Exception ex)
+        public void Debug(object s, Exception ex)
         {
             if (Format) { s = DoFormat(s); }
             LogEvent?.Invoke(null, new LogMessage(s.ToString(), Severity.Debug, ex));
@@ -129,7 +129,7 @@ namespace Somfic.Logging
         /// <summary>
         /// Whether to use soft wrap.
         /// </summary>
-        public static void UseSoftWrap()
+        public void UseSoftWrap()
         {
             SoftWrap = true;
         }
@@ -137,7 +137,7 @@ namespace Somfic.Logging
         /// <summary>
         /// Whether to automatically format text.
         /// </summary>
-        public static void UseFormat()
+        public void UseFormat()
         {
             Format = true;
         }
@@ -145,7 +145,7 @@ namespace Somfic.Logging
         /// <summary>
         /// Outputs the logs to console.
         /// </summary>
-        public static void UseConsole(Severity type)
+        public void UseConsole(Severity type)
         {
             MinType = type;
             UseConsole();
@@ -154,7 +154,7 @@ namespace Somfic.Logging
         /// <summary>
         /// Outputs the logs to console.
         /// </summary>
-        public static void UseConsole(ITheme theme)
+        public void UseConsole(ITheme theme)
         {
             Theme = theme;
             UseConsole();
@@ -163,7 +163,7 @@ namespace Somfic.Logging
         /// <summary>
         /// Outputs the logs to console.
         /// </summary>
-        public static void UseConsole(ITheme theme, Severity type)
+        public void UseConsole(ITheme theme, Severity type)
         {
             MinType = type;
             Theme = theme;
@@ -173,7 +173,7 @@ namespace Somfic.Logging
         /// <summary>
         /// Outputs the logs to console.
         /// </summary>
-        public static void UseConsole()
+        public void UseConsole()
         {
             Console.BackgroundColor = Theme.BackGround;
             Console.ForegroundColor = Theme.Main;
@@ -221,7 +221,7 @@ namespace Somfic.Logging
         /// Outputs the logs to an external log file.
         /// </summary>
         /// <param name="directory">The directory in which to save the log files.</param>
-        public static void UseLogFile(string directory, string name = "log")
+        public void UseLogFile(string directory, string name = "log")
         {
             if (!Directory.Exists(directory))
             {
@@ -259,7 +259,7 @@ namespace Somfic.Logging
             Debug($"Log to file '{new FileInfo(LogFile).Name}'.");
         }
 
-        private static void Write(Severity severity, ConsoleColor color, string content, Exception ex = null)
+        private void Write(Severity severity, ConsoleColor color, string content, Exception ex = null)
         {
             //If it's nothing, return.
             if (string.IsNullOrWhiteSpace(content)) { return; }
@@ -324,7 +324,7 @@ namespace Somfic.Logging
             }
         }
 
-        private static void WithSoftWrap(string text, char cBegin = '─', char cBeginMultiple = '┬', char c = '│', char cEnd = '└', string split = " ")
+        private void WithSoftWrap(string text, char cBegin = '─', char cBeginMultiple = '┬', char c = '│', char cEnd = '└', string split = " ")
         {
             string s = text;
 
@@ -379,7 +379,7 @@ namespace Somfic.Logging
             if (hasLeftOver) { Write(line, cEnd); }
         }
 
-        private static void Write(string s, char c)
+        private void Write(string s, char c)
         {
             if (string.IsNullOrWhiteSpace(s)) { return; }
             if (s[0] != ' ') { s = " " + s; }
@@ -398,7 +398,7 @@ namespace Somfic.Logging
             Console.WriteLine(s);
         }
 
-        private static void WriteLog(Severity severity, string content, Exception ex = null)
+        private void WriteLog(Severity severity, string content, Exception ex = null)
         {
             StringBuilder s = new StringBuilder("                     ");
             s.Insert(0, DateTime.Now.ToLongTimeString() + " :");
@@ -427,7 +427,7 @@ namespace Somfic.Logging
             }
         }
 
-        private static void WriteLog(string content)
+        private void WriteLog(string content)
         {
             StringBuilder s = new StringBuilder("                     ");
             s.Insert(19, $"| " + content);
@@ -435,7 +435,7 @@ namespace Somfic.Logging
             WriteToLog(s);
         }
 
-        private static void WriteToLog(object s)
+        private void WriteToLog(object s)
         {
             for (int i = 0; i < 5; i++)
             {
@@ -448,7 +448,7 @@ namespace Somfic.Logging
             }
         }
 
-        private static void ShowJson(string json)
+        private void ShowJson(string json)
         {
             string formatJson = "";
             try { formatJson = Newtonsoft.Json.JsonConvert.SerializeObject(Newtonsoft.Json.JsonConvert.DeserializeObject(json), Newtonsoft.Json.Formatting.Indented); }
@@ -464,7 +464,7 @@ namespace Somfic.Logging
             Write(lines[lines.Length - 1], '└');
         }
 
-        private static object DoFormat(object o)
+        private object DoFormat(object o)
         {
             if (!Format) { return o.ToString(); }
 
@@ -496,7 +496,7 @@ namespace Somfic.Logging
             }
         }
 
-        public static event EventHandler<LogMessage> LogEvent;
+        public event EventHandler<LogMessage> LogEvent;
     }
 
     public class LogMessage
