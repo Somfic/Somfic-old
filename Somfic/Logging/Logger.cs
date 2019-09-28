@@ -1,11 +1,15 @@
-﻿using Somfic.Logging.Theme;
+﻿using Newtonsoft.Json;
+using Somfic.Logging.Theme;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Somfic.Logging
 {
@@ -13,10 +17,18 @@ namespace Somfic.Logging
     {
         private string DirectoryPath = "";
         private string LogFile = "";
+
         private Severity MinType = Severity.Debug;
         private ITheme Theme = Themes.Dark;
-        private bool SoftWrap = false;
-        private bool Format = false;
+
+        private bool SoftWrap = true;
+        private bool Format = true;
+        private bool Tcp = false;
+        private readonly bool PrettyJson = false;
+
+        private TcpListener TcpServer;
+        private readonly TcpClient TcpClient;
+        private List<NetworkStream> TcpStreams;
 
         private int maxLenght => Console.WindowWidth - 11;
 
@@ -129,54 +141,56 @@ namespace Somfic.Logging
         /// <summary>
         /// Whether to use soft wrap.
         /// </summary>
-        public void UseSoftWrap()
+        public Logger UseSoftWrap(bool state)
         {
-            SoftWrap = true;
+            SoftWrap = state;
+            return this;
         }
 
         /// <summary>
         /// Whether to automatically format text.
         /// </summary>
-        public void UseFormat()
+        public Logger UseFormat(bool state)
         {
-            Format = true;
+            Format = state;
+            return this;
         }
 
         /// <summary>
         /// Outputs the logs to console.
         /// </summary>
-        public void UseConsole(Severity type)
+        public Logger UseConsole(Severity type)
         {
             MinType = type;
-            UseConsole();
+            return UseConsole();
         }
 
         /// <summary>
         /// Outputs the logs to console.
         /// </summary>
-        public void UseConsole(ITheme theme)
+        public Logger UseConsole(ITheme theme)
         {
             Theme = theme;
-            UseConsole();
+            return UseConsole();
         }
 
         /// <summary>
         /// Outputs the logs to console.
         /// </summary>
-        public void UseConsole(ITheme theme, Severity type)
+        public Logger UseConsole(ITheme theme, Severity type)
         {
             MinType = type;
             Theme = theme;
-            UseConsole();
+            return UseConsole();
         }
 
         /// <summary>
         /// Outputs the logs to console.
         /// </summary>
-        public void UseConsole()
+        public Logger UseConsole()
         {
-            Console.BackgroundColor = Theme.BackGround;
-            Console.ForegroundColor = Theme.Main;
+            ChangeBackground(Theme.BackGround);
+            ChangeForeground(Theme.Main);
             Console.Clear();
             Console.OutputEncoding = Encoding.UTF8;
 
@@ -214,14 +228,120 @@ namespace Somfic.Logging
                 };
             };
 
+            return this;
+        }
 
+
+        public Logger UseTCP(int port)
+        {
+            TcpStreams = new List<NetworkStream>();
+            Tcp = true;
+
+            string localhost = "";
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var thisIp in host.AddressList)
+            {
+                if (thisIp.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    localhost = thisIp.ToString();
+                    break;
+                }
+            }
+
+            //Host TCP server.
+            IPAddress ip = IPAddress.Parse(localhost);
+            TcpServer = new TcpListener(ip, port);
+
+            TcpServer.Start();
+
+            byte[] bytes = new byte[256];
+
+            Debug($"Hosting TCP server on {ip}:{port}.");
+
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    //Wait for the next client to connect.
+                    TcpClient client = TcpServer.AcceptTcpClient();
+                    NetworkStream stream = client.GetStream();
+
+                    Debug($"TCP client connected.");
+
+                    //Add the stream to the list.
+                    TcpStreams.Add(stream);
+                }
+            });
+
+
+            return this;
+        }
+
+        public Logger UseTCP(string ip, int port)
+        {
+            Task.Run(() =>
+            {
+                Debug($"Connecting to TPC server via {ip}:{port}.");
+                TcpClient client;
+
+                try
+                {
+                    client = new TcpClient(ip, port);
+                    Success("Connected to TPC server.");
+                }
+                catch (Exception ex)
+                {
+                    Error("Could not connect to TPC server.", ex);
+                    return this;
+                }
+
+                NetworkStream stream = client.GetStream();
+                StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+
+                while (true)
+                {
+                    string command = reader.ReadLine();
+                 
+
+                    try
+                    {
+                        TcpMessage message = JsonConvert.DeserializeObject<TcpMessage>(command);
+
+                        switch (message.MessageType)
+                        {
+                            case MessageType.Background:
+                                Console.BackgroundColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), message.Content);
+                                break;
+
+                            case MessageType.Foreground:
+                                Console.ForegroundColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), message.Content);
+                                break;
+
+                            case MessageType.Cursor:
+                                Console.SetCursorPosition(int.Parse(message.Content.Split(',')[0]), int.Parse(message.Content.Split(',')[1]));
+                                break;
+
+                            case MessageType.Write:
+                                Console.Write(message.Content);
+                                break;
+
+                            case MessageType.WriteLine:
+                                Console.WriteLine(message.Content);
+                                break;
+                        }
+                    }
+                    catch(Exception ex) { Error($"Error while parsing message '{command}'.", ex); }
+                }
+            });
+
+            return this;
         }
 
         /// <summary>
         /// Outputs the logs to an external log file.
         /// </summary>
         /// <param name="directory">The directory in which to save the log files.</param>
-        public void UseLogFile(string directory, string name = "log")
+        public Logger UseLogFile(string directory, string name = "log")
         {
             if (!Directory.Exists(directory))
             {
@@ -256,7 +376,9 @@ namespace Somfic.Logging
             };
 
             Debug($"Logging to folder '{new FileInfo(LogFile).DirectoryName}'.");
-            Debug($"Log to file '{new FileInfo(LogFile).Name}'.");
+            Debug($"Logging to file '{new FileInfo(LogFile).Name}'.");
+
+            return this;
         }
 
         private void Write(Severity severity, ConsoleColor color, string content, Exception ex = null)
@@ -265,19 +387,19 @@ namespace Somfic.Logging
             if (string.IsNullOrWhiteSpace(content)) { return; }
 
             //Write the severity to the screen.
-            Console.BackgroundColor = Theme.BackGround;
-            Console.ForegroundColor = color;
-            Console.Write(severity);
-            Console.ForegroundColor = Theme.Debug;
-            Console.SetCursorPosition(8, Console.CursorTop);
+            ChangeBackground(Theme.BackGround);
+            ChangeForeground(color);
+            Write(severity.ToString());
+            ChangeForeground(Theme.Debug);
+            ChangeCursor(8, Console.CursorTop);
 
             //Set the correct color scheme.
             if (severity == Severity.Error || severity == Severity.Success)
             {
-                Console.ForegroundColor = Theme.BackGround;
-                Console.BackgroundColor = color;
+                ChangeForeground(Theme.BackGround);
+                ChangeBackground(color);
             }
-            else { Console.ForegroundColor = color; }
+            else { ChangeForeground(color); }
 
             char c = '─';
             char c2 = '└';
@@ -290,23 +412,20 @@ namespace Somfic.Logging
             WithSoftWrap(content, c, '┬', '│', c2);
 
             //Back to normal colors.
-            Console.ForegroundColor = color;
-            Console.BackgroundColor = Theme.BackGround;
+            ChangeForeground(color);
+            ChangeBackground(Theme.BackGround);
 
             if (ex != null)
             {
                 c = '└';
-                if (ex.StackTrace != null) { c = '├'; }
+                if (ex.StackTrace != null) { c = '│'; }
                 WithSoftWrap(ex.Message, '├', '├', '│', c);
 
                 if (ex.StackTrace != null)
                 {
-                    Console.ForegroundColor = Theme.Debug;
+                    ChangeForeground(Theme.Debug);
 
-                    string[] splitStackTrace = Regex.Split(ex.StackTrace.Trim(), " in ");
-                    WithSoftWrap(splitStackTrace[0], '╞', '╞');
-
-                    string stackTrace = splitStackTrace[1];
+                    string stackTrace = ex.StackTrace;
                     List<string> lines = stackTrace.Split(new string[] { Environment.NewLine }, StringSplitOptions.None).ToList();
 
                     int i = 0;
@@ -316,7 +435,7 @@ namespace Somfic.Logging
                         c = '╞';
                         if (lines.Count == i) { c = '└'; }
 
-                        WithSoftWrap(line, c, c, '╞', '╘', " \\\\");
+                        WithSoftWrap(line, c, c, '│', '╘', " \\\\");
 
                         i++;
                     }
@@ -328,23 +447,33 @@ namespace Somfic.Logging
         {
             string s = text;
 
-            if(string.IsNullOrWhiteSpace(text)) { return; }
+            if (string.IsNullOrWhiteSpace(text)) { return; }
 
             if (s[s.Length - 1] != ' ') { s += " "; }
 
-            if (!SoftWrap) { Console.WriteLine(s); return; }
+            if (!SoftWrap) { WriteLine(s); return; }
 
             if (s.Length <= maxLenght) { Write(s, cBegin); return; }
 
-            var match = Regex.Match(s, @"(.*)(\{.+\})(.*)");
-            if (match.Success)
+            try
             {
-                WithSoftWrap(match.Groups[1].Value, cBegin, cBeginMultiple, c, cEnd, split);
-                ShowJson(match.Groups[2].Value);
-                WithSoftWrap(match.Groups[3].Value, cBegin, cBeginMultiple, c, cEnd, split);
-
-                return;
+                Match match = Regex.Match(s, @"(.*)(\{.+\})(.*)");
+                if (match.Success && Format)
+                {
+                    if (PrettyJson)
+                    {
+                        WithSoftWrap(match.Groups[1].Value, cBegin, cBeginMultiple, c, cEnd, split);
+                        ShowJson(match.Groups[2].Value);
+                        WithSoftWrap(match.Groups[3].Value, cBegin, cBeginMultiple, c, cEnd, split);
+                    }
+                    else
+                    {
+                        WithSoftWrap(match.Groups[0].Value, cBegin, cBeginMultiple, c, cEnd, split);
+                    }
+                    return;
+                }
             }
+            catch { }
 
             string[] words = Regex.Split(s, $"([^{split}]+ )");
 
@@ -387,15 +516,15 @@ namespace Somfic.Logging
             ConsoleColor foreground = Console.ForegroundColor;
             ConsoleColor background = Console.BackgroundColor;
 
-            Console.ForegroundColor = Theme.Debug;
-            Console.BackgroundColor = Theme.BackGround;
-            Console.SetCursorPosition(8, Console.CursorTop);
-            Console.Write(c);
-            Console.SetCursorPosition(10, Console.CursorTop);
-            Console.BackgroundColor = background;
-            Console.ForegroundColor = foreground;
+            ChangeForeground(Theme.Debug);
+            ChangeBackground(Theme.BackGround);
+            ChangeCursor(8, Console.CursorTop);
+            Write(c.ToString());
+            ChangeCursor(10, Console.CursorTop);
+            ChangeBackground(background);
+            ChangeForeground(foreground);
 
-            Console.WriteLine(s);
+            WriteLine(s);
         }
 
         private void WriteLog(Severity severity, string content, Exception ex = null)
@@ -444,7 +573,7 @@ namespace Somfic.Logging
                     File.AppendAllText(LogFile, $"{s.ToString()}{Environment.NewLine}");
                     return;
                 }
-                catch (Exception ex) { Console.WriteLine(ex.Message); Thread.Sleep(1000); }
+                catch (Exception ex) { WriteLine(ex.Message); Thread.Sleep(1000); }
             }
         }
 
@@ -452,9 +581,9 @@ namespace Somfic.Logging
         {
             string formatJson = "";
             try { formatJson = Newtonsoft.Json.JsonConvert.SerializeObject(Newtonsoft.Json.JsonConvert.DeserializeObject(json), Newtonsoft.Json.Formatting.Indented); }
-            catch(Exception ex) { Debug("Could not correctly output JSON from object.", ex); Debug("JSON:"); Debug(json); }
+            catch (Exception ex) { Debug("Could not correctly output JSON from object.", ex); Debug("JSON:"); Debug(json); }
 
-            var lines = Regex.Split(formatJson, Environment.NewLine);
+            string[] lines = Regex.Split(formatJson, Environment.NewLine);
 
             Write(lines[0], '┌');
             for (int i = 1; i < lines.Length - 1; i++)
@@ -466,7 +595,9 @@ namespace Somfic.Logging
 
         private object DoFormat(object o)
         {
-            if (!Format) { return o.ToString(); }
+            //if (!Format) { return o.ToString(); }
+
+            if (string.IsNullOrWhiteSpace(o.ToString())) { return o; }
 
             //Turn into json if it's a custom object.
             if (!o.GetType().Namespace.StartsWith("System"))
@@ -477,75 +608,63 @@ namespace Somfic.Logging
             {
                 string s = "";
                 string[] lines = Regex.Split(o.ToString(), @"(\. |! |\? )");
-                if (lines.Length == 0) { s = o.ToString(); }
+                if (lines.Length == 0) { return o.ToString(); }
                 else
                 {
                     foreach (string line in lines)
                     {
-                        s += line[0].ToString().ToUpper() + line.Substring(1);
+                        s += line;
                     }
-                }
-
-                if (s.Length > 0)
-                {
-                    s = s[0].ToString().ToUpper() + s.Substring(1);
-                    if (s[s.Length - 1] != '.') { s += "."; }
                 }
 
                 return s;
             }
         }
 
+        private void WriteLine(string s)
+        {
+            if (Tcp) { SendMessage(new TcpMessage(MessageType.WriteLine, s)); }
+            Console.WriteLine(s);
+        }
+
+        private void Write(string s)
+        {
+            if (Tcp) { SendMessage(new TcpMessage(MessageType.Write, s)); }
+            Console.Write(s);
+        }
+
+        private void ChangeForeground(ConsoleColor c)
+        {
+            if (Tcp) { SendMessage(new TcpMessage(MessageType.Foreground, c.ToString())); }
+            Console.ForegroundColor = c;
+        }
+
+        private void ChangeBackground(ConsoleColor c)
+        {
+            if (Tcp) { SendMessage(new TcpMessage(MessageType.Background, c.ToString())); }
+            Console.BackgroundColor = c;
+        }
+
+        private void ChangeCursor(int x, int y)
+        {
+            if (Tcp) { SendMessage(new TcpMessage(MessageType.Cursor, $"{x},{y}")); }
+            Console.SetCursorPosition(x, y);
+
+        }
+
+        private void SendMessage(TcpMessage TcpMessage)
+        {
+            foreach (NetworkStream stream in TcpStreams)
+            {
+                try
+                {
+                    byte[] message = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(TcpMessage) + Environment.NewLine);
+                    stream.Write(message, 0, message.Length);
+                }
+                catch (Exception ex) { Debug("Could not send TCP message to client.", ex); }
+            }
+        }
+
         public event EventHandler<LogMessage> LogEvent;
-    }
-
-    public class LogMessage
-    {
-        /// <summary>
-        /// Creates a new log message.
-        /// </summary>
-        /// <param name="message">The content of the message.</param>
-        /// <param name="severity">The severity of the message.</param>
-        public LogMessage(string message, Severity severity)
-        {
-            Message = message;
-            Severity = severity;
-        }
-
-        /// <summary>
-        /// Creates a new log message with an exception.
-        /// </summary>
-        /// <param name="message">The content of the message.</param>
-        /// <param name="severity">The severity of the message.</param>
-        /// <param name="exception">The exception with which the message is linked.</param>
-        public LogMessage(string message, Severity severity, Exception exception)
-        {
-            Message = message;
-            Severity = severity;
-            Exception = exception;
-        }
-
-        /// <summary>
-        /// The content of the message.
-        /// </summary>
-        public string Message { get; private set; }
-
-        /// <summary>
-        /// The severity of the message.
-        /// </summary>
-        public Severity Severity { get; private set; }
-
-        /// <summary>
-        /// The exception linked with this messsage. 
-        /// </summary>
-        public Exception Exception { get; private set; }
-    }
-
-    /// <summary>
-    /// The severity levle of the message.
-    /// </summary>
-    public enum Severity
-    {
-        Success, Error, Warning, Info, Debug, Special
     }
 }

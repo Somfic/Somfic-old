@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>
     </DocumentationFile>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -52,6 +53,10 @@
     <Compile Include="Logging\LoadingBar\ILoadingBar.cs" />
     <Compile Include="Logging\LoadingBar\SlimLoadingBar.cs" />
     <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logging\LogMessage.cs" />
+    <Compile Include="Logging\MessageType.cs" />
+    <Compile Include="Logging\Severity.cs" />
+    <Compile Include="Logging\TcpMessage.cs" />
     <Compile Include="Logging\Theme\ITheme.cs" />
     <Compile Include="Logging\Theme\Themes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
