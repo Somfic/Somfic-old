@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using Newtonsoft.Json;
 
-namespace Somfic.Logging
+namespace Somfic.Logging_old
 {
     public static class CustomConsole
     {

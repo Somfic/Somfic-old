@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using Somfic.Logging.Theme;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,8 +8,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Somfic.Logging_old.Theme;
 
-namespace Somfic.Logging
+namespace Somfic.Logging_old
 {
     public class Logger
     {

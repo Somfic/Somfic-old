@@ -1,6 +1,6 @@
-﻿using Somfic.Logging.Theme;
+﻿using Somfic.Logging_old.Theme;
 
-namespace Somfic.Logging.LoadingBar
+namespace Somfic.Logging_old.LoadingBar
 {
     /// <summary>
     /// The interface for loading bars.

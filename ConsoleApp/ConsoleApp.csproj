@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <AssemblyVersion>1.2.20.1141</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Somfic\Somfic.csproj">
-      <Project>{E84DE05B-0F5F-4852-9C96-4BA815A44121}</Project>
+      <Project>{9b169111-8e15-42e1-8c81-da6098249e2c}</Project>
       <Name>Somfic</Name>
     </ProjectReference>
   </ItemGroup>

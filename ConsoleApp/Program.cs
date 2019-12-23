@@ -6,8 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Somfic.Logging;
-using Somfic.Logging.LoadingBar;
-using Somfic.Logging.Theme;
+using Somfic.Logging.Handlers;
 
 namespace ConsoleApp
 {
@@ -17,13 +16,8 @@ namespace ConsoleApp
 
         static void Main(string[] args)
         {
-            log = new Logger().UseConsole().UseTCP(1234);
-
-            while(true)
-            {
-                Thread.Sleep(1000);
-                log.Log(DateTime.Now);
-            }
+            log = new Logger(new ConsoleHandler());
+            log.add
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Somfic.Logging
+﻿namespace Somfic.Logging_old
 {
     public class TcpMessage
     {

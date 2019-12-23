@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Somfic.Logging
+namespace Somfic.Logging_old
 {
     /// <summary>
     /// Class that holds methods to update lines in the console.
