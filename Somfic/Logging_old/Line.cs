@@ -108,6 +108,7 @@ namespace Somfic.Logging
                     Console.Write(value.Split('&')[0]);
                 }
 
+
                 //Write the additional text.
                 foreach (Match match in Regex.Matches(value, "&([0-9,a-f])([^&]*)"))
                 {

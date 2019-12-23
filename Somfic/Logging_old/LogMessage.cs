@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Somfic.Logging_old
+namespace Somfic.Logging
 {
     public class LogMessage
     {

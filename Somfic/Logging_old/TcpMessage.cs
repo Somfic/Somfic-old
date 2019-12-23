@@ -8,6 +8,7 @@
             Content = content;
         }
 
+
         public MessageType MessageType { get; private set; }
         public string Content { get; private set; }
     }

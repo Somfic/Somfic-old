@@ -25,7 +25,7 @@ namespace Somfic.Logging.LoadingBar
         /// <summary>
         /// The maximum amount of tasks, or steps, the loading bar has.
         /// </summary>
-        int Max { get; }
+        int Max { get; set; }
 
         /// <summary>
         /// The current item that's being processed.

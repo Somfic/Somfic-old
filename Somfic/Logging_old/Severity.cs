@@ -1,4 +1,4 @@
-﻿namespace Somfic.Logging_old
+﻿namespace Somfic.Logging
 {
     /// <summary>
     /// The severity level of the message.
