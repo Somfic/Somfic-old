@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Somfic.Logging.Theme
+namespace Somfic.Logging_old.Theme
 {
     public static class Themes
     {

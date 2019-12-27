@@ -1,9 +1,9 @@
-﻿using Somfic.Logging.Theme;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Somfic.Logging_old.Theme;
 
-namespace Somfic.Logging.LoadingBar
+namespace Somfic.Logging_old.LoadingBar
 {
     public class SlimLoadingBar : ILoadingBar
     {

@@ -1,6 +1,6 @@
-﻿using Somfic.Logging.Theme;
+﻿using Somfic.Logging_old.Theme;
 
-namespace Somfic.Logging.LoadingBar
+namespace Somfic.Logging_old.LoadingBar
 {
     /// <summary>
     /// The interface for loading bars.
@@ -25,7 +25,7 @@ namespace Somfic.Logging.LoadingBar
         /// <summary>
         /// The maximum amount of tasks, or steps, the loading bar has.
         /// </summary>
-        int Max { get; }
+        int Max { get; set; }
 
         /// <summary>
         /// The current item that's being processed.

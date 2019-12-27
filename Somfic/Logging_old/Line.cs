@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Somfic.Logging
+namespace Somfic.Logging_old
 {
     /// <summary>
     /// Class that holds methods to update lines in the console.
@@ -107,6 +107,7 @@ namespace Somfic.Logging
                 {
                     Console.Write(value.Split('&')[0]);
                 }
+
 
                 //Write the additional text.
                 foreach (Match match in Regex.Matches(value, "&([0-9,a-f])([^&]*)"))

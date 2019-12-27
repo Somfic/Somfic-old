@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Somfic.Logging.Theme
+namespace Somfic.Logging_old.Theme
 {
     public interface ITheme
     {

@@ -1,4 +1,4 @@
-﻿namespace Somfic.Logging
+﻿namespace Somfic.Logging_old
 {
     public class TcpMessage
     {
@@ -7,6 +7,7 @@
             MessageType = messageType;
             Content = content;
         }
+
 
         public MessageType MessageType { get; private set; }
         public string Content { get; private set; }
