@@ -81,6 +81,7 @@ namespace Somfic.Logging
                     .Replace(exception.GetType().Name, @"\p{Lu}", m => " " + m.Value.ToLowerInvariant())
                     .Replace("exception", "").Trim();
                 output = char.ToUpperInvariant(output[0]) + output.Substring(1);
+                if(output == "I o") {  output = "IO"; }
                 Type = output;
                 Exception = exception;
                 Localised = null;

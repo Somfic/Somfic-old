@@ -16,8 +16,9 @@ namespace ConsoleApp
 
         static void Main(string[] args)
         {
-            log = new Logger(new ConsoleHandler());
-            log.AddHandler(new LogFileHandler("C:\\Users\\Lucas\\Documents\\Somfic", "log"));
+            log = new Logger();
+            log.AddHandler(new ConsoleHandler());
+            log.AddHandler(new LogFileHandler("C:\\Users\\Lucas\\Documents\\Somfic", "EliteAPI"));
 
             log.Log("Hello this is a test on whether or not this stupid console actually does what i want it to do", new Test());
             log.Log(Severity.Warning, "We're about to trigger an exception!");

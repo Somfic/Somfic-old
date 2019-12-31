@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -10,7 +9,7 @@ namespace Somfic.Logging.Handlers
 {
     public class ConsoleHandler : ILoggerHandler
     {
-        private const int SeverityColumn = 13;
+        private const int SeverityColumn = 10;
         private static readonly Dictionary<char, ConsoleColor> ConsoleColors = new Dictionary<char, ConsoleColor>
         {
             { '0',ConsoleColor.Black },
@@ -57,36 +56,30 @@ namespace Somfic.Logging.Handlers
         {
             StringBuilder s = new StringBuilder();
 
+            bool isIndented = false;
+
             // Write down the severity
             s.Append($"&{FrontColors[message.Severity]};"); // Correct color
             s.Append(string.Format("{0, -" + SeverityColumn + "}", message.Severity)); // Write the severity
+            isIndented = true;
             s.Append("&r;"); // Reset colors
 
             // Show the content
-            if (message.Content != null)
+            if (!string.IsNullOrEmpty(message.Content))
             {
                 s.Append($"&{FrontColors[message.Severity]};");
                 s.Append(Format(message.Content));
                 s.Append("&r;"); // Reset colors
                 s.Append("\n");
+                isIndented = false;
             }
 
             if (message.Object != null)
             {
-                s.AppendFormat("{0, " + SeverityColumn + "}", "*  ");
+                if(!isIndented) {s.Append(' ', SeverityColumn);}
                 s.Append(Format(PrettyJson(Newtonsoft.Json.JsonConvert.SerializeObject(message.Object))));
                 s.Append("\n");
-            }
-
-            if (message.StackTrace != null && false)
-            {
-                for (int i = 0; i < message.StackTrace.Frames.Count; i++)
-                {
-                    StackFrame stackFrame = message.StackTrace.Frames[i];
-                    s.AppendFormat("{0, " + SeverityColumn + ":000}", $"{i + 1}  ");
-                    s.Append(Format(stackFrame.ToString().Replace("\n", "")));
-                    s.Append("\n");
-                }
+                isIndented = false;
             }
 
             if (message.Exception.Exception != null)
@@ -95,7 +88,8 @@ namespace Somfic.Logging.Handlers
 
                 while (true)
                 {
-                    s.AppendFormat("{0, " + SeverityColumn + "}", "!  ");
+                    if(!isIndented) {s.Append(' ', SeverityColumn);}
+                    isIndented = false;
                     s.Append(Format($"&{BackColors[message.Severity]}0; {ex.Type} &r; &8;: &{FrontColors[message.Severity]};{ex.Exception.Message}&r;"));
                     if (ex.Localised != null)
                     {
@@ -115,13 +109,13 @@ namespace Somfic.Logging.Handlers
                     string[] stacks = message.Exception.Exception.StackTrace.Split('\n');
                     if (stacks.Length > StackTraceMax)
                     {
-                        s.AppendFormat("{0, " + SeverityColumn + "}", ">  ");
+                        s.Append(' ', SeverityColumn);
                         s.Append(Format($"&8;({stacks.Length - StackTraceMax} more ...)&r;"));
                         s.Append("\n");
                     }
                     foreach (string stack in stacks.Reverse().Take(StackTraceMax).Reverse())
                     {
-                        s.AppendFormat("{0, " + SeverityColumn + "}", ">  ");
+                        s.Append(' ', SeverityColumn);
                         s.Append(Format($"&8;{stack.Trim()}&r;"));
                         s.Append("\n");
                     }
@@ -130,7 +124,7 @@ namespace Somfic.Logging.Handlers
             }
 
             string result = s.ToString();
-            if(result.EndsWith("\n")) { result = result.Substring(0, result.Length - 1);}
+            if (result.EndsWith("\n")) { result = result.Substring(0, result.Length - 1); }
 
             Write(result);
         }
@@ -177,23 +171,22 @@ namespace Somfic.Logging.Handlers
         private static string Format(string content)
         {
             StringBuilder s = new StringBuilder();
-            string[] parts = Regex.Split(content, @"(?<=[ .,;:\\/'"+'"'+"])");
+            string[] parts = Regex.Split(content, @"(?<=[ .,;:\\/'" + '"' + "])");
 
             int currentWidth = 0;
             foreach (string part in parts)
             {
                 string cleanPart = Regex.Replace(part, "([0-9a-fr]){1,2};", "");
-
-
+                
                 if (currentWidth + cleanPart.Length > Console.WindowWidth - SeverityColumn - 1)
                 {
                     s.Append("\n");
-                    s.Append(' ', SeverityColumn);
-                    currentWidth = 0;
+                    s.Append(' ', SeverityColumn + 1);
+                    currentWidth = 1;
                 }
 
                 s.Append(currentWidth == 0 ? part.TrimStart() : part);
-                currentWidth += part.Length;
+                currentWidth += cleanPart.Length;
             }
 
             return s.ToString();
@@ -201,7 +194,7 @@ namespace Somfic.Logging.Handlers
 
         private static string PrettyJson(string json)
         {
-            return $"&8;{Regex.Replace(json, "(\"|\')([^\"]*)(\"|\')(?=:)(: *)(\"|\')?(true|false|[0-9a-zA-Z+" + '-' +",.$#_ ]*)", "&8;$1&a;$2&8;$3&7;$4&8;$5&b;$6&8;")}";
+            return $"&8;{Regex.Replace(json, "(\"|\')([^\"]*)(\"|\')(?=:)(: *)(\"|\')?(true|false|[0-9a-zA-Z+" + '-' + ",.$#_ ]*)", "&8;$1&a;$2&8;$3&7;$4&8;$5&b;$6&8;")}";
         }
     }
 }

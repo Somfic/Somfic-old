@@ -8,32 +8,46 @@ namespace Somfic.Logging
 {
     public class Logger
     {
-        private readonly IList<ILoggerHandler> handlers;
+        public IList<ILoggerHandler> Handlers { get; private set; }
+        public bool IsDisabled { get; private set; }
 
         public Logger()
         {
-            handlers = new List<ILoggerHandler>();
+            Handlers = new List<ILoggerHandler>();
         }
 
-        public Logger(ILoggerHandler handler)
-        {
-            this.handlers = new List<ILoggerHandler> { handler };
-        }
-
-        public Logger(IEnumerable<ILoggerHandler> handlers)
-        {
-            this.handlers = new List<ILoggerHandler>();
-            handlers.ToList().ForEach(x => this.handlers.Add(x));
-        }
-
+        /// <summary>
+        /// Adds a handler to the logger.
+        /// </summary>
+        /// <param name="handler">The handler</param>
         public void AddHandler(ILoggerHandler handler)
         {
-            handlers.Add(handler);
+            Handlers.Add(handler);
         }
 
+        /// <summary>
+        /// Removes a handler from the logger.
+        /// </summary>
+        /// <param name="handler">The handler</param>
         public void RemoveHandler(ILoggerHandler handler)
         {
-            handlers.Remove(handler);
+            Handlers.Remove(handler);
+        }
+
+        /// <summary>
+        /// Disables logging.
+        /// </summary>
+        public void Disable()
+        {
+            IsDisabled = true;
+        }
+
+        /// <summary>
+        /// Enables logging, should only be used after logging has been disabled.
+        /// </summary>
+        public void Enable()
+        {
+            IsDisabled = false;
         }
 
         ///old
@@ -112,9 +126,11 @@ namespace Somfic.Logging
 
         private void ProcessLog(Severity severity, string content, object @object, Exception exception)
         {
+            if(IsDisabled) { return; }
+
             StackTrace stack = new StackTrace();
             LogMessage m = new LogMessage(content, severity, @object, stack, exception);
-            handlers.ToList().ForEach(x => x.WriteLog(m));
+            Handlers.ToList().ForEach(x => x.WriteLog(m));
             LogEvent?.Invoke(this, m);
         }
 
