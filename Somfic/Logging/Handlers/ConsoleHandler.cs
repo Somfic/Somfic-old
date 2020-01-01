@@ -194,7 +194,7 @@ namespace Somfic.Logging.Handlers
 
         private static string PrettyJson(string json)
         {
-            return $"&8;{Regex.Replace(json, "(\"|\')([^\"]*)(\"|\')(?=:)(: *)(\"|\')?(true|false|[0-9a-zA-Z+" + '-' + ",.$#_ ]*)", "&8;$1&a;$2&8;$3&7;$4&8;$5&b;$6&8;")}";
+            return $"&8;{Regex.Replace(json, "(\"|\')([^\"]*)(\"|\')(?=:)(: *)(\"|\')?(true|false|[^\"]*)", "&8;$1&6;$2&8;$3&7;$4&8;$5&b;$6&8;")}";
         }
     }
 }
