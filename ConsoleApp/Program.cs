@@ -17,6 +17,8 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             log = new Logger();
+            log.AllowAllLevels();
+
             log.AddHandler(new ConsoleHandler());
             log.AddHandler(new LogFileHandler("C:\\Users\\Lucas\\Documents\\Somfic", "EliteAPI"));
 

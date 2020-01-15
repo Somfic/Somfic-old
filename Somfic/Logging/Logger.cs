@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Somfic.Logging
@@ -10,6 +11,7 @@ namespace Somfic.Logging
     {
         public IList<ILoggerHandler> Handlers { get; private set; }
         public bool IsDisabled { get; private set; }
+        public Severity? AllowedLevels { get; private set; } = null;
 
         public Logger()
         {
@@ -124,9 +126,21 @@ namespace Somfic.Logging
         public void Log(string content, object obj, Exception exception) => ProcessLog(Severity.Info, content, obj, exception);
         public void Log(Severity severity, string content, object obj, Exception exception) => ProcessLog(severity, content, obj, exception);
 
+        public void SetAllowedLevels(Severity severity)
+        {
+            AllowedLevels = severity;
+        }
+
+        public void AllowAllLevels()
+        {
+            AllowedLevels = null;
+        }
+
         private void ProcessLog(Severity severity, string content, object @object, Exception exception)
         {
             if(IsDisabled) { return; }
+
+            if (AllowedLevels.HasValue && !AllowedLevels.Value.HasFlag(severity)) { return; }
 
             StackTrace stack = new StackTrace();
             LogMessage m = new LogMessage(content, severity, @object, stack, exception);
