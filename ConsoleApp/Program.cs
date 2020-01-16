@@ -16,15 +16,20 @@ namespace ConsoleApp
 
         static void Main(string[] args)
         {
-            log = new Logger();
-            log.AllowAllLevels();
+            ConsoleHandler console = new ConsoleHandler();
+            LogFileHandler logFile = new LogFileHandler(Directory.GetCurrentDirectory(), "log");
 
-            log.AddHandler(new ConsoleHandler());
-            log.AddHandler(new LogFileHandler("C:\\Users\\Lucas\\Documents\\Somfic", "EliteAPI"));
+            
+            
+            log = new Logger();
+
+            log.AddHandler(new ConsoleHandler(), Severity.Warning);
+            log.AddHandler(new LogFileHandler(Directory.GetCurrentDirectory(), "EliteAPI"));
 
             log.Log("Hello this is a test on whether or not this stupid console actually does what i want it to do", new Test());
             log.Log(Severity.Warning, "We're about to trigger an exception!");
             log.Log(Severity.Error, new IndexOutOfRangeException(":(", new FileNotFoundException("Issa null bro", "C:\\path.txt")));
+            log.Log(Severity.Debug, "owo");
 
             try
             {
