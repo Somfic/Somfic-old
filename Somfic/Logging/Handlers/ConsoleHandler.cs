@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace Somfic.Logging.Handlers
 {
-    public class ConsoleHandler : ILoggerHandler
+    public class ConsoleHandler : LoggerHandler
     {
         private const int SeverityColumn = 10;
         private static readonly Dictionary<char, ConsoleColor> ConsoleColors = new Dictionary<char, ConsoleColor>
@@ -52,7 +52,7 @@ namespace Somfic.Logging.Handlers
 
         private static readonly int StackTraceMax = 3;
 
-        public void WriteLog(LogMessage message)
+        public override void WriteLog(LogMessage message)
         {
             StringBuilder s = new StringBuilder();
 

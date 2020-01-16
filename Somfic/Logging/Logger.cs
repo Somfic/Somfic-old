@@ -9,20 +9,32 @@ namespace Somfic.Logging
 {
     public class Logger
     {
-        public IList<ILoggerHandler> Handlers { get; private set; }
+        public IList<LoggerHandler> Handlers { get; private set; }
         public bool IsDisabled { get; private set; }
-        public Severity? AllowedLevels { get; private set; } = null;
+        public Severity[] AllowedLevels { get; private set; }
 
         public Logger()
         {
-            Handlers = new List<ILoggerHandler>();
+            AllowedLevels = new Severity[0];
+            AllowAllLevels();
+            Handlers = new List<LoggerHandler>();
+        }
+
+        /// <summary>
+        /// Adds a handler to the logger that only allows certain levels.
+        /// </summary>
+        /// <param name="handler">The handler</param>
+        public void AddHandler(LoggerHandler handler, params Severity[] allowedLevels)
+        {
+            handler.AllowedLevels = allowedLevels;
+            Handlers.Add(handler);
         }
 
         /// <summary>
         /// Adds a handler to the logger.
         /// </summary>
         /// <param name="handler">The handler</param>
-        public void AddHandler(ILoggerHandler handler)
+        public void AddHandler(LoggerHandler handler)
         {
             Handlers.Add(handler);
         }
@@ -31,7 +43,7 @@ namespace Somfic.Logging
         /// Removes a handler from the logger.
         /// </summary>
         /// <param name="handler">The handler</param>
-        public void RemoveHandler(ILoggerHandler handler)
+        public void RemoveHandler(LoggerHandler handler)
         {
             Handlers.Remove(handler);
         }
@@ -126,25 +138,26 @@ namespace Somfic.Logging
         public void Log(string content, object obj, Exception exception) => ProcessLog(Severity.Info, content, obj, exception);
         public void Log(Severity severity, string content, object obj, Exception exception) => ProcessLog(severity, content, obj, exception);
 
-        public void SetAllowedLevels(Severity severity)
+        public void SetAllowedLevels(params Severity[] severity)
         {
             AllowedLevels = severity;
         }
 
         public void AllowAllLevels()
         {
-            AllowedLevels = null;
+            AllowedLevels = new Severity[]
+                {Severity.Debug, Severity.Info, Severity.Warning, Severity.Error, Severity.Success};
         }
 
         private void ProcessLog(Severity severity, string content, object @object, Exception exception)
         {
             if(IsDisabled) { return; }
 
-            if (AllowedLevels.HasValue && !AllowedLevels.Value.HasFlag(severity)) { return; }
+            if (!AllowedLevels.Contains(severity)) { return; }
 
             StackTrace stack = new StackTrace();
             LogMessage m = new LogMessage(content, severity, @object, stack, exception);
-            Handlers.ToList().ForEach(x => x.WriteLog(m));
+            Handlers.ToList().ForEach(x => x.ProcessLog(m));
             LogEvent?.Invoke(this, m);
         }
 

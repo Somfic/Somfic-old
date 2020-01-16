@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace Somfic.Logging.Handlers
 {
-    public class LogFileHandler : ILoggerHandler
+    public class LogFileHandler : LoggerHandler
     {
         private const int SeverityColumn = 11;
         private const int TimeColumn = 12;
@@ -36,11 +36,12 @@ namespace Somfic.Logging.Handlers
                 i++;
             }
 
-            try { File.WriteAllText(LogFile.FullName, ""); }
-            catch {}
-        }
+            File.WriteAllText(LogFile.FullName, "");
 
-        public void WriteLog(LogMessage message)
+
+            }
+
+        public override void WriteLog(LogMessage message)
         {
             StringBuilder s = new StringBuilder();
             string time = message.Timestamp.ToString("hh:mm:ss.fff");
@@ -126,5 +127,6 @@ namespace Somfic.Logging.Handlers
                }
             }
         }
+
     }
 }
