@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>1.1.5.0</AssemblyVersion>
-    <FileVersion>1.1.5.0</FileVersion>
+    <AssemblyVersion>1.1.6.0</AssemblyVersion>
+    <FileVersion>1.1.6.0</FileVersion>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Somfic's all-in-one package for everything</Description>
     <Copyright>Somfic 2019</Copyright>
-    <Version>1.1.5</Version>
+    <Version>1.1.6</Version>
     <RepositoryUrl>https://github.com/Somfic/Somfic</RepositoryUrl>
     <PackageTags>Somfic</PackageTags>
     <PackageIconUrl>https://github.com/Somfic/Somfic/blob/master/Icons/logo.jpg?raw=true</PackageIconUrl>
