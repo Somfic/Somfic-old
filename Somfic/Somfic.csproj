@@ -11,8 +11,9 @@
     <Version>1.1.7</Version>
     <RepositoryUrl>https://github.com/Somfic/Somfic</RepositoryUrl>
     <PackageTags>Somfic</PackageTags>
-    <PackageIconUrl>https://github.com/Somfic/Somfic/blob/master/Icons/logo.jpg?raw=true</PackageIconUrl>
+    <PackageIconUrl></PackageIconUrl>
     <PackageProjectUrl>https://github.com/Somfic/Somfic</PackageProjectUrl>
+    <PackageIcon>logo_gradient.jpg</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +27,13 @@
     <Reference Include="vmAPI">
       <HintPath>..\lib\vmAPI.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Icons\logo_gradient.jpg">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
