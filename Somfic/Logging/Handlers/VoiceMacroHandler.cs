@@ -5,7 +5,7 @@ namespace Somfic.Logging.Handlers
 {
     /// <summary>
     /// A logging handler for VoiceMacro.
-    /// Uses VoicMacro's <c>vmCommand.AddLogEntry()</c> method .
+    /// Uses VoiceMacro's <c>vmCommand.AddLogEntry()</c> method.
     /// </summary>
     public class VoiceMacroHandler : LoggerHandler
     {

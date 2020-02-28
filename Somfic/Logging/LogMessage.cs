@@ -13,12 +13,12 @@ namespace Somfic.Logging
         /// <summary>
         /// Creates a new log content with an exception.
         /// </summary>
-        /// <param name="content">The content of the content.</param>
         /// <param name="severity">The severity of the content.</param>
+        /// <param name="content">The content of the content.</param>
         /// <param name="object">The object linked with this content.</param>
         /// <param name="stack">The stack of the message.</param>
         /// <param name="exception">The exception with which the content is linked.</param>
-        internal LogMessage(object content, Severity severity, object @object, StackTrace stack, Exception exception)
+        internal LogMessage(Severity severity, string content, object @object, StackTrace stack, Exception exception)
         {
             Content = content == null ? string.Empty : content.ToString();
             Severity = severity;
@@ -69,43 +69,37 @@ namespace Somfic.Logging
         {
             if (exception == null) { return; }
 
-            if (exception.GetType().Name == "Exception")
-            {
-                Type = exception.Message;
-                Localised = null;
-                Exception = exception;
-            }
-            else
-            {
-                string output = Regex
-                    .Replace(exception.GetType().Name, @"\p{Lu}", m => " " + m.Value.ToLowerInvariant())
-                    .Replace("exception", "").Trim();
-                output = char.ToUpperInvariant(output[0]) + output.Substring(1);
-                if(output == "I o") {  output = "IO"; }
-                Type = output;
-                Exception = exception;
-                Localised = null;
+            string output = Regex.Replace(exception.GetType().Name, @"\p{Lu}", m => " " + m.Value.ToLowerInvariant());
 
-                switch (exception)
-                {
-                    case ArgumentNullException a:
-                        Localised = $"Argument '{a.ParamName}' cannot be null.";
-                        break;
-                    case ArgumentOutOfRangeException a:
-                        Localised = $"Argument '{a.ParamName}' is out of range.";
-                        break;
-                    case FileNotFoundException a:
-                        Localised = $"File '{a.FileName}' could not be found.";
-                        break;
-                    case COMException a:
-                        Localised = $"HRESULT {a.ErrorCode}.";
-                        break;
-                    case SEHException a:
-                        Localised = !a.CanResume()
-                            ? $"HRESULT {a.ErrorCode}. This exception can not be recovered from."
-                            : $"HRESULT {a.ErrorCode}. This exception can be recovered from.";
-                        break;
-                }
+
+            output = exception.GetType().Name == "Exception" ? "Exception" : output.Replace("exception", "");
+
+            output = output.Trim();
+            output = char.ToUpperInvariant(output[0]) + output.Substring(1);
+            if (output == "I o") { output = "IO"; }
+            Type = output;
+            Exception = exception;
+            Localised = null;
+
+            switch (exception)
+            {
+                case ArgumentNullException a:
+                    Localised = $"Argument '{a.ParamName}' cannot be null.";
+                    break;
+                case ArgumentOutOfRangeException a:
+                    Localised = $"Argument '{a.ParamName}' is out of range.";
+                    break;
+                case FileNotFoundException a:
+                    Localised = $"File '{a.FileName}' could not be found.";
+                    break;
+                case COMException a:
+                    Localised = $"HRESULT {a.ErrorCode}.";
+                    break;
+                case SEHException a:
+                    Localised = !a.CanResume()
+                        ? $"HRESULT {a.ErrorCode}. This exception can not be recovered from."
+                        : $"HRESULT {a.ErrorCode}. This exception can be recovered from.";
+                    break;
             }
         }
 

@@ -7,29 +7,28 @@ using System.Threading;
 using System.Threading.Tasks;
 using Somfic.Logging;
 using Somfic.Logging.Handlers;
+using Somfic.Version;
+using Somfic.Version.Github;
 
 namespace ConsoleApp
 {
     class Program
     {
-        static Logger log;
-
         static void Main(string[] args)
         {
             ConsoleHandler console = new ConsoleHandler();
             LogFileHandler logFile = new LogFileHandler(Directory.GetCurrentDirectory(), "log");
 
-            
-            
-            log = new Logger();
 
-            log.AddHandler(new ConsoleHandler(), Severity.Warning);
-            log.AddHandler(new LogFileHandler(Directory.GetCurrentDirectory(), "EliteAPI"));
+            Logger.AddHandler(new ConsoleHandler());
+            Logger.AddHandler(new LogFileHandler(Directory.GetCurrentDirectory(), "EliteAPI"));
 
-            log.Log("Hello this is a test on whether or not this stupid console actually does what i want it to do", new Test());
-            log.Log(Severity.Warning, "We're about to trigger an exception!");
-            log.Log(Severity.Error, new IndexOutOfRangeException(":(", new FileNotFoundException("Issa null bro", "C:\\path.txt")));
-            log.Log(Severity.Debug, "owo");
+            bool newerAvailable = VersionControl.NewerVersionAvailable(new GithubVersionControl("EliteAPI", "EliteAPI"));
+            if (newerAvailable)
+            {
+                Logger.Log("A new version is available.");
+            }
+
 
             try
             {
@@ -38,16 +37,11 @@ namespace ConsoleApp
             }
             catch (Exception ex)
             {
-                log.Log(ex);
+                Logger.Log(ex);
             }
+            
             
             Console.ReadLine();
         }
-    }
-
-    public class Test
-    {
-        public string Name { get; set; } = "Jack";
-        public string LastName { get; set; } = "Johnson";
     }
 }

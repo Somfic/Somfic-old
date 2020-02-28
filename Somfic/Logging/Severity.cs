@@ -7,11 +7,12 @@ namespace Somfic.Logging
     /// </summary>
     public enum Severity
     {
+        Special,
         Success,
-        Info, 
-        Warning, 
-        Error, 
-        Debug, 
-        Special
+        Error,
+        Warning,
+        Info,
+        Debug,
+        Verbose
     }
 }

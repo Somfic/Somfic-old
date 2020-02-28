@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -37,7 +36,8 @@ namespace Somfic.Logging.Handlers
             {Severity.Error, 'c' },
             {Severity.Warning, 'e' },
             {Severity.Success, 'a' },
-            {Severity.Special, 'b' }
+            {Severity.Special, 'b' },
+            {Severity.Verbose, '8' },
         };
 
         private static readonly Dictionary<Severity, char> BackColors = new Dictionary<Severity, char>
@@ -47,10 +47,11 @@ namespace Somfic.Logging.Handlers
             {Severity.Error, '4' },
             {Severity.Warning, '6' },
             {Severity.Success, '2' },
-            {Severity.Special, '3' }
+            {Severity.Special, '3' },
+            {Severity.Verbose, '8' },
         };
 
-        private static readonly int StackTraceMax = 3;
+        private const int StackTraceMax = 3;
 
         public override void WriteLog(LogMessage message)
         {
@@ -76,7 +77,7 @@ namespace Somfic.Logging.Handlers
 
             if (message.Object != null)
             {
-                if(!isIndented) {s.Append(' ', SeverityColumn);}
+                if (!isIndented) { s.Append(' ', SeverityColumn); }
                 s.Append(Format(PrettyJson(Newtonsoft.Json.JsonConvert.SerializeObject(message.Object))));
                 s.Append("\n");
                 isIndented = false;
@@ -85,12 +86,20 @@ namespace Somfic.Logging.Handlers
             if (message.Exception.Exception != null)
             {
                 LogException ex = message.Exception;
+                bool isFirst = true;
+
 
                 while (true)
                 {
-                    if(!isIndented) {s.Append(' ', SeverityColumn);}
+                    if (!isIndented) { s.Append(' ', SeverityColumn); }
                     isIndented = false;
-                    s.Append(Format($"&{BackColors[message.Severity]}0; {ex.Type} &r; &8;: &{FrontColors[message.Severity]};{ex.Exception.Message}&r;"));
+                    s.Append(!isFirst
+                        ? Format(
+                            $"&{FrontColors[Severity.Debug]};+ &{BackColors[Severity.Debug]}0; {ex.Type} &r; &8;: &{FrontColors[Severity.Debug]};{ex.Exception.Message}&r;")
+                        : Format(
+                            $"&{BackColors[message.Severity]}0; {ex.Type} &r; &8;: &{FrontColors[message.Severity]};{ex.Exception.Message}&r;"));
+
+                    isFirst = false;
                     if (ex.Localised != null)
                     {
                         s.Append("\n");
@@ -171,22 +180,35 @@ namespace Somfic.Logging.Handlers
         private static string Format(string content)
         {
             StringBuilder s = new StringBuilder();
-            string[] parts = Regex.Split(content, @"(?<=[ .,;:\\/'" + '"' + "])");
+            string[] lines = Regex.Split(content, "\n");
 
-            int currentWidth = 0;
-            foreach (string part in parts)
+            foreach (string line in lines)
             {
-                string cleanPart = Regex.Replace(part, "([0-9a-fr]){1,2};", "");
-                
-                if (currentWidth + cleanPart.Length > Console.WindowWidth - SeverityColumn - 1)
+                string[] parts = Regex.Split(line, @"(?<=[ .,;:\\/'" + '"' + "])");
+
+                int currentWidth = 0;
+                foreach (string part in parts)
                 {
-                    s.Append("\n");
-                    s.Append(' ', SeverityColumn + 1);
-                    currentWidth = 1;
+                    string cleanPart = Regex.Replace(part, "([0-9a-fr]){1,2};", "");
+
+                    if (currentWidth + cleanPart.Length > Console.WindowWidth - SeverityColumn - 1)
+                    {
+                        s.Append("\n");
+                        s.Append(' ', SeverityColumn + 1);
+                        currentWidth = 1;
+                    }
+
+                    s.Append(currentWidth == 0 ? part.TrimStart() : part);
+                    currentWidth += cleanPart.Length;
                 }
 
-                s.Append(currentWidth == 0 ? part.TrimStart() : part);
-                currentWidth += cleanPart.Length;
+                if (lines.Length <= 1)
+                {
+                    continue;
+                }
+
+                s.Append("\n");
+                s.Append(' ', SeverityColumn + 1);
             }
 
             return s.ToString();

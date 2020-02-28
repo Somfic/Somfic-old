@@ -13,7 +13,7 @@ namespace Somfic.Logging
             AllowAllLevels();
         }
 
-        public Severity[] AllowedLevels { get; internal set; }
+        public IList<Severity> AllowedLevels { get; internal set; }
         public bool IsDisabled { get; private set; }
 
         public void ProcessLog(LogMessage message)
@@ -41,7 +41,7 @@ namespace Somfic.Logging
 
         public void AllowAllLevels()
         {
-            AllowedLevels = new []{Severity.Debug, Severity.Info, Severity.Warning, Severity.Error, Severity.Success};
+            AllowedLevels = new []{Severity.Debug, Severity.Info, Severity.Warning, Severity.Error, Severity.Success, Severity.Verbose, Severity.Special};
         }
     }
 }
