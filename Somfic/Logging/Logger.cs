@@ -55,8 +55,6 @@ namespace Somfic.Logging
             IsDisabled = false;
         }
 
-
-
         public static void SetAllowedLevels(params Severity[] severity)
         {
             AllowedLevels = severity;
