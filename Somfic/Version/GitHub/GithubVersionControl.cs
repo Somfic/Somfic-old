@@ -24,7 +24,7 @@ namespace Somfic.Version.Github
             usePre = countPreReleases;
         }
 
-        public override System.Version GetLatestVersion()
+        public override System.Version GetLatest()
         {
             Exception ex = null;
 
@@ -33,19 +33,19 @@ namespace Somfic.Version.Github
 
             if (userRepos == null)
             {
-                Logger.Error("Could not get a response from GitHub.");
+                Logger.Verbose("Could not get a response from GitHub.");
                 return null;
             }
 
             if (userRepos.Response != null && userRepos.Response.StatusCode != HttpStatusCode.OK)
             {
-                Logger.Error("Could not get a response from GitHub.", userRepos.Exception);
+                Logger.Verbose("Could not get a response from GitHub.", userRepos.Exception);
                 return null;
             }
 
             if (string.IsNullOrWhiteSpace(userRepos.Content))
             {
-                Logger.Error("Could not get latest version from GitHub.", new Exception($"The repository '{user}/{repo}' could not be found.", userRepos.Exception));
+                Logger.Verbose("Could not get latest version from GitHub.", new Exception($"The repository '{user}/{repo}' could not be found.", userRepos.Exception));
                 return null;
             }
 
