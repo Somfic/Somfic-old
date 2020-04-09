@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Somfic</name>
+    </assembly>
+    <members>
+        <member name="T:Somfic.Logging.Handlers.VoiceAttackHandler">
+            <summary>
+            A logging handler for VoiceAttack.
+            Uses VoiceAttack's <c>proxy.WriteToLog()</c> method .
+            </summary>
+        </member>
+        <member name="M:Somfic.Logging.Handlers.VoiceAttackHandler.#ctor(System.String)">
+            <summary>
+            Creates a new VoiceAttackHandler with a display name.
+            </summary>
+            <param name="displayName">The name used while logging.</param>
+        </member>
+        <member name="M:Somfic.Logging.Handlers.VoiceAttackHandler.UpdateProxy(System.Object)">
+            <summary>
+            Update the VoiceAttack proxy object.
+            </summary>
+            <param name="proxy">The VoiceAttack proxy dynamic.</param>
+        </member>
+        <member name="T:Somfic.Logging.Handlers.VoiceMacroHandler">
+            <summary>
+            A logging handler for VoiceMacro.
+            Uses VoiceMacro's <c>vmCommand.AddLogEntry()</c> method.
+            </summary>
+        </member>
+        <member name="M:Somfic.Logging.Handlers.VoiceMacroHandler.#ctor(System.String,System.String)">
+            <summary>
+            Creates a new VoiceMacroHandler with a display name.
+            </summary>
+            <param name="displayName">The name used while logging.</param>
+            <param name="id">The id of the plugin.</param>
+        </member>
+        <member name="M:Somfic.Logging.Handlers.VoiceMacroHandler.UpdateProxy(System.Object)">
+            <summary>
+            Update the VoiceAttack proxy object.
+            </summary>
+            <param name="proxy">The VoiceAttack proxy dynamic.</param>
+        </member>
+        <member name="M:Somfic.Logging.Logger.AddHandler(Somfic.Logging.LoggerHandler,Somfic.Logging.Severity[])">
+            <summary>
+            Adds a handler to the logger that only allows certain levels.
+            </summary>
+            <param name="handler">The handler</param>
+        </member>
+        <member name="M:Somfic.Logging.Logger.AddHandler(Somfic.Logging.LoggerHandler)">
+            <summary>
+            Adds a handler to the logger.
+            </summary>
+            <param name="handler">The handler</param>
+        </member>
+        <member name="M:Somfic.Logging.Logger.RemoveHandler(Somfic.Logging.LoggerHandler)">
+            <summary>
+            Removes a handler from the logger.
+            </summary>
+            <param name="handler">The handler</param>
+        </member>
+        <member name="M:Somfic.Logging.Logger.Disable">
+            <summary>
+            Disables logging.
+            </summary>
+        </member>
+        <member name="M:Somfic.Logging.Logger.Enable">
+            <summary>
+            Enables logging, should only be used after logging has been disabled.
+            </summary>
+        </member>
+        <member name="M:Somfic.Logging.LogMessage.#ctor(Somfic.Logging.Severity,System.String,System.Object,System.Diagnostics.StackTrace,System.Exception)">
+            <summary>
+            Creates a new log content with an exception.
+            </summary>
+            <param name="severity">The severity of the content.</param>
+            <param name="content">The content of the content.</param>
+            <param name="object">The object linked with this content.</param>
+            <param name="stack">The stack of the message.</param>
+            <param name="exception">The exception with which the content is linked.</param>
+        </member>
+        <member name="P:Somfic.Logging.LogMessage.Content">
+            <summary>
+            The content of the message.
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.LogMessage.Severity">
+            <summary>
+            The severity of the content.
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.LogMessage.Exception">
+            <summary>
+            The exception linked with this message. 
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.LogMessage.Object">
+            <summary>
+            The object linked with this message.
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.LogMessage.StackTrace">
+            <summary>
+            The stracktrace linked with this message.
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.LogMessage.Timestamp">
+            <summary>
+            Timestamp of the content.
+            </summary>
+        </member>
+        <member name="T:Somfic.Logging.Severity">
+            <summary>
+            The severity level of the message.
+            </summary>
+        </member>
+        <member name="P:Somfic.Version.VersionController.Latest">
+            <summary>
+            The latest available version.
+            </summary>
+        </member>
+        <member name="P:Somfic.Version.VersionController.NewerAvailable">
+            <summary>
+            Whether the latest available version is newer than this version.
+            </summary>
+        </member>
+    </members>
+</doc>
