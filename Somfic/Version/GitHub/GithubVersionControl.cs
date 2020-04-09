@@ -24,7 +24,7 @@ namespace Somfic.Version.Github
             usePre = countPreReleases;
         }
 
-        public override System.Version GetLatest()
+        public override System.Version GetVersion()
         {
             Exception ex = null;
 
