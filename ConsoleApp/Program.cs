@@ -23,24 +23,16 @@ namespace ConsoleApp
             Logger.AddHandler(new ConsoleHandler());
             Logger.AddHandler(new LogFileHandler(Directory.GetCurrentDirectory(), "EliteAPI"));
 
-            VersionController versionController = new GithubVersionControl("EliteAPI", "EliteAPI");
-            if (versionController.HasNewer)
+            Logger.Debug("Lets go");
+            GithubVersionControl versionController = new GithubVersionControl("EliteAPI", "EliteAPI");
+            if (versionController.NewerAvailable)
             {
+                Logger.Debug("Github", versionController.Latest);
+                Logger.Debug("This", versionController.This);
                 Logger.Log("A new version is available.");
             }
 
 
-            try
-            {
-                File.Open("X:\\A.txt", FileMode.Append);
-
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(ex);
-            }
-            
-            
             Console.ReadLine();
         }
     }
