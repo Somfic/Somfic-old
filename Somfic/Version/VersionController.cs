@@ -8,29 +8,18 @@ namespace Somfic.Version
 {
     public abstract class VersionController
     {
-        public VersionController()
-        {
-            Latest = GetVersion();
-            HasNewer = GetHasNewer();
-        }
-
         /// <summary>
         /// The latest available version.
         /// </summary>
-        public System.Version Latest { get; private set; }
+        public System.Version Latest => GetVersion();
+
+        public System.Version This => Assembly.GetCallingAssembly().GetName().Version;
 
         /// <summary>
         /// Whether the latest available version is newer than this version.
         /// </summary>
-        public bool HasNewer { get; private set; }
+        public bool NewerAvailable => Latest > This;
 
         public abstract System.Version GetVersion();
-
-        private bool GetHasNewer()
-        {
-            System.Version latestVersion = GetVersion();
-            System.Version thisVersion = Assembly.GetCallingAssembly().GetName().Version;
-            return latestVersion > thisVersion;
-        }
     }
 }
