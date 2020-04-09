@@ -24,7 +24,7 @@ namespace ConsoleApp
             Logger.AddHandler(new LogFileHandler(Directory.GetCurrentDirectory(), "EliteAPI"));
 
             VersionController versionController = new GithubVersionControl("EliteAPI", "EliteAPI");
-            if (versionController.HasNewer())
+            if (versionController.HasNewer)
             {
                 Logger.Log("A new version is available.");
             }
