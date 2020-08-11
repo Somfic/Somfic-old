@@ -14,14 +14,6 @@
             The connection string used for this instance
             </summary>
         </member>
-        <member name="M:Somfic.Database.DatabaseService.#ctor(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-            <summary>
-            Creates a new database connection service
-            </summary>
-            <param name="log">Logging information</param>
-            <param name="configuration">Configuration information</param>
-            <param name="connectionString">The connection string</param>
-        </member>
         <member name="P:Somfic.Database.DatabaseService.Connection">
             <summary>
             The connection to the database
