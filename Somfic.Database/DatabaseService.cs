@@ -15,18 +15,7 @@ namespace Somfic.Database
         /// <summary>
         /// The connection string used for this instance
         /// </summary>
-        protected string ConnectionString { get; }
-
-        /// <summary>
-        /// Creates a new database connection service
-        /// </summary>
-        /// <param name="log">Logging information</param>
-        /// <param name="configuration">Configuration information</param>
-        /// <param name="connectionString">The connection string</param>
-        protected DatabaseService(ILogger log, IConfiguration configuration, string connectionString)
-        {
-            ConnectionString = connectionString;
-        }
+        protected abstract string ConnectionString { get; }
 
         /// <summary>
         /// The connection to the database
