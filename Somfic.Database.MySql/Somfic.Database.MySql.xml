@@ -9,13 +9,18 @@
             A MySql database connection service
             </summary>
         </member>
-        <member name="M:Somfic.Database.MySql.MySqlService.#ctor(Microsoft.Extensions.Logging.ILogger{Somfic.Database.DatabaseService},Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+        <member name="M:Somfic.Database.MySql.MySqlService.#ctor(Microsoft.Extensions.Logging.ILogger{Somfic.Database.DatabaseService},Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             Creates a new MySql database connection service
             </summary>
             <param name="log">Logging information</param>
             <param name="configuration">Configuration information</param>
             <param name="connectionString">The connection string</param>
+        </member>
+        <member name="P:Somfic.Database.MySql.MySqlService.ConnectionString">
+            <summary>
+            The connection string used for this instance
+            </summary>
         </member>
         <member name="M:Somfic.Database.MySql.MySqlService.Get``1(System.Object,System.Data.IDbTransaction)">
             <summary>
