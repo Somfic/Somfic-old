@@ -15,7 +15,7 @@ namespace Somfic.Database.MySql
     /// </summary>
     public class MySqlService : DatabaseService
     {
-        private readonly ILogger _log;
+        private readonly ILogger<DatabaseService> _log;
 
         /// <summary>
         /// Creates a new MySql database connection service
@@ -23,11 +23,10 @@ namespace Somfic.Database.MySql
         /// <param name="log">Logging information</param>
         /// <param name="configuration">Configuration information</param>
         /// <param name="connectionString">The connection string</param>
-        public MySqlService(ILogger log, IConfiguration configuration, string connectionString) : base(log, configuration, connectionString)
+        public MySqlService(ILogger<DatabaseService> log, IConfiguration configuration, string connectionString) : base(log, configuration, connectionString)
         {
             _log = log;
             DapperAsyncExtensions.SqlDialect = new DapperExtensions.Sql.MySqlDialect();
-
         }
 
         /// <summary>

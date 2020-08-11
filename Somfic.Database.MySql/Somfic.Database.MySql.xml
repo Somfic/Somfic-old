@@ -9,7 +9,7 @@
             A MySql database connection service
             </summary>
         </member>
-        <member name="M:Somfic.Database.MySql.MySqlService.#ctor(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+        <member name="M:Somfic.Database.MySql.MySqlService.#ctor(Microsoft.Extensions.Logging.ILogger{Somfic.Database.DatabaseService},Microsoft.Extensions.Configuration.IConfiguration,System.String)">
             <summary>
             Creates a new MySql database connection service
             </summary>

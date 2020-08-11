@@ -9,6 +9,7 @@
     <Company>Somfic</Company>
     <Product>Database.MySql</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageTags>Somfic</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

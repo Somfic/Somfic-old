@@ -145,15 +145,33 @@ namespace Somfic.Logging.Console
             // Remove color codes from counting
             int tagLength = Regex.Replace(sb.ToString(), "\\u001b(.*?)m", "").Length;
 
+            StringBuilder source = new StringBuilder();
+            if (!string.IsNullOrWhiteSpace(CategoryName))
+            {
+                source.Append("[".Fg(utility));
+                source.Append(CategoryName.Fg(utilityText));
+                source.Append("] ".Fg(utility));
+                source.Append("".Fg(text));
+
+                sb.Append(source);
+            }
+            string cleanSource = Regex.Replace(source.ToString(), "\\u001b(.*?)m", "");
+
             // Main message
             StringBuilder message = new StringBuilder();
 
             string msg = formatter(state, exception);
-            foreach (string line in ToWrapped(msg, System.Console.WindowWidth - tagLength))
+            foreach (string line in ToWrapped(cleanSource + msg, System.Console.WindowWidth - tagLength))
             {
-                if (!isFirstLine) { message.Append(string.Empty.PadRight(tagLength)); }
-
-                message.AppendLine(line.Fg(text));
+                if (!isFirstLine)
+                {
+                    message.Append(string.Empty.PadRight(tagLength));
+                    message.AppendLine(line.Fg(text));
+                }
+                else
+                {
+                    message.AppendLine(line.Substring(cleanSource.Length).Fg(text));
+                }
                 isFirstLine = false;
             }
 

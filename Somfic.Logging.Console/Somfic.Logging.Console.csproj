@@ -8,6 +8,7 @@
     <RepositoryUrl>https://github.com/Somfic/Somfic</RepositoryUrl>
     <PackageIcon>logo_black_shine.jpg</PackageIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageTags>Somfic</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

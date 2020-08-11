@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{AEAAA67B-E7D3-4360-A64B-06807ECAD7EE}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Somfic", "Somfic\Somfic.csproj", "{9B169111-8E15-42E1-8C81-DA6098249E2C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Somfic.Database", "Somfic.Database\Somfic.Database.csproj", "{62B23981-4FA2-4EF7-AF09-1CD5282B5BDB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Somfic.Logging", "Somfic.Logging\Somfic.Logging.csproj", "{E7D2A59C-C565-4AF3-8401-48D148ED46A8}"
@@ -15,20 +11,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Somfic.Database.MySql", "So
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Somfic.Logging.Console", "Somfic.Logging.Console\Somfic.Logging.Console.csproj", "{BC46F4CE-FFAD-487C-BDBD-78063365EBEF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Somfic", "Somfic\Somfic.csproj", "{2F63D03A-4318-4727-9B94-F131DAE07E67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Somfic.Http", "Somfic.Http\Somfic.Http.csproj", "{ADFCA245-A08A-4E37-9EC3-96F849D48E6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AEAAA67B-E7D3-4360-A64B-06807ECAD7EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AEAAA67B-E7D3-4360-A64B-06807ECAD7EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AEAAA67B-E7D3-4360-A64B-06807ECAD7EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AEAAA67B-E7D3-4360-A64B-06807ECAD7EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9B169111-8E15-42E1-8C81-DA6098249E2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9B169111-8E15-42E1-8C81-DA6098249E2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9B169111-8E15-42E1-8C81-DA6098249E2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9B169111-8E15-42E1-8C81-DA6098249E2C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{62B23981-4FA2-4EF7-AF09-1CD5282B5BDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{62B23981-4FA2-4EF7-AF09-1CD5282B5BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62B23981-4FA2-4EF7-AF09-1CD5282B5BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +37,14 @@ Global
 		{BC46F4CE-FFAD-487C-BDBD-78063365EBEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC46F4CE-FFAD-487C-BDBD-78063365EBEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC46F4CE-FFAD-487C-BDBD-78063365EBEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F63D03A-4318-4727-9B94-F131DAE07E67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F63D03A-4318-4727-9B94-F131DAE07E67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F63D03A-4318-4727-9B94-F131DAE07E67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F63D03A-4318-4727-9B94-F131DAE07E67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADFCA245-A08A-4E37-9EC3-96F849D48E6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADFCA245-A08A-4E37-9EC3-96F849D48E6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADFCA245-A08A-4E37-9EC3-96F849D48E6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADFCA245-A08A-4E37-9EC3-96F849D48E6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
