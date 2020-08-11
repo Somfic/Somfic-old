@@ -1,11 +1,55 @@
 ﻿using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using Microsoft.Extensions.Logging;
+using Somfic.Logging.Console.Themes;
 
 namespace Somfic.Logging.Console
 {
+    public interface IConsoleTheme
+    {
+        Color Background { get; }
+
+        Color Text { get; }
+
+        Color SecondaryText { get; }
+
+        Color PunctuationText { get; }
+
+        Color Critical { get; }
+
+        Color Error { get; }
+
+        Color Warning { get; }
+
+        Color Information { get; }
+
+        Color Debug { get; }
+
+        Color Trace { get; }
+
+        Color Strings { get; }
+
+        Color Numbers { get; }
+
+        Color Booleans { get; }
+    }
+
     public class ConsoleLoggerProvider : ILoggerProvider
     {
+        private readonly IConsoleTheme _theme;
+
+
+        public ConsoleLoggerProvider(IConsoleTheme theme)
+        {
+            _theme = theme;
+        }
+
+        public ConsoleLoggerProvider()
+        {
+            _theme = new VanillaConsoleTheme();
+        }
+
         /// <summary>
         /// Disposes of the logger
         /// </summary>
@@ -27,7 +71,7 @@ namespace Somfic.Logging.Console
             bool colorSupported = GetConsoleMode(iStdOut, out uint outConsoleMode) && 
                                   SetConsoleMode(iStdOut, outConsoleMode | EnableVirtualTerminalProcessing);
 
-            return new ConsoleLogger(categoryName, colorSupported);
+            return new ConsoleLogger(categoryName, colorSupported, _theme);
         }
 
         private const int StdOutputHandle = -11;

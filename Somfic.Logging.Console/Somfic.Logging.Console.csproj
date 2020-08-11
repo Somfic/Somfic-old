@@ -15,6 +15,10 @@
     <DocumentationFile>C:\Users\Lucas\Documents\GitHub\Somfic\Somfic.Logging.Console\Somfic.Logging.Console.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\Lucas\Documents\GitHub\Somfic\Somfic.Logging.Console\Somfic.Logging.Console.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Include="..\Icons\logo_black_shine.jpg">
       <Pack>True</Pack>
