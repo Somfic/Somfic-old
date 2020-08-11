@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Somfic</Authors>
+    <Company>Somfic</Company>
+    <Product>Logging.Console</Product>
+    <RepositoryUrl>https://github.com/Somfic/Somfic</RepositoryUrl>
+    <PackageIcon>logo_black_shine.jpg</PackageIcon>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\Lucas\Documents\GitHub\Somfic\Somfic.Logging.Console\Somfic.Logging.Console.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\Icons\logo_black_shine.jpg">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Somfic.Logging\Somfic.Logging.csproj" />
+  </ItemGroup>
+
+</Project>

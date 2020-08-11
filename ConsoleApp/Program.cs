@@ -1,39 +1,64 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
+﻿
+
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Somfic.Logging;
-using Somfic.Logging.Handlers;
-using Somfic.Version;
-using Somfic.Version.Github;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Somfic.Logging.Console;
 
 namespace ConsoleApp
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
-            ConsoleHandler console = new ConsoleHandler();
-            LogFileHandler logFile = new LogFileHandler(Directory.GetCurrentDirectory(), "log");
+            var host = Host.CreateDefaultBuilder().ConfigureServices((context, service) =>
+                {
+                    service.AddTransient<Core>();
+                })
+                .ConfigureLogging((context, logger) =>
+                {
+                    logger.ClearProviders();
+                    logger.AddProvider(new ConsoleLoggerProvider());
+                    logger.SetMinimumLevel(LogLevel.Trace);
+                })
+                .Build();
+
+            ActivatorUtilities.CreateInstance<Core>(host.Services).Run().GetAwaiter().GetResult();
 
 
-            Logger.AddHandler(new ConsoleHandler());
-            Logger.AddHandler(new LogFileHandler(Directory.GetCurrentDirectory(), "EliteAPI"));
 
-            Logger.Debug("Lets go");
-            GithubVersionControl versionController = new GithubVersionControl("EliteAPI", "EliteAPI");
-            if (versionController.NewerAvailable)
-            {
-                Logger.Debug("Github", versionController.Latest);
-                Logger.Debug("This", versionController.This);
-                Logger.Log("A new version is available.");
-            }
+            Thread.Sleep(-1);
+        }
+    }
 
+    public class Core
+    {
+        private readonly ILogger<Core> _log;
+        private readonly IConfiguration _config;
 
-            Console.ReadLine();
+        public Core(ILogger<Core> log, IConfiguration config)
+        {
+            _log = log;
+            _config = config;
+        }
+
+        public async Task Run()
+        {
+
+            int i = 1;
+
+            _log.LogTrace(new Exception("This is an exception message"), "This is an example logging string. Anything else could be added here.");
+            _log.LogDebug(new Exception("This is an exception message"), "This is an example logging string. Anything else could be added here.");
+            _log.LogInformation(new Exception("This is an exception message"), "This is an example logging string. Anything else could be added here.");
+            _log.LogWarning(new Exception("This is an exception message"), "This is an example logging string. Anything else could be added here.");
+            _log.LogError(new Exception("This is an exception message"), "This is an example logging string. Anything else could be added here.");
+            _log.LogCritical(new Exception("This is an exception message"), "This is an example logging string. Anything else could be added here.");
+
+            Thread.Sleep(-1);
         }
     }
 }

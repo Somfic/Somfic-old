@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <RepositoryUrl>https://github.com/Somfic/Somfic</RepositoryUrl>
+    <PackageIcon>logo_black_shine.jpg</PackageIcon>
+    <Authors>Somfic</Authors>
+    <Company>Somfic</Company>
+    <Product>Database.MySql</Product>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\Lucas\Documents\GitHub\Somfic\Somfic.Database.MySql\Somfic.Database.MySql.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.35" />
+    <PackageReference Include="DapperExtensions" Version="1.6.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Somfic.Database\Somfic.Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Icons\logo_black_shine.jpg">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
