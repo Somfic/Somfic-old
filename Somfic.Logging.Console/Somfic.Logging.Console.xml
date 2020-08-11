@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Somfic.Logging.Console</name>
+    </assembly>
+    <members>
+        <member name="T:Somfic.Logging.Console.ConsoleLogger">
+            <summary>
+            A Console logger
+            </summary>
+        </member>
+        <member name="M:Somfic.Logging.Console.ConsoleLogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+            Whether a specific level is enabled
+            </summary>
+            <param name="logLevel">The level to check</param>
+            <returns>Whether this level is enabled</returns>
+        </member>
+        <member name="M:Somfic.Logging.Console.ConsoleLogger.BeginScope``1(``0)">
+            <summary>
+            Begins the scope of this logger
+            </summary>
+            <typeparam name="TState">The class type</typeparam>
+            <param name="state">The class</param>
+            <returns></returns>
+        </member>
+        <member name="M:Somfic.Logging.Console.ConsoleLoggerProvider.Dispose">
+            <summary>
+            Disposes of the logger
+            </summary>
+        </member>
+        <member name="M:Somfic.Logging.Console.ConsoleLoggerProvider.CreateLogger(System.String)">
+            <summary>
+            Creates a new ConsoleLogger
+            </summary>
+            <param name="categoryName">The category of these logs</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

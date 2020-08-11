@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Somfic.Database.MySql</name>
+    </assembly>
+    <members>
+        <member name="T:Somfic.Database.MySql.MySqlService">
+            <summary>
+            A MySql database connection service
+            </summary>
+        </member>
+        <member name="M:Somfic.Database.MySql.MySqlService.#ctor(Microsoft.Extensions.Logging.ILogger{Somfic.Database.DatabaseService},Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            Creates a new MySql database connection service
+            </summary>
+            <param name="log">Logging information</param>
+            <param name="configuration">Configuration information</param>
+            <param name="connectionString">The connection string</param>
+        </member>
+        <member name="M:Somfic.Database.MySql.MySqlService.Get``1(System.Object,System.Data.IDbTransaction)">
+            <summary>
+            Gets a record from a table
+            </summary>
+            <typeparam name="T">The type of record</typeparam>
+            <param name="id">The id of the record</param>
+            <param name="transaction">The transaction this task is part of</param>
+            <returns>The record</returns>
+        </member>
+        <member name="M:Somfic.Database.MySql.MySqlService.Get``1(System.Func{``0,System.Boolean},System.Data.IDbTransaction)">
+            <summary>
+            Gets multiple records from a table
+            </summary>
+            <typeparam name="T">The type of record</typeparam>
+            <param name="filter">The predicate of the filter</param>
+            <param name="transaction">The transaction this task is part of</param>
+            <returns>A list of records</returns>
+        </member>
+        <member name="M:Somfic.Database.MySql.MySqlService.Get``1(System.Func{``0,System.Boolean},System.Int32,System.Int32,System.Data.IDbTransaction)">
+            <summary>
+            Gets multiple records from a table with pagination
+            </summary>
+            <typeparam name="T">The type of record</typeparam>
+            <param name="resultsPerPage">The amount of results per page</param>
+            <param name="page">The page index</param>
+            <param name="filter">The predicate of the filter</param>
+            <param name="transaction">The transaction this task is part of</param>
+            <returns>A list of records</returns>
+        </member>
+        <member name="M:Somfic.Database.MySql.MySqlService.Count``1(System.Func{``0,System.Boolean},System.Data.IDbTransaction)">
+            <summary>
+            Counts the amount of records against a predicate
+            </summary>
+            <typeparam name="T">The type of record</typeparam>
+            <param name="filter">The predicate of the filter</param>
+            <param name="transaction">The transaction this task is part of</param>
+            <returns>The amount of records</returns>
+        </member>
+        <member name="M:Somfic.Database.MySql.MySqlService.Insert``1(``0,System.Data.IDbTransaction)">
+            <summary>
+            Inserts a record
+            </summary>
+            <typeparam name="T">The type of record</typeparam>
+            <param name="entity">The record to be inserted</param>
+            <param name="transaction">The transaction this task is part of</param>
+            <returns>The inserted Id</returns>
+        </member>
+        <member name="M:Somfic.Database.MySql.MySqlService.Insert``1(System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction)">
+            <summary>
+            Inserts multiple records
+            </summary>
+            <typeparam name="T">The type of record</typeparam>
+            <param name="entities">The records to be inserted</param>
+            <param name="transaction">The transaction this task is part of</param>
+        </member>
+        <member name="M:Somfic.Database.MySql.MySqlService.Update``1(``0,System.Data.IDbTransaction)">
+            <summary>
+            Updates a record
+            </summary>
+            <typeparam name="T">The type of record</typeparam>
+            <param name="entity">The record to be updated</param>
+            <param name="transaction">The transaction this task is part of</param>
+            <returns>Whether the update was a success</returns>
+        </member>
+        <member name="M:Somfic.Database.MySql.MySqlService.Delete``1(``0,System.Data.IDbTransaction)">
+            <summary>
+            Deletes a record
+            </summary>
+            <typeparam name="T">The type of record</typeparam>
+            <param name="entity">The record to be deleted</param>
+            <param name="transaction">The transaction this task is part of</param>
+            <returns>Whether the deletion was a success</returns>
+        </member>
+    </members>
+</doc>
