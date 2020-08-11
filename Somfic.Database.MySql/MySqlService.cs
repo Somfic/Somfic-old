@@ -23,11 +23,17 @@ namespace Somfic.Database.MySql
         /// <param name="log">Logging information</param>
         /// <param name="configuration">Configuration information</param>
         /// <param name="connectionString">The connection string</param>
-        public MySqlService(ILogger<DatabaseService> log, IConfiguration configuration, string connectionString) : base(log, configuration, connectionString)
+        public MySqlService(ILogger<DatabaseService> log, IConfiguration configuration)
         {
             _log = log;
             DapperAsyncExtensions.SqlDialect = new DapperExtensions.Sql.MySqlDialect();
+            ConnectionString = configuration["ConnectionString"];
         }
+
+        /// <summary>
+        /// The connection string used for this instance
+        /// </summary>
+        protected override string ConnectionString { get; }
 
         /// <summary>
         /// Gets a record from a table
