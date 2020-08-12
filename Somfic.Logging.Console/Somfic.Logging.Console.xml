@@ -4,25 +4,208 @@
         <name>Somfic.Logging.Console</name>
     </assembly>
     <members>
+        <member name="T:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilder">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilder.Parts">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilder.Build">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilder.BuildClean">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilder.AddPart(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilder.EndWith(System.Drawing.Color)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilder.EndWith(System.Drawing.Color,Somfic.Logging.Console.Builder.Ansi.AnsiColorRegion)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilder.EndWith(Somfic.Logging.Console.Builder.AnsiCode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilder.EndWithBackground(System.Drawing.Color)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilder.EndWithUnderline(System.Drawing.Color)">
+            <inheritdoc />
+        </member>
+        <member name="T:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilderPart">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilderPart.Build">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilderPart.BuildClean">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilderPart.With(System.Drawing.Color)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilderPart.With(System.Drawing.Color,Somfic.Logging.Console.Builder.Ansi.AnsiColorRegion)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilderPart.With(Somfic.Logging.Console.Builder.AnsiCode)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilderPart.WithBackground(System.Drawing.Color)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilderPart.WithUnderline(System.Drawing.Color)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilderPart.Set(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilderPart.Append(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.AnsiStringBuilderPart.Clear">
+            <inheritdoc />
+        </member>
+        <member name="T:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilder">
+            <summary>
+            A class that builds a string using multiple ANSI-escape-characters-filled strings
+            </summary>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilder.Build">
+            <summary>
+            Builds the string with ANSI escape-characters
+            </summary>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilder.BuildClean">
+            <summary>
+            Builds the string without any ANSI escape-characters
+            </summary>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilder.BuildWithWrap(System.Int32)">
+            <summary>
+            Builds the string with ANSI escape-characters with soft wrap
+            <param name="maxSize">The maximum width of the sentence</param>
+            </summary>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilder.BuildCleanWithWrap(System.Int32)">
+            <summary>
+            Builds the string without any ANSI escape-characters with soft wrap
+            <param name="maxSize">The maximum width of the sentence</param>
+            </summary>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilder.AddPart(System.String)">
+            <summary>
+            Creates a new <see cref="T:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilderPart"/> and adds it to the builder
+            </summary>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilder.EndWith(System.Drawing.Color)">
+            <summary>
+            Appends a colored ANSI escape-character for the foreground
+            </summary>
+            <param name="color">The color the foreground should be set to</param>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilder.EndWith(System.Drawing.Color,Somfic.Logging.Console.Builder.Ansi.AnsiColorRegion)">
+            <summary>
+            Appends a colored ANSI escape-character for a specific region
+            </summary>
+            <param name="region">The applicable region</param>
+            <param name="color">The color the region should be set to</param>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilder.EndWith(Somfic.Logging.Console.Builder.AnsiCode)">
+            <summary>
+            Appends an ANSI escape-character
+            </summary>
+            <param name="ansiCode">The ANSI escape-character</param>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilder.EndWithBackground(System.Drawing.Color)">
+            <summary>
+            Appends a colored ANSI escape-character for the background
+            </summary>
+            <param name="color">The color the background should be set to</param>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilder.EndWithUnderline(System.Drawing.Color)">
+            <summary>
+            Appends a colored ANSI escape-character for the underline
+            </summary>
+            <param name="color">The color the underline should be set to</param>
+        </member>
+        <member name="T:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilderPart">
+            <summary>
+            A class that builds a pretty base string using ANSI escape-characters
+            </summary>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilderPart.Build">
+            <summary>
+            Builds the string with ANSI escape-characters
+            </summary>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilderPart.BuildClean">
+            <summary>
+            Builds the string without any ANSI escape-characters
+            </summary>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilderPart.With(System.Drawing.Color)">
+            <summary>
+            Prepends a colored ANSI escape-character for the foreground
+            </summary>
+            <param name="color">The color the foreground should be set to</param>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilderPart.With(System.Drawing.Color,Somfic.Logging.Console.Builder.Ansi.AnsiColorRegion)">
+            <summary>
+            Prepends a colored ANSI escape-character for a specific region
+            </summary>
+            <param name="region">The applicable region</param>
+            <param name="color">The color the region should be set to</param>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilderPart.WithBackground(System.Drawing.Color)">
+            <summary>
+            Prepends a colored ANSI escape-character for the background
+            </summary>
+            <param name="color">The color the background should be set to</param>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilderPart.With(Somfic.Logging.Console.Builder.AnsiCode)">
+            <summary>
+            Prepends an ANSI escape-character
+            </summary>
+            <param name="ansiCode">The ANSI escape-character</param>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilderPart.WithUnderline(System.Drawing.Color)">
+            <summary>
+            Prepends a colored ANSI escape-character for the underline
+            </summary>
+            <param name="color">The color the underline should be set to</param>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilderPart.Set(System.String)">
+            <summary>
+            Overwrites the string's content
+            </summary>
+            <param name="content">The new string content</param>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilderPart.Append(System.String)">
+            <summary>
+            Appends to the string's content
+            </summary>
+            <param name="content">The string to append</param>
+        </member>
+        <member name="M:Somfic.Logging.Console.Builder.Ansi.IAnsiStringBuilderPart.Clear">
+            <summary>
+            Clears the string's content, does not clear ANSI characters
+            </summary>
+        </member>
         <member name="T:Somfic.Logging.Console.ConsoleLogger">
             <summary>
             A Console logger
             </summary>
         </member>
         <member name="M:Somfic.Logging.Console.ConsoleLogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)">
-            <summary>
-            Whether a specific level is enabled
-            </summary>
-            <param name="logLevel">The level to check</param>
-            <returns>Whether this level is enabled</returns>
+            <inheritdoc />
         </member>
         <member name="M:Somfic.Logging.Console.ConsoleLogger.BeginScope``1(``0)">
-            <summary>
-            Begins the scope of this logger
-            </summary>
-            <typeparam name="TState">The class type</typeparam>
-            <param name="state">The class</param>
-            <returns></returns>
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.Console.ConsoleLogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})">
+            <inheritdoc />
         </member>
         <member name="M:Somfic.Logging.Console.ConsoleLoggerProvider.Dispose">
             <summary>
@@ -36,9 +219,167 @@
             <param name="categoryName">The category of these logs</param>
             <returns></returns>
         </member>
+        <member name="T:Somfic.Logging.Console.Themes.ConsoleThemes">
+            <summary>
+            A set of default console themes
+            </summary>
+        </member>
+        <member name="T:Somfic.Logging.Console.Themes.CodeConsoleTheme">
+            <summary>
+            A theme similar to the colors used in Visual Studio Code
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.CodeConsoleTheme.Background">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.CodeConsoleTheme.Text">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.CodeConsoleTheme.SecondaryText">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.CodeConsoleTheme.Punctuation">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.CodeConsoleTheme.Critical">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.CodeConsoleTheme.Error">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.CodeConsoleTheme.Warning">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.CodeConsoleTheme.Information">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.CodeConsoleTheme.Debug">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.CodeConsoleTheme.Trace">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.CodeConsoleTheme.Strings">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.CodeConsoleTheme.Numbers">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.CodeConsoleTheme.Booleans">
+            <inheritdoc />
+        </member>
         <member name="T:Somfic.Logging.Console.Themes.VanillaConsoleTheme">
             <summary>
             A default 16-color Console Theme
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.VanillaConsoleTheme.Background">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.VanillaConsoleTheme.Text">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.VanillaConsoleTheme.SecondaryText">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.VanillaConsoleTheme.Punctuation">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.VanillaConsoleTheme.Critical">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.VanillaConsoleTheme.Error">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.VanillaConsoleTheme.Warning">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.VanillaConsoleTheme.Information">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.VanillaConsoleTheme.Debug">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.VanillaConsoleTheme.Trace">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.VanillaConsoleTheme.Strings">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.VanillaConsoleTheme.Numbers">
+            <inheritdoc />
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.VanillaConsoleTheme.Booleans">
+            <inheritdoc />
+        </member>
+        <member name="T:Somfic.Logging.Console.Themes.IConsoleTheme">
+            <summary>
+            A custom theme used for coloring the console
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.IConsoleTheme.Background">
+            <summary>
+            The background color
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.IConsoleTheme.Text">
+            <summary>
+            Normal text color
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.IConsoleTheme.SecondaryText">
+            <summary>
+            Secondary text color
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.IConsoleTheme.Punctuation">
+            <summary>
+            Punctuation color
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.IConsoleTheme.Critical">
+            <summary>
+            Color for when a <see cref="T:Microsoft.Extensions.Logging.LogLevel"/> of CRITICAL is reached
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.IConsoleTheme.Error">
+            <summary>
+            Color for when a <see cref="T:Microsoft.Extensions.Logging.LogLevel"/> of ERROR is reached
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.IConsoleTheme.Warning">
+            <summary>
+            Color for when a <see cref="T:Microsoft.Extensions.Logging.LogLevel"/> of WARNING is reached
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.IConsoleTheme.Information">
+            <summary>
+            Color for when a <see cref="T:Microsoft.Extensions.Logging.LogLevel"/> of INFORMATION is reached
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.IConsoleTheme.Debug">
+            <summary>
+            Color for when a <see cref="T:Microsoft.Extensions.Logging.LogLevel"/> of DEBUG is reached
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.IConsoleTheme.Trace">
+            <summary>
+            Color for when a <see cref="T:Microsoft.Extensions.Logging.LogLevel"/> of TRACE is reached
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.IConsoleTheme.Strings">
+            <summary>
+            Color for strings when formatting JSON
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.IConsoleTheme.Numbers">
+            <summary>
+            Color for numbers when formatting JSON
+            </summary>
+        </member>
+        <member name="P:Somfic.Logging.Console.Themes.IConsoleTheme.Booleans">
+            <summary>
+            Color for booleans when formatting JSON
             </summary>
         </member>
     </members>

@@ -4,32 +4,6 @@
         <name>Somfic.Logging</name>
     </assembly>
     <members>
-        <member name="T:Somfic.Logging.LogException">
-            <summary>
-            LogException helper class
-            </summary>
-        </member>
-        <member name="M:Somfic.Logging.LogException.#ctor(System.Exception)">
-            <summary>
-            Creates a new LogException class, should not be manually instantiated
-            </summary>
-            <param name="exception">The exception</param>
-        </member>
-        <member name="P:Somfic.Logging.LogException.Localised">
-            <summary>
-            The localised description
-            </summary>
-        </member>
-        <member name="P:Somfic.Logging.LogException.Type">
-            <summary>
-            The type of exception
-            </summary>
-        </member>
-        <member name="P:Somfic.Logging.LogException.Exception">
-            <summary>
-            The original exception
-            </summary>
-        </member>
         <member name="T:Somfic.Logging.Console.NoopDisposable">
             <summary>
             NoopDisposable helper class

@@ -3,17 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Somfic.Database", "Somfic.Database\Somfic.Database.csproj", "{62B23981-4FA2-4EF7-AF09-1CD5282B5BDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Somfic.Database", "Somfic.Database\Somfic.Database.csproj", "{62B23981-4FA2-4EF7-AF09-1CD5282B5BDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Somfic.Logging", "Somfic.Logging\Somfic.Logging.csproj", "{E7D2A59C-C565-4AF3-8401-48D148ED46A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Somfic.Logging", "Somfic.Logging\Somfic.Logging.csproj", "{E7D2A59C-C565-4AF3-8401-48D148ED46A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Somfic.Database.MySql", "Somfic.Database.MySql\Somfic.Database.MySql.csproj", "{17AEC59B-9B20-4B79-9169-8B6E2F812FC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Somfic.Database.MySql", "Somfic.Database.MySql\Somfic.Database.MySql.csproj", "{17AEC59B-9B20-4B79-9169-8B6E2F812FC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Somfic.Logging.Console", "Somfic.Logging.Console\Somfic.Logging.Console.csproj", "{BC46F4CE-FFAD-487C-BDBD-78063365EBEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Somfic.Logging.Console", "Somfic.Logging.Console\Somfic.Logging.Console.csproj", "{BC46F4CE-FFAD-487C-BDBD-78063365EBEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Somfic", "Somfic\Somfic.csproj", "{2F63D03A-4318-4727-9B94-F131DAE07E67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Somfic", "Somfic\Somfic.csproj", "{2F63D03A-4318-4727-9B94-F131DAE07E67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Somfic.Http", "Somfic.Http\Somfic.Http.csproj", "{ADFCA245-A08A-4E37-9EC3-96F849D48E6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Somfic.Http", "Somfic.Http\Somfic.Http.csproj", "{ADFCA245-A08A-4E37-9EC3-96F849D48E6A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{C7061F3F-3EFB-440D-842E-CFBA7C76511B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{8A1F38CE-8981-470A-805D-61A1A5C9C00D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HTTP", "HTTP", "{C411CF6E-E095-404D-875A-F50365A23F25}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8BB70395-ED28-4703-9A8C-1B7A60267821}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Somfic.Database.Tests", "Somfic.Database.Tests\Somfic.Database.Tests.csproj", "{D576CD4F-345C-45A2-8F10-6A4ACD7DD97A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{06841BC9-E286-40EA-A110-51A144F3855A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Somfic.Logging.Tests", "Somfic.Logging.Tests\Somfic.Logging.Tests.csproj", "{FFDAA3A8-0504-4A14-BBF4-7ED4D43F0290}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,9 +59,28 @@ Global
 		{ADFCA245-A08A-4E37-9EC3-96F849D48E6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADFCA245-A08A-4E37-9EC3-96F849D48E6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADFCA245-A08A-4E37-9EC3-96F849D48E6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D576CD4F-345C-45A2-8F10-6A4ACD7DD97A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D576CD4F-345C-45A2-8F10-6A4ACD7DD97A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D576CD4F-345C-45A2-8F10-6A4ACD7DD97A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D576CD4F-345C-45A2-8F10-6A4ACD7DD97A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFDAA3A8-0504-4A14-BBF4-7ED4D43F0290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFDAA3A8-0504-4A14-BBF4-7ED4D43F0290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFDAA3A8-0504-4A14-BBF4-7ED4D43F0290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFDAA3A8-0504-4A14-BBF4-7ED4D43F0290}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{62B23981-4FA2-4EF7-AF09-1CD5282B5BDB} = {8A1F38CE-8981-470A-805D-61A1A5C9C00D}
+		{E7D2A59C-C565-4AF3-8401-48D148ED46A8} = {C7061F3F-3EFB-440D-842E-CFBA7C76511B}
+		{17AEC59B-9B20-4B79-9169-8B6E2F812FC5} = {8A1F38CE-8981-470A-805D-61A1A5C9C00D}
+		{BC46F4CE-FFAD-487C-BDBD-78063365EBEF} = {C7061F3F-3EFB-440D-842E-CFBA7C76511B}
+		{ADFCA245-A08A-4E37-9EC3-96F849D48E6A} = {C411CF6E-E095-404D-875A-F50365A23F25}
+		{8BB70395-ED28-4703-9A8C-1B7A60267821} = {8A1F38CE-8981-470A-805D-61A1A5C9C00D}
+		{D576CD4F-345C-45A2-8F10-6A4ACD7DD97A} = {8BB70395-ED28-4703-9A8C-1B7A60267821}
+		{06841BC9-E286-40EA-A110-51A144F3855A} = {C7061F3F-3EFB-440D-842E-CFBA7C76511B}
+		{FFDAA3A8-0504-4A14-BBF4-7ED4D43F0290} = {06841BC9-E286-40EA-A110-51A144F3855A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9855E1DC-3865-41BD-B88D-ADAC772BB248}

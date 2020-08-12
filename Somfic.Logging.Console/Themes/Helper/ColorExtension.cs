@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Somfic.Logging.Console.Themes
+namespace Somfic.Logging.Console.Themes.Helper
 {
     internal static class ColorExtension
     {

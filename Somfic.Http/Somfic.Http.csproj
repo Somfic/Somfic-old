@@ -8,7 +8,10 @@
     <Product>Http</Product>
     <RepositoryUrl>https://github.com/Somfic/Somfic</RepositoryUrl>
     <PackageIcon>logo_black_shine.jpg</PackageIcon>
-    <PackageTags>Somfic</PackageTags>
+    <PackageTags>Somfic Http Injection</PackageTags>
+    <Version>1.0.1</Version>
+    <Description>A wrapper around System.Net that works with dependency injection</Description>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
