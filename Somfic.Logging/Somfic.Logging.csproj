@@ -10,6 +10,8 @@
     <PackageIcon>logo_black_shine.jpg</PackageIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>Somfic</PackageTags>
+    <Copyright>© Somfic 2020</Copyright>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
