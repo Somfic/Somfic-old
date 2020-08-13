@@ -9,6 +9,10 @@
     <PackageIcon>logo_black_shine.jpg</PackageIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>Somfic</PackageTags>
+    <Description>A colorful depedency injection console logger with support of ANSI themes</Description>
+    <PackageReleaseNotes>Somfic Logging File Console ANSI Injection</PackageReleaseNotes>
+    <Version>1.0.3</Version>
+    <Copyright>© Somfic 2020</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
