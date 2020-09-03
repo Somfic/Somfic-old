@@ -17,26 +17,33 @@ jobs:
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
         PROJECT_FILE_PATH: Somfic.Database/Somfic.Database.csproj
-        PACKAGE_NAME: EliteAPI
+        PACKAGE_NAME: Somfic.Database
+        NUGET_KEY: ${{ secrets.NUGET_KEY }}
+        
+    - name: Publish Somfic.Database.MySql
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: Somfic.Database.MySql/Somfic.Database.MySql.csproj
+        PACKAGE_NAME: Somfic.Database.Mysql
         NUGET_KEY: ${{ secrets.NUGET_KEY }}
         
     - name: Publish Somfic.Http
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
         PROJECT_FILE_PATH: Somfic.Http/Somfic.Http.csproj
-        PACKAGE_NAME: EliteAPI
+        PACKAGE_NAME: Somfic.Http
         NUGET_KEY: ${{ secrets.NUGET_KEY }}
         
     - name: Publish Somfic.Logging.Console
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
         PROJECT_FILE_PATH: Somfic.Logging.Console/Somfic.Logging.Console.csproj
-        PACKAGE_NAME: EliteAPI
+        PACKAGE_NAME: Somfic.Logging.Console
         NUGET_KEY: ${{ secrets.NUGET_KEY }}
         
     - name: Publish Somfic.Logging
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
         PROJECT_FILE_PATH: Somfic.Logging/Somfic.Logging.csproj
-        PACKAGE_NAME: EliteAPI
+        PACKAGE_NAME: Somfic.Logging
         NUGET_KEY: ${{ secrets.NUGET_KEY }}
