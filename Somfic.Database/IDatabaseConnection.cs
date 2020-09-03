@@ -30,7 +30,7 @@ namespace Somfic.Database
         /// <param name="filter">The predicate of the filter</param>
         /// <param name="transaction">The transaction this task is part of</param>
         /// <returns>A list of records</returns>
-        public Task<IList<T>> Get<T>(Func<T, bool> filter, IDbTransaction transaction = null) where T : class;
+        public Task<IEnumerable<T>> Get<T>(Func<T, bool> filter, IDbTransaction transaction = null) where T : class;
 
         /// <summary>
         /// Gets multiple records from a table with pagination
@@ -41,7 +41,7 @@ namespace Somfic.Database
         /// <param name="filter">The predicate of the filter</param>
         /// <param name="transaction">The transaction this task is part of</param>
         /// <returns>A list of records</returns>
-        public Task<IList<T>> Get<T>(Func<T, bool> filter, int resultsPerPage, int page = 1, IDbTransaction transaction = null) where T : class;
+        public Task<IEnumerable<T>> Get<T>(Func<T, bool> filter, int resultsPerPage, int page = 1, IDbTransaction transaction = null) where T : class;
 
         /// <summary>
         /// Get all records from a table

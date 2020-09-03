@@ -62,7 +62,7 @@ namespace Somfic.Database.MySql
         }
 
         /// <inheritdoc />
-        public async Task<IList<T>> Get<T>(Func<T, bool> filter, IDbTransaction transaction = null) where T : class
+        public async Task<IEnumerable<T>> Get<T>(Func<T, bool> filter, IDbTransaction transaction = null) where T : class
         {
             try
             {
@@ -81,7 +81,7 @@ namespace Somfic.Database.MySql
 
 
         /// <inheritdoc />
-        public async Task<IList<T>> Get<T>(Func<T, bool> filter, int resultsPerPage, int page = 1, IDbTransaction transaction = null) where T : class
+        public async Task<IEnumerable<T>> Get<T>(Func<T, bool> filter, int resultsPerPage, int page = 1, IDbTransaction transaction = null) where T : class
         {
             try
             {
