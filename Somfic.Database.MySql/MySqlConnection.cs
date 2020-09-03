@@ -22,7 +22,6 @@ namespace Somfic.Database.MySql
         /// </summary>
         /// <param name="log">Logging information</param>
         /// <param name="configuration">Configuration information</param>
-        /// <param name="connectionString">The connection string</param>
         public MySqlConnection(ILogger<MySqlConnection> log, IConfiguration configuration)
         {
             try
@@ -44,13 +43,7 @@ namespace Somfic.Database.MySql
         /// <inheritdoc />
         public string ConnectionString { get; }
 
-        /// <summary>
-        /// Gets a record from a table
-        /// </summary>
-        /// <typeparam name="T">The type of record</typeparam>
-        /// <param name="id">The id of the record</param>
-        /// <param name="transaction">The transaction this task is part of</param>
-        /// <returns>The record</returns>
+        /// <inheritdoc />
         public async Task<T> Get<T>(object id, IDbTransaction transaction = null) where T : class
         {
             try
@@ -63,18 +56,12 @@ namespace Somfic.Database.MySql
             }
             catch (Exception ex)
             {
-                _log.LogTrace(ex, "Could not get record from '{table}' with Id of '{id}'", typeof(T).Name, (object)id);
+                _log.LogTrace(ex, "Could not get record from {table} with Id of {id}", typeof(T).Name, (object)id);
                 throw;
             }
         }
 
-        /// <summary>
-        /// Gets multiple records from a table
-        /// </summary>
-        /// <typeparam name="T">The type of record</typeparam>
-        /// <param name="filter">The predicate of the filter</param>
-        /// <param name="transaction">The transaction this task is part of</param>
-        /// <returns>A list of records</returns>
+        /// <inheritdoc />
         public async Task<IList<T>> Get<T>(Func<T, bool> filter, IDbTransaction transaction = null) where T : class
         {
             try
@@ -87,20 +74,13 @@ namespace Somfic.Database.MySql
             }
             catch (Exception ex)
             {
-                _log.LogTrace(ex, "Could not get records from '{table}' with filter.", typeof(T).Name);
+                _log.LogTrace(ex, "Could not get records from {table} with filter.", typeof(T).Name);
                 throw;
             }
         }
 
-        /// <summary>
-        /// Gets multiple records from a table with pagination
-        /// </summary>
-        /// <typeparam name="T">The type of record</typeparam>
-        /// <param name="resultsPerPage">The amount of results per page</param>
-        /// <param name="page">The page index</param>
-        /// <param name="filter">The predicate of the filter</param>
-        /// <param name="transaction">The transaction this task is part of</param>
-        /// <returns>A list of records</returns>
+
+        /// <inheritdoc />
         public async Task<IList<T>> Get<T>(Func<T, bool> filter, int resultsPerPage, int page = 1, IDbTransaction transaction = null) where T : class
         {
             try
@@ -113,7 +93,26 @@ namespace Somfic.Database.MySql
             }
             catch (Exception ex)
             {
-                _log.LogTrace(ex, "Could not get records from '{table}' with filter on page {page} with {maxResult} results per page.", typeof(T).Name, page, resultsPerPage);
+                _log.LogTrace(ex, "Could not get records from {table} with filter on page {page} with {maxResult} results per page.", typeof(T).Name, page, resultsPerPage);
+                throw;
+            }
+        }
+
+
+        /// <inheritdoc />
+        public async Task<IEnumerable<T>> Get<T>(IDbTransaction transaction = null) where T : class
+        {
+            try
+            {
+                _connection.Open();
+                var all = await _connection.GetListAsync<T>(transaction: transaction);
+                _connection.Close();
+
+                return all;
+            }
+            catch (Exception ex)
+            {
+                _log.LogTrace(ex, "Could not get all records from {table}.", typeof(T).Name);
                 throw;
             }
         }
@@ -133,12 +132,11 @@ namespace Somfic.Database.MySql
                 int amount = await _connection.CountAsync<T>(filter, transaction);
                 _connection.Close();
 
-
                 return amount;
             }
             catch (Exception ex)
             {
-                _log.LogTrace(ex, "Could not count records from '{table}' with filter.", typeof(T).Name);
+                _log.LogTrace(ex, "Could not count records from {table} with filter.", typeof(T).Name);
                 throw;
             }
         }
@@ -162,7 +160,7 @@ namespace Somfic.Database.MySql
             }
             catch (Exception ex)
             {
-                _log.LogTrace(ex, "Could not insert record in '{table}' ({record}).", typeof(T).Name, entity);
+                _log.LogTrace(ex, "Could not insert record in {table} ({record}).", typeof(T).Name, entity);
                 throw;
             }
         }
@@ -183,7 +181,7 @@ namespace Somfic.Database.MySql
             }
             catch (Exception ex)
             {
-                _log.LogTrace(ex, "Could not insert records in '{table}' ({record}).", typeof(T).Name, entities);
+                _log.LogTrace(ex, "Could not insert records in {table} ({record}).", typeof(T).Name, entities);
                 throw;
             }
         }
@@ -207,7 +205,7 @@ namespace Somfic.Database.MySql
             }
             catch (Exception ex)
             {
-                _log.LogTrace(ex, "Could not update record in '{table}' ({entity})", typeof(T).Name, entity);
+                _log.LogTrace(ex, "Could not update record in {table} ({entity})", typeof(T).Name, entity);
                 throw;
             }
         }
@@ -231,7 +229,7 @@ namespace Somfic.Database.MySql
             }
             catch (Exception ex)
             {
-                _log.LogTrace(ex, "Could not delete record from '{table}' ({entity})", typeof(T).Name, entity);
+                _log.LogTrace(ex, "Could not delete record from {table} ({entity})", typeof(T).Name, entity);
                 throw;
             }
         }

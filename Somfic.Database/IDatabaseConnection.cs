@@ -44,6 +44,13 @@ namespace Somfic.Database
         public Task<IList<T>> Get<T>(Func<T, bool> filter, int resultsPerPage, int page = 1, IDbTransaction transaction = null) where T : class;
 
         /// <summary>
+        /// Get all records from a table
+        /// </summary>
+        /// <typeparam name="T">The type of record</typeparam>
+        /// <returns>A list of records</returns>
+        public Task<IEnumerable<T>> Get<T>(IDbTransaction transaction = null) where T : class;
+
+        /// <summary>
         /// Counts the amount of records against a predicate
         /// </summary>
         /// <typeparam name="T">The type of record</typeparam>
