@@ -28,6 +28,7 @@ namespace Somfic.Database.MySql
             _log = log;
             DapperAsyncExtensions.SqlDialect = new DapperExtensions.Sql.MySqlDialect();
             ConnectionString = configuration["ConnectionString"];
+            _connection = new global::MySql.Data.MySqlClient.MySqlConnection(ConnectionString);
         }
 
         private readonly IDbConnection _connection;
