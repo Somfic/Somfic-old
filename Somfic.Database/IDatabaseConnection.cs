@@ -10,26 +10,9 @@ namespace Somfic.Database
     /// <summary>
     /// An abstract database connection service
     /// </summary>
-    public abstract class DatabaseService
+    public interface IDatabaseConnection
     {
-        /// <summary>
-        /// The connection string used for this instance
-        /// </summary>
-        protected abstract string ConnectionString { get; }
-
-        /// <summary>
-        /// The connection to the database
-        /// </summary>
-        protected IDbConnection Connection { get; set; }
-
-        /// <summary>
-        /// Creates a new transaction
-        /// </summary>
-        /// <returns>The new transaction</returns>
-        public IDbTransaction NewTransaction()
-        {
-            return Connection.BeginTransaction();
-        }
+        public string ConnectionString { get; }
 
         /// <summary>
         /// Gets a record from a table
@@ -38,7 +21,7 @@ namespace Somfic.Database
         /// <param name="id">The id of the record</param>
         /// <param name="transaction">The transaction this task is part of</param>
         /// <returns>The record</returns>
-        public abstract Task<T> Get<T>(dynamic id, IDbTransaction transaction = null) where T : class;
+        public Task<T> Get<T>(object id, IDbTransaction transaction = null) where T : class;
 
         /// <summary>
         /// Gets multiple records from a table
@@ -47,7 +30,7 @@ namespace Somfic.Database
         /// <param name="filter">The predicate of the filter</param>
         /// <param name="transaction">The transaction this task is part of</param>
         /// <returns>A list of records</returns>
-        public abstract Task<IList<T>> Get<T>(Func<T, bool> filter, IDbTransaction transaction = null) where T : class;
+        public Task<IList<T>> Get<T>(Func<T, bool> filter, IDbTransaction transaction = null) where T : class;
 
         /// <summary>
         /// Gets multiple records from a table with pagination
@@ -58,7 +41,7 @@ namespace Somfic.Database
         /// <param name="filter">The predicate of the filter</param>
         /// <param name="transaction">The transaction this task is part of</param>
         /// <returns>A list of records</returns>
-        public abstract Task<IList<T>> Get<T>(Func<T, bool> filter, int resultsPerPage, int page = 1, IDbTransaction transaction = null) where T : class;
+        public Task<IList<T>> Get<T>(Func<T, bool> filter, int resultsPerPage, int page = 1, IDbTransaction transaction = null) where T : class;
 
         /// <summary>
         /// Counts the amount of records against a predicate
@@ -67,7 +50,7 @@ namespace Somfic.Database
         /// <param name="filter">The predicate of the filter</param>
         /// <param name="transaction">The transaction this task is part of</param>
         /// <returns>The amount of records</returns>
-        public abstract Task<int> Count<T>(Func<T, bool> filter, IDbTransaction transaction = null) where T : class;
+        public Task<int> Count<T>(Func<T, bool> filter, IDbTransaction transaction = null) where T : class;
 
         /// <summary>
         /// Inserts a record
@@ -76,7 +59,7 @@ namespace Somfic.Database
         /// <param name="entity">The record to be inserted</param>
         /// <param name="transaction">The transaction this task is part of</param>
         /// <returns>The inserted Id</returns>
-        public abstract Task<dynamic> Insert<T>(T entity, IDbTransaction transaction = null) where T : class;
+        public Task<object> Insert<T>(T entity, IDbTransaction transaction = null) where T : class;
 
         /// <summary>
         /// Inserts multiple records
@@ -93,7 +76,7 @@ namespace Somfic.Database
         /// <param name="entity">The record to be updated</param>
         /// <param name="transaction">The transaction this task is part of</param>
         /// <returns>Whether the update was a success</returns>
-        public abstract Task<bool> Update<T>(T entity, IDbTransaction transaction = null) where T : class;
+        public Task<bool> Update<T>(T entity, IDbTransaction transaction = null) where T : class;
 
         /// <summary>
         /// Deletes a record
@@ -102,6 +85,6 @@ namespace Somfic.Database
         /// <param name="entity">The record to be deleted</param>
         /// <param name="transaction">The transaction this task is part of</param>
         /// <returns>Whether the deletion was a success</returns>
-        public abstract Task<bool> Delete<T>(T entity, IDbTransaction transaction = null) where T : class;
+        public Task<bool> Delete<T>(T entity, IDbTransaction transaction = null) where T : class;
     }
 }
