@@ -1,0 +1,42 @@
+name: Publish to NuGet
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    name: Build, Pack, Publish
+    
+    steps:
+    - uses: actions/checkout@v2
+
+    # Publish to NuGet
+    - name: Publish Somfic.Database
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: Somfic.Database/Somfic.Database.csproj
+        PACKAGE_NAME: EliteAPI
+        NUGET_KEY: ${{ secrets.NUGET_KEY }}
+        
+    - name: Publish Somfic.Http
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: Somfic.Http/Somfic.Http.csproj
+        PACKAGE_NAME: EliteAPI
+        NUGET_KEY: ${{ secrets.NUGET_KEY }}
+        
+    - name: Publish Somfic.Logging.Console
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: Somfic.Logging.Console/Somfic.Logging.Console.csproj
+        PACKAGE_NAME: EliteAPI
+        NUGET_KEY: ${{ secrets.NUGET_KEY }}
+        
+    - name: Publish Somfic.Logging
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: Somfic.Logging/Somfic.Logging.csproj
+        PACKAGE_NAME: EliteAPI
+        NUGET_KEY: ${{ secrets.NUGET_KEY }}
