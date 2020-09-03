@@ -25,10 +25,18 @@ namespace Somfic.Database.MySql
         /// <param name="connectionString">The connection string</param>
         public MySqlConnection(ILogger<MySqlConnection> log, IConfiguration configuration)
         {
-            _log = log;
-            DapperAsyncExtensions.SqlDialect = new DapperExtensions.Sql.MySqlDialect();
-            ConnectionString = configuration["ConnectionString"];
-            _connection = new global::MySql.Data.MySqlClient.MySqlConnection(ConnectionString);
+            try
+            {
+                _log = log;
+                DapperAsyncExtensions.SqlDialect = new DapperExtensions.Sql.MySqlDialect();
+                ConnectionString = configuration["ConnectionString"];
+                _connection = new global::MySql.Data.MySqlClient.MySqlConnection(ConnectionString);
+            }
+            catch (Exception ex)
+            {
+                log?.LogWarning(ex, "Could not start MySql connection service");
+                throw;
+            }
         }
 
         private readonly IDbConnection _connection;
