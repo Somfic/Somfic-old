@@ -12,6 +12,7 @@
     <Version>1.0.1</Version>
     <Description>A wrapper around System.Net that works with dependency injection</Description>
     <LangVersion>8.0</LangVersion>
+    <Copyright>© Somfic 2020</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

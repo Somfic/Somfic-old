@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Somfic.Gui.Console</name>
+    </assembly>
+    <members>
+        <member name="T:Somfic.Gui.Console.Layout.CenterLayout">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Gui.Console.Layout.CenterLayout.Setup(Somfic.Gui.Console.LayoutContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Gui.Console.Layout.CenterLayout.Build(System.String)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

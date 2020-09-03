@@ -23,11 +23,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HTTP", "HTTP", "{C411CF6E-E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8BB70395-ED28-4703-9A8C-1B7A60267821}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Somfic.Database.Tests", "Somfic.Database.Tests\Somfic.Database.Tests.csproj", "{D576CD4F-345C-45A2-8F10-6A4ACD7DD97A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Somfic.Database.Tests", "Somfic.Database.Tests\Somfic.Database.Tests.csproj", "{D576CD4F-345C-45A2-8F10-6A4ACD7DD97A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{06841BC9-E286-40EA-A110-51A144F3855A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Somfic.Logging.Tests", "Somfic.Logging.Tests\Somfic.Logging.Tests.csproj", "{FFDAA3A8-0504-4A14-BBF4-7ED4D43F0290}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Somfic.Logging.Tests", "Somfic.Logging.Tests\Somfic.Logging.Tests.csproj", "{FFDAA3A8-0504-4A14-BBF4-7ED4D43F0290}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Somfic.Logging.File", "Somfic.Logging.File\Somfic.Logging.File.csproj", "{B8B6DD34-5D7B-45CC-9B03-6C612A24E429}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GUI", "GUI", "{790E541F-F0AD-4994-93E3-7F93D14F6A1B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Somfic.Gui.Console", "Somfic.Gui.Console\Somfic.Gui.Console.csproj", "{4709339F-F0D4-4049-9CEB-5F12BDF6CFCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +73,14 @@ Global
 		{FFDAA3A8-0504-4A14-BBF4-7ED4D43F0290}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFDAA3A8-0504-4A14-BBF4-7ED4D43F0290}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFDAA3A8-0504-4A14-BBF4-7ED4D43F0290}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8B6DD34-5D7B-45CC-9B03-6C612A24E429}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8B6DD34-5D7B-45CC-9B03-6C612A24E429}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8B6DD34-5D7B-45CC-9B03-6C612A24E429}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8B6DD34-5D7B-45CC-9B03-6C612A24E429}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4709339F-F0D4-4049-9CEB-5F12BDF6CFCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4709339F-F0D4-4049-9CEB-5F12BDF6CFCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4709339F-F0D4-4049-9CEB-5F12BDF6CFCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4709339F-F0D4-4049-9CEB-5F12BDF6CFCB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +95,8 @@ Global
 		{D576CD4F-345C-45A2-8F10-6A4ACD7DD97A} = {8BB70395-ED28-4703-9A8C-1B7A60267821}
 		{06841BC9-E286-40EA-A110-51A144F3855A} = {C7061F3F-3EFB-440D-842E-CFBA7C76511B}
 		{FFDAA3A8-0504-4A14-BBF4-7ED4D43F0290} = {06841BC9-E286-40EA-A110-51A144F3855A}
+		{B8B6DD34-5D7B-45CC-9B03-6C612A24E429} = {C7061F3F-3EFB-440D-842E-CFBA7C76511B}
+		{4709339F-F0D4-4049-9CEB-5F12BDF6CFCB} = {790E541F-F0AD-4994-93E3-7F93D14F6A1B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9855E1DC-3865-41BD-B88D-ADAC772BB248}

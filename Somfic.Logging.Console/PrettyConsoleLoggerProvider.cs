@@ -5,17 +5,17 @@ using Somfic.Logging.Console.Themes;
 
 namespace Somfic.Logging.Console
 {
-    public class ConsoleLoggerProvider : ILoggerProvider
+    public class PrettyConsoleLoggerProvider : ILoggerProvider
     {
         private readonly IConsoleTheme _theme;
 
 
-        public ConsoleLoggerProvider(IConsoleTheme theme)
+        public PrettyConsoleLoggerProvider(IConsoleTheme theme)
         {
             _theme = theme;
         }
 
-        public ConsoleLoggerProvider()
+        public PrettyConsoleLoggerProvider()
         {
             _theme = new VanillaConsoleTheme();
         }
@@ -41,7 +41,7 @@ namespace Somfic.Logging.Console
             bool colorSupported = GetConsoleMode(iStdOut, out uint outConsoleMode) &&
                                   SetConsoleMode(iStdOut, outConsoleMode | EnableVirtualTerminalProcessing);
 
-            return new ConsoleLogger(categoryName, colorSupported, _theme);
+            return new PrettyConsoleLogger(categoryName, colorSupported, _theme);
         }
 
         private const int StdOutputHandle = -11;

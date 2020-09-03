@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks.Sources;
 using Microsoft.Extensions.Logging;
 using Somfic.Logging.Console.Builder;
 using Somfic.Logging.Console.Builder.Ansi;
@@ -13,11 +14,11 @@ using Somfic.Logging.Console.Themes;
 namespace Somfic.Logging.Console
 {
     /// <summary>
-    /// A Console logger
+    /// A pretty console logger
     /// </summary>
-    public class ConsoleLogger : ILogger
+    public class PrettyConsoleLogger : ILogger
     {
-        internal ConsoleLogger(string categoryName, bool useColor, IConsoleTheme theme)
+        internal PrettyConsoleLogger(string categoryName, bool useColor, IConsoleTheme theme)
         {
             CategoryName = categoryName;
             UseColor = useColor;
@@ -85,7 +86,17 @@ namespace Somfic.Logging.Console
             StringBuilder logEntry = new StringBuilder();
             logEntry.Append(stampText);
             logEntry.Append(" ");
-            logEntry.Append(tagText).AppendLine();
+            logEntry.Append(tagText);
+            if (!string.IsNullOrWhiteSpace(sourceTagText))
+            {
+                logEntry.Append(" ");
+                logEntry.AppendLine(sourceTagText);
+            }
+            else
+            {
+                logEntry.AppendLine();
+            }
+            
             logEntry.Append(WithIndent(contentText, indentSize));
             logEntry.AppendLine(WithIndent(exceptionText, indentSize));
 

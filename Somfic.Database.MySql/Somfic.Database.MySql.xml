@@ -4,12 +4,12 @@
         <name>Somfic.Database.MySql</name>
     </assembly>
     <members>
-        <member name="T:Somfic.Database.MySql.MySqlService">
+        <member name="T:Somfic.Database.MySql.MySqlConnection">
             <summary>
             A MySql database connection service
             </summary>
         </member>
-        <member name="M:Somfic.Database.MySql.MySqlService.#ctor(Microsoft.Extensions.Logging.ILogger{Somfic.Database.DatabaseService},Microsoft.Extensions.Configuration.IConfiguration)">
+        <member name="M:Somfic.Database.MySql.MySqlConnection.#ctor(Microsoft.Extensions.Logging.ILogger{Somfic.Database.MySql.MySqlConnection},Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             Creates a new MySql database connection service
             </summary>
@@ -17,12 +17,10 @@
             <param name="configuration">Configuration information</param>
             <param name="connectionString">The connection string</param>
         </member>
-        <member name="P:Somfic.Database.MySql.MySqlService.ConnectionString">
-            <summary>
-            The connection string used for this instance
-            </summary>
+        <member name="P:Somfic.Database.MySql.MySqlConnection.ConnectionString">
+            <inheritdoc />
         </member>
-        <member name="M:Somfic.Database.MySql.MySqlService.Get``1(System.Object,System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.MySql.MySqlConnection.Get``1(System.Object,System.Data.IDbTransaction)">
             <summary>
             Gets a record from a table
             </summary>
@@ -31,7 +29,7 @@
             <param name="transaction">The transaction this task is part of</param>
             <returns>The record</returns>
         </member>
-        <member name="M:Somfic.Database.MySql.MySqlService.Get``1(System.Func{``0,System.Boolean},System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.MySql.MySqlConnection.Get``1(System.Func{``0,System.Boolean},System.Data.IDbTransaction)">
             <summary>
             Gets multiple records from a table
             </summary>
@@ -40,7 +38,7 @@
             <param name="transaction">The transaction this task is part of</param>
             <returns>A list of records</returns>
         </member>
-        <member name="M:Somfic.Database.MySql.MySqlService.Get``1(System.Func{``0,System.Boolean},System.Int32,System.Int32,System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.MySql.MySqlConnection.Get``1(System.Func{``0,System.Boolean},System.Int32,System.Int32,System.Data.IDbTransaction)">
             <summary>
             Gets multiple records from a table with pagination
             </summary>
@@ -51,7 +49,7 @@
             <param name="transaction">The transaction this task is part of</param>
             <returns>A list of records</returns>
         </member>
-        <member name="M:Somfic.Database.MySql.MySqlService.Count``1(System.Func{``0,System.Boolean},System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.MySql.MySqlConnection.Count``1(System.Func{``0,System.Boolean},System.Data.IDbTransaction)">
             <summary>
             Counts the amount of records against a predicate
             </summary>
@@ -60,7 +58,7 @@
             <param name="transaction">The transaction this task is part of</param>
             <returns>The amount of records</returns>
         </member>
-        <member name="M:Somfic.Database.MySql.MySqlService.Insert``1(``0,System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.MySql.MySqlConnection.Insert``1(``0,System.Data.IDbTransaction)">
             <summary>
             Inserts a record
             </summary>
@@ -69,7 +67,7 @@
             <param name="transaction">The transaction this task is part of</param>
             <returns>The inserted Id</returns>
         </member>
-        <member name="M:Somfic.Database.MySql.MySqlService.Insert``1(System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.MySql.MySqlConnection.Insert``1(System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction)">
             <summary>
             Inserts multiple records
             </summary>
@@ -77,7 +75,7 @@
             <param name="entities">The records to be inserted</param>
             <param name="transaction">The transaction this task is part of</param>
         </member>
-        <member name="M:Somfic.Database.MySql.MySqlService.Update``1(``0,System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.MySql.MySqlConnection.Update``1(``0,System.Data.IDbTransaction)">
             <summary>
             Updates a record
             </summary>
@@ -86,7 +84,7 @@
             <param name="transaction">The transaction this task is part of</param>
             <returns>Whether the update was a success</returns>
         </member>
-        <member name="M:Somfic.Database.MySql.MySqlService.Delete``1(``0,System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.MySql.MySqlConnection.Delete``1(``0,System.Data.IDbTransaction)">
             <summary>
             Deletes a record
             </summary>

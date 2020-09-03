@@ -193,26 +193,26 @@
             Clears the string's content, does not clear ANSI characters
             </summary>
         </member>
-        <member name="T:Somfic.Logging.Console.ConsoleLogger">
+        <member name="T:Somfic.Logging.Console.PrettyConsoleLogger">
             <summary>
-            A Console logger
+            A pretty console logger
             </summary>
         </member>
-        <member name="M:Somfic.Logging.Console.ConsoleLogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)">
+        <member name="M:Somfic.Logging.Console.PrettyConsoleLogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)">
             <inheritdoc />
         </member>
-        <member name="M:Somfic.Logging.Console.ConsoleLogger.BeginScope``1(``0)">
+        <member name="M:Somfic.Logging.Console.PrettyConsoleLogger.BeginScope``1(``0)">
             <inheritdoc />
         </member>
-        <member name="M:Somfic.Logging.Console.ConsoleLogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})">
+        <member name="M:Somfic.Logging.Console.PrettyConsoleLogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})">
             <inheritdoc />
         </member>
-        <member name="M:Somfic.Logging.Console.ConsoleLoggerProvider.Dispose">
+        <member name="M:Somfic.Logging.Console.PrettyConsoleLoggerProvider.Dispose">
             <summary>
             Disposes of the logger
             </summary>
         </member>
-        <member name="M:Somfic.Logging.Console.ConsoleLoggerProvider.CreateLogger(System.String)">
+        <member name="M:Somfic.Logging.Console.PrettyConsoleLoggerProvider.CreateLogger(System.String)">
             <summary>
             Creates a new ConsoleLogger
             </summary>
