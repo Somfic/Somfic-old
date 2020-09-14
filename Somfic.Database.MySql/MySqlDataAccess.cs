@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using SqlKata;
+using SqlKata.Compilers;
+using SqlKata.Execution;
+using SqlKata.Extensions;
 
 namespace Somfic.Database.MySql
 {
@@ -21,6 +25,86 @@ namespace Somfic.Database.MySql
         {
             _log = log;
             _config = config;
+        }
+
+        /// <inheritdoc />
+        public Task<T> GetAsync<T>(Query query, IDbTransaction transaction = null) where T : class
+        {
+            try
+            {
+                var db = CreateFactory();
+                return db.FirstOrDefaultAsync<T>(query, transaction);
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Add("SQL", CreateCompiler().Compile(query).Sql);
+                _log.LogError(ex, "Could not create record in database");
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public Task<IEnumerable<T>> GetListAsync<T>(Query query, IDbTransaction transaction = null) where T : class
+        {
+            try
+            {
+                var db = CreateFactory();
+                return db.GetAsync<T>(query, transaction);
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Add("SQL", CreateCompiler().Compile(query).Sql);
+                _log.LogError(ex, "Could not get records from database");
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public Task<int> InsertAsync(Query query, IDbTransaction transaction = null)
+        {
+            try
+            {
+                var db = CreateFactory();
+                return db.ExecuteAsync(query, transaction);
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Add("SQL", CreateCompiler().Compile(query).Sql);
+                _log.LogError(ex, "Could not insert record in database");
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public Task<int> UpdateAsync(Query query, IDbTransaction transaction = null)
+        {
+            try
+            {
+                var db = CreateFactory();
+                return db.ExecuteAsync(query, transaction);
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Add("SQL", CreateCompiler().Compile(query).Sql);
+                _log.LogError(ex, "Could not update record in database");
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public Task<int> DeleteAsync(Query query, IDbTransaction transaction = null)
+        {
+            try
+            {
+                var db = CreateFactory();
+                return db.ExecuteAsync(query, transaction);
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Add("SQL", CreateCompiler().Compile(query).Sql);
+                _log.LogError(ex, "Could not delete record from database");
+                throw;
+            }
         }
 
         private IDbConnection CreateConnection()
@@ -44,84 +128,22 @@ namespace Somfic.Database.MySql
             }
         }
 
-        /// <inheritdoc />
-        public Task<T> GetAsync<T>(string sql, IDbTransaction transaction = null) where T : class
+        private Compiler CreateCompiler()
         {
             try
             {
-                using IDbConnection c = CreateConnection();
-                return c.QueryFirstOrDefaultAsync<T>(sql, transaction: transaction);
+                return new MySqlCompiler();
             }
             catch (Exception ex)
             {
-                ex.Data.Add("SQL", sql);
-                _log.LogError(ex, "Could not create record in database");
+                _log.LogTrace(ex, "Could not create MySqlCompiler");
                 throw;
             }
         }
 
-        /// <inheritdoc />
-        public Task<IEnumerable<T>> GetListAsync<T>(string sql, IDbTransaction transaction = null) where T : class
+        private QueryFactory CreateFactory()
         {
-            try
-            {
-                using IDbConnection c = CreateConnection();
-                return c.QueryAsync<T>(sql, transaction: transaction);
-            }
-            catch (Exception ex)
-            {
-                ex.Data.Add("SQL", sql);
-                _log.LogError(ex, "Could not read record from database");
-                throw;
-            }
-        }
-
-        /// <inheritdoc />
-        public Task<int> InsertAsync<T>(string sql, IDbTransaction transaction = null) where T : class
-        {
-            try
-            {
-                using IDbConnection c = CreateConnection();
-                return c.ExecuteAsync(sql, transaction: transaction);
-            }
-            catch (Exception ex)
-            {
-                ex.Data.Add("SQL", sql);
-                _log.LogError(ex, "Could not insert record in database");
-                throw;
-            }
-        }
-
-        /// <inheritdoc />
-        public Task<int> UpdateAsync<T>(string sql, IDbTransaction transaction = null) where T : class
-        {
-            try
-            {
-                using IDbConnection c = CreateConnection();
-                return c.ExecuteAsync(sql, transaction: transaction);
-            }
-            catch (Exception ex)
-            {
-                ex.Data.Add("SQL", sql);
-                _log.LogError(ex, "Could not update record in database");
-                throw;
-            }
-        }
-
-        /// <inheritdoc />
-        public Task<int> DeleteAsync<T>(string sql, IDbTransaction transaction = null) where T : class
-        {
-            try
-            {
-                using IDbConnection c = CreateConnection();
-                return c.ExecuteAsync(sql, transaction: transaction);
-            }
-            catch (Exception ex)
-            {
-                ex.Data.Add("SQL", sql);
-                _log.LogError(ex, "Could not delete record from database");
-                throw;
-            }
+            return new QueryFactory(CreateConnection(), CreateCompiler());
         }
     }
 }

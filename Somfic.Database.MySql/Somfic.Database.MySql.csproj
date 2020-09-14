@@ -10,7 +10,7 @@
     <Product>Database.MySql</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>Somfic Database MySql Injection</PackageTags>
-    <Version>1.1.2</Version>
+    <Version>1.2.0</Version>
     <Description>Provides a MySql wrapper that works with dependency injection</Description>
     <Copyright>© Somfic 2020</Copyright>
   </PropertyGroup>
@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.35" />
-    <PackageReference Include="DapperExtensions" Version="1.6.3" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.6" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.6" />
     <PackageReference Include="MySql.Data" Version="8.0.21" />

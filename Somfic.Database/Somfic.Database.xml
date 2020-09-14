@@ -9,48 +9,45 @@
             Interface for accessing data from a database
             </summary>
         </member>
-        <member name="M:Somfic.Database.IDataAccess.GetAsync``1(System.String,System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.IDataAccess.GetAsync``1(SqlKata.Query,System.Data.IDbTransaction)">
             <summary>
             Reads a record from the database
             </summary>
             <typeparam name="T">The model</typeparam>
-            <param name="sql">The sql</param>
+            <param name="query">The SQL query</param>
             <param name="transaction">The database transaction</param>
             <returns>The rows</returns>
         </member>
-        <member name="M:Somfic.Database.IDataAccess.GetListAsync``1(System.String,System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.IDataAccess.GetListAsync``1(SqlKata.Query,System.Data.IDbTransaction)">
             <summary>
             Updates a record in the database
             </summary>
             <typeparam name="T">The model</typeparam>
-            <param name="sql">The sql</param>
+            <param name="query">The SQL query</param>
             <param name="transaction">The database transaction</param>
             <returns>The amount of affected rows</returns>
         </member>
-        <member name="M:Somfic.Database.IDataAccess.InsertAsync``1(System.String,System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.IDataAccess.InsertAsync(SqlKata.Query,System.Data.IDbTransaction)">
             <summary>
             Creates a record in the database
             </summary>
-            <typeparam name="T">The model</typeparam>
-            <param name="sql">The sql</param>
+            <param name="query">The SQL query</param>
             <param name="transaction">The database transaction</param>
             <returns>The amount of affected rows</returns>
         </member>
-        <member name="M:Somfic.Database.IDataAccess.UpdateAsync``1(System.String,System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.IDataAccess.UpdateAsync(SqlKata.Query,System.Data.IDbTransaction)">
             <summary>
             Updates a record in the database
             </summary>
-            <typeparam name="T">The model</typeparam>
-            <param name="sql">The sql</param>
+            <param name="query">The SQL query</param>
             <param name="transaction">The database transaction</param>
             <returns>The amount of affected rows</returns>
         </member>
-        <member name="M:Somfic.Database.IDataAccess.DeleteAsync``1(System.String,System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.IDataAccess.DeleteAsync(SqlKata.Query,System.Data.IDbTransaction)">
             <summary>
             Deletes a record from the database
             </summary>
-            <typeparam name="T">The model</typeparam>
-            <param name="sql">The sql</param>
+            <param name="query">The SQL query</param>
             <param name="transaction">The database transaction</param>
             <returns>The amount of affected rows</returns>
         </member>
