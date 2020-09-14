@@ -50,7 +50,7 @@ namespace Somfic.Database.MySql
             try
             {
                 using IDbConnection c = CreateConnection();
-                return c.QueryFirstAsync<T>(sql, transaction: transaction);
+                return c.QueryFirstOrDefaultAsync<T>(sql, transaction: transaction);
             }
             catch (Exception ex)
             {
