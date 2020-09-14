@@ -4,83 +4,49 @@
         <name>Somfic.Database</name>
     </assembly>
     <members>
-        <member name="T:Somfic.Database.IDatabaseConnection">
+        <member name="T:Somfic.Database.IDataAccess">
             <summary>
-            An abstract database connection service
+            Interface for accessing data from a database
             </summary>
         </member>
-        <member name="M:Somfic.Database.IDatabaseConnection.Get``1(System.Object,System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.IDataAccess.Create``1(System.String,``0,System.Data.IDbTransaction)">
             <summary>
-            Gets a record from a table
+            Creates a record in the database
             </summary>
-            <typeparam name="T">The type of record</typeparam>
-            <param name="id">The id of the record</param>
-            <param name="transaction">The transaction this task is part of</param>
-            <returns>The record</returns>
+            <typeparam name="T">The model</typeparam>
+            <param name="sql">The sql</param>
+            <param name="data">The model data</param>
+            <param name="transaction">The database transaction</param>
+            <returns>The amount of affected rows</returns>
         </member>
-        <member name="M:Somfic.Database.IDatabaseConnection.Get``1(System.Func{``0,System.Boolean},System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.IDataAccess.Read``1(System.String,System.Data.IDbTransaction)">
             <summary>
-            Gets multiple records from a table
+            Reads a record from the database
             </summary>
-            <typeparam name="T">The type of record</typeparam>
-            <param name="filter">The predicate of the filter</param>
-            <param name="transaction">The transaction this task is part of</param>
-            <returns>A list of records</returns>
+            <typeparam name="T">The model</typeparam>
+            <param name="sql">The sql</param>
+            <param name="transaction">The database transaction</param>
+            <returns>The rows</returns>
         </member>
-        <member name="M:Somfic.Database.IDatabaseConnection.Get``1(System.Func{``0,System.Boolean},System.Int32,System.Int32,System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.IDataAccess.Update``1(System.String,``0,System.Data.IDbTransaction)">
             <summary>
-            Gets multiple records from a table with pagination
+            Updates a record in the database
             </summary>
-            <typeparam name="T">The type of record</typeparam>
-            <param name="resultsPerPage">The amount of results per page</param>
-            <param name="page">The page index</param>
-            <param name="filter">The predicate of the filter</param>
-            <param name="transaction">The transaction this task is part of</param>
-            <returns>A list of records</returns>
+            <typeparam name="T">The model</typeparam>
+            <param name="sql">The sql</param>
+            <param name="data">The model data</param>
+            <param name="transaction">The database transaction</param>
+            <returns>The amount of affected rows</returns>
         </member>
-        <member name="M:Somfic.Database.IDatabaseConnection.Count``1(System.Func{``0,System.Boolean},System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.IDataAccess.Delete``1(System.String,``0,System.Data.IDbTransaction)">
             <summary>
-            Counts the amount of records against a predicate
+            Deletes a record from the database
             </summary>
-            <typeparam name="T">The type of record</typeparam>
-            <param name="filter">The predicate of the filter</param>
-            <param name="transaction">The transaction this task is part of</param>
-            <returns>The amount of records</returns>
-        </member>
-        <member name="M:Somfic.Database.IDatabaseConnection.Insert``1(``0,System.Data.IDbTransaction)">
-            <summary>
-            Inserts a record
-            </summary>
-            <typeparam name="T">The type of record</typeparam>
-            <param name="entity">The record to be inserted</param>
-            <param name="transaction">The transaction this task is part of</param>
-            <returns>The inserted Id</returns>
-        </member>
-        <member name="M:Somfic.Database.IDatabaseConnection.Insert``1(System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction)">
-            <summary>
-            Inserts multiple records
-            </summary>
-            <typeparam name="T">The type of record</typeparam>
-            <param name="entities">The records to be inserted</param>
-            <param name="transaction">The transaction this task is part of</param>
-        </member>
-        <member name="M:Somfic.Database.IDatabaseConnection.Update``1(``0,System.Data.IDbTransaction)">
-            <summary>
-            Updates a record
-            </summary>
-            <typeparam name="T">The type of record</typeparam>
-            <param name="entity">The record to be updated</param>
-            <param name="transaction">The transaction this task is part of</param>
-            <returns>Whether the update was a success</returns>
-        </member>
-        <member name="M:Somfic.Database.IDatabaseConnection.Delete``1(``0,System.Data.IDbTransaction)">
-            <summary>
-            Deletes a record
-            </summary>
-            <typeparam name="T">The type of record</typeparam>
-            <param name="entity">The record to be deleted</param>
-            <param name="transaction">The transaction this task is part of</param>
-            <returns>Whether the deletion was a success</returns>
+            <typeparam name="T">The model</typeparam>
+            <param name="sql">The sql</param>
+            <param name="data">The model data</param>
+            <param name="transaction">The database transaction</param>
+            <returns>The amount of affected rows</returns>
         </member>
     </members>
 </doc>
