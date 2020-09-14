@@ -10,42 +10,48 @@ namespace Somfic.Database
     public interface IDataAccess
     {
         /// <summary>
-        /// Creates a record in the database
-        /// </summary>
-        /// <typeparam name="T">The model</typeparam>
-        /// <param name="sql">The sql</param>
-        /// <param name="data">The model data</param>
-        /// <param name="transaction">The database transaction</param>
-        /// <returns>The amount of affected rows</returns>
-        public Task<int> Create<T>(string sql, T data, IDbTransaction transaction = null) where T : class;
-
-        /// <summary>
         /// Reads a record from the database
         /// </summary>
         /// <typeparam name="T">The model</typeparam>
         /// <param name="sql">The sql</param>
         /// <param name="transaction">The database transaction</param>
         /// <returns>The rows</returns>
-        public Task<IEnumerable<T>> Read<T>(string sql, IDbTransaction transaction = null) where T : class;
+        public Task<T> GetAsync<T>(string sql, IDbTransaction transaction = null) where T : class;
 
         /// <summary>
         /// Updates a record in the database
         /// </summary>
         /// <typeparam name="T">The model</typeparam>
         /// <param name="sql">The sql</param>
-        /// <param name="data">The model data</param>
         /// <param name="transaction">The database transaction</param>
         /// <returns>The amount of affected rows</returns>
-        public Task<int> Update<T>(string sql, T data, IDbTransaction transaction = null) where T : class;
+        public Task<IEnumerable<T>> GetListAsync<T>(string sql, IDbTransaction transaction = null) where T : class;
+
+        /// <summary>
+        /// Creates a record in the database
+        /// </summary>
+        /// <typeparam name="T">The model</typeparam>
+        /// <param name="sql">The sql</param>
+        /// <param name="transaction">The database transaction</param>
+        /// <returns>The amount of affected rows</returns>
+        public Task<int> InsertAsync<T>(string sql, IDbTransaction transaction = null) where T : class;
+
+        /// <summary>
+        /// Updates a record in the database
+        /// </summary>
+        /// <typeparam name="T">The model</typeparam>
+        /// <param name="sql">The sql</param>
+        /// <param name="transaction">The database transaction</param>
+        /// <returns>The amount of affected rows</returns>
+        public Task<int> UpdateAsync<T>(string sql, IDbTransaction transaction = null) where T : class;
 
         /// <summary>
         /// Deletes a record from the database
         /// </summary>
         /// <typeparam name="T">The model</typeparam>
         /// <param name="sql">The sql</param>
-        /// <param name="data">The model data</param>
         /// <param name="transaction">The database transaction</param>
         /// <returns>The amount of affected rows</returns>
-        public Task<int> Delete<T>(string sql, T data, IDbTransaction transaction = null) where T : class;
+        public Task<int> DeleteAsync<T>(string sql, IDbTransaction transaction = null) where T : class;
     }
 }

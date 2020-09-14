@@ -9,17 +9,7 @@
             Interface for accessing data from a database
             </summary>
         </member>
-        <member name="M:Somfic.Database.IDataAccess.Create``1(System.String,``0,System.Data.IDbTransaction)">
-            <summary>
-            Creates a record in the database
-            </summary>
-            <typeparam name="T">The model</typeparam>
-            <param name="sql">The sql</param>
-            <param name="data">The model data</param>
-            <param name="transaction">The database transaction</param>
-            <returns>The amount of affected rows</returns>
-        </member>
-        <member name="M:Somfic.Database.IDataAccess.Read``1(System.String,System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.IDataAccess.GetAsync``1(System.String,System.Data.IDbTransaction)">
             <summary>
             Reads a record from the database
             </summary>
@@ -28,23 +18,39 @@
             <param name="transaction">The database transaction</param>
             <returns>The rows</returns>
         </member>
-        <member name="M:Somfic.Database.IDataAccess.Update``1(System.String,``0,System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.IDataAccess.GetListAsync``1(System.String,System.Data.IDbTransaction)">
             <summary>
             Updates a record in the database
             </summary>
             <typeparam name="T">The model</typeparam>
             <param name="sql">The sql</param>
-            <param name="data">The model data</param>
             <param name="transaction">The database transaction</param>
             <returns>The amount of affected rows</returns>
         </member>
-        <member name="M:Somfic.Database.IDataAccess.Delete``1(System.String,``0,System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.IDataAccess.InsertAsync``1(System.String,System.Data.IDbTransaction)">
+            <summary>
+            Creates a record in the database
+            </summary>
+            <typeparam name="T">The model</typeparam>
+            <param name="sql">The sql</param>
+            <param name="transaction">The database transaction</param>
+            <returns>The amount of affected rows</returns>
+        </member>
+        <member name="M:Somfic.Database.IDataAccess.UpdateAsync``1(System.String,System.Data.IDbTransaction)">
+            <summary>
+            Updates a record in the database
+            </summary>
+            <typeparam name="T">The model</typeparam>
+            <param name="sql">The sql</param>
+            <param name="transaction">The database transaction</param>
+            <returns>The amount of affected rows</returns>
+        </member>
+        <member name="M:Somfic.Database.IDataAccess.DeleteAsync``1(System.String,System.Data.IDbTransaction)">
             <summary>
             Deletes a record from the database
             </summary>
             <typeparam name="T">The model</typeparam>
             <param name="sql">The sql</param>
-            <param name="data">The model data</param>
             <param name="transaction">The database transaction</param>
             <returns>The amount of affected rows</returns>
         </member>

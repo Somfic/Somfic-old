@@ -23,10 +23,14 @@ namespace Somfic.Database.MySql
             _config = config;
         }
 
-        private IDbConnection CreateConnection(string connectionName = "ASM")
+        private IDbConnection CreateConnection()
         {
             try
             {
+                string connectionName = _config.GetSection("ConnectionString")["Active"];
+                if (string.IsNullOrWhiteSpace(connectionName)) { _log.LogWarning("No active connection string is set"); }
+
+
                 _connectionString = _config.GetConnectionString(connectionName);
                 if (string.IsNullOrWhiteSpace(_connectionString)) { _log.LogWarning("The connection string is empty"); }
 
@@ -34,7 +38,6 @@ namespace Somfic.Database.MySql
             }
             catch (Exception ex)
             {
-                ex.Data.Add("Connection name", connectionName);
                 ex.Data.Add("Connection string", _connectionString);
                 _log.LogTrace(ex, "Could not create a connection to the database");
                 throw;
@@ -42,29 +45,28 @@ namespace Somfic.Database.MySql
         }
 
         /// <inheritdoc />
-        public Task<int> Create<T>(string sql, T data, IDbTransaction transaction = null) where T : class
+        public Task<T> GetAsync<T>(string sql, IDbTransaction transaction = null) where T : class
         {
             try
             {
                 using IDbConnection c = CreateConnection();
-                return c.ExecuteAsync(sql, data, transaction);
+                return c.QueryFirstAsync<T>(sql, transaction: transaction);
             }
             catch (Exception ex)
             {
                 ex.Data.Add("SQL", sql);
-                ex.Data.Add("Data", data);
                 _log.LogError(ex, "Could not create record in database");
                 throw;
             }
         }
 
         /// <inheritdoc />
-        public Task<IEnumerable<T>> Read<T>(string sql, IDbTransaction transaction = null) where T : class
+        public Task<IEnumerable<T>> GetListAsync<T>(string sql, IDbTransaction transaction = null) where T : class
         {
             try
             {
                 using IDbConnection c = CreateConnection();
-                return c.QueryAsync<T>(sql, transaction);
+                return c.QueryAsync<T>(sql, transaction: transaction);
             }
             catch (Exception ex)
             {
@@ -75,12 +77,28 @@ namespace Somfic.Database.MySql
         }
 
         /// <inheritdoc />
-        public Task<int> Update<T>(string sql, T data, IDbTransaction transaction = null) where T : class
+        public Task<int> InsertAsync<T>(string sql, IDbTransaction transaction = null) where T : class
         {
             try
             {
                 using IDbConnection c = CreateConnection();
-                return c.ExecuteAsync(sql, data, transaction);
+                return c.ExecuteAsync(sql, transaction: transaction);
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Add("SQL", sql);
+                _log.LogError(ex, "Could not insert record in database");
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public Task<int> UpdateAsync<T>(string sql, IDbTransaction transaction = null) where T : class
+        {
+            try
+            {
+                using IDbConnection c = CreateConnection();
+                return c.ExecuteAsync(sql, transaction: transaction);
             }
             catch (Exception ex)
             {
@@ -91,12 +109,12 @@ namespace Somfic.Database.MySql
         }
 
         /// <inheritdoc />
-        public Task<int> Delete<T>(string sql, T data, IDbTransaction transaction = null) where T : class
+        public Task<int> DeleteAsync<T>(string sql, IDbTransaction transaction = null) where T : class
         {
             try
             {
                 using IDbConnection c = CreateConnection();
-                return c.ExecuteAsync(sql, data, transaction);
+                return c.ExecuteAsync(sql, transaction: transaction);
             }
             catch (Exception ex)
             {
