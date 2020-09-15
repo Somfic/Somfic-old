@@ -51,5 +51,11 @@ namespace Somfic.Database
         /// <param name="transaction">The database transaction</param>
         /// <returns>The amount of affected rows</returns>
         public Task<int> DeleteAsync(Query query, IDbTransaction transaction = null);
+
+        /// <summary>
+        /// Creates a <seealso cref="IDbConnection"/>
+        /// </summary>
+        /// <returns>The connection</returns>
+        public IDbConnection CreateConnection();
     }
 }

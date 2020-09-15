@@ -136,7 +136,8 @@ namespace Somfic.Database.MySql
             if (ex.Data.Contains("Keys")) { ex.Data.Remove("Keys"); }
         }
 
-        private IDbConnection CreateConnection()
+        /// <inheritdoc />
+        public IDbConnection CreateConnection()
         {
             try
             {
