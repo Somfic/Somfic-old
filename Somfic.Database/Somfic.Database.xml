@@ -51,5 +51,11 @@
             <param name="transaction">The database transaction</param>
             <returns>The amount of affected rows</returns>
         </member>
+        <member name="M:Somfic.Database.IDataAccess.CreateConnection">
+            <summary>
+            Creates a <seealso cref="T:System.Data.IDbConnection"/>
+            </summary>
+            <returns>The connection</returns>
+        </member>
     </members>
 </doc>
