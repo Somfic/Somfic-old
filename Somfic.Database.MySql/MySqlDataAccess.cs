@@ -1,13 +1,13 @@
 ﻿
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SqlKata;
 using SqlKata.Compilers;
 using SqlKata.Execution;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Threading.Tasks;
 
 namespace Somfic.Database.MySql
 {
@@ -38,10 +38,9 @@ namespace Somfic.Database.MySql
             {
                 SqlResult compiled = CreateCompiler().Compile(query);
 
-                ex.Data.Add("SQL", compiled.Sql);
-                ex.Data.Add("Keys", compiled.NamedBindings);
+                AddExceptionData(ex, compiled);
                 _log.LogTrace(ex, "Could not get record from database");
-                ex.Data.Remove("Keys");
+                RemoveSensitiveExceptionData(ex);
                 throw;
             }
         }
@@ -59,10 +58,9 @@ namespace Somfic.Database.MySql
             {
                 SqlResult compiled = CreateCompiler().Compile(query);
 
-                ex.Data.Add("SQL", compiled.Sql);
-                ex.Data.Add("Keys", compiled.NamedBindings);
+                AddExceptionData(ex, compiled);
                 _log.LogTrace(ex, "Could not get records from database");
-                ex.Data.Remove("Keys");
+                RemoveSensitiveExceptionData(ex);
                 throw;
             }
         }
@@ -80,10 +78,9 @@ namespace Somfic.Database.MySql
             {
                 SqlResult compiled = CreateCompiler().Compile(query);
 
-                ex.Data.Add("SQL", compiled.Sql);
-                ex.Data.Add("Keys", compiled.NamedBindings);
+                AddExceptionData(ex, compiled);
                 _log.LogTrace(ex, "Could not insert record in database");
-                ex.Data.Remove("Keys");
+                RemoveSensitiveExceptionData(ex);
                 throw;
             }
         }
@@ -101,10 +98,9 @@ namespace Somfic.Database.MySql
             {
                 SqlResult compiled = CreateCompiler().Compile(query);
 
-                ex.Data.Add("SQL", compiled.Sql);
-                ex.Data.Add("Keys", compiled.NamedBindings);
+                AddExceptionData(ex, compiled);
                 _log.LogTrace(ex, "Could not update record in database");
-                ex.Data.Remove("Keys");
+                RemoveSensitiveExceptionData(ex);
                 throw;
             }
         }
@@ -122,12 +118,22 @@ namespace Somfic.Database.MySql
             {
                 SqlResult compiled = CreateCompiler().Compile(query);
 
-                ex.Data.Add("SQL", compiled.Sql);
-                ex.Data.Add("Keys", compiled.NamedBindings);
+                AddExceptionData(ex, compiled);
                 _log.LogTrace(ex, "Could not delete record from database");
-                ex.Data.Remove("Keys");
+                RemoveSensitiveExceptionData(ex);
                 throw;
             }
+        }
+
+        private void AddExceptionData(Exception ex, SqlResult sql)
+        {
+            ex.Data.Add("SQL", sql.Sql);
+            if (sql.NamedBindings.Count > 0) { ex.Data.Add("Keys", sql.NamedBindings); }
+        }
+
+        private void RemoveSensitiveExceptionData(Exception ex)
+        {
+            if (ex.Data.Contains("Keys")) { ex.Data.Remove("Keys"); }
         }
 
         private IDbConnection CreateConnection()
