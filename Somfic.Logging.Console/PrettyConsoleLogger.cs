@@ -5,8 +5,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks.Sources;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Somfic.Logging.Console.Builder;
 using Somfic.Logging.Console.Builder.Ansi;
 using Somfic.Logging.Console.Themes;
@@ -96,7 +96,7 @@ namespace Somfic.Logging.Console
             {
                 logEntry.AppendLine();
             }
-            
+
             logEntry.Append(WithIndent(contentText, indentSize));
             logEntry.AppendLine(WithIndent(exceptionText, indentSize));
 
@@ -136,7 +136,7 @@ namespace Somfic.Logging.Console
                         exception.AddPart("{").With(Theme.Punctuation);
                         exception.AddPart(o.Key.ToString()).With(Theme.SecondaryText);
                         exception.AddPart(": ").With(Theme.Punctuation);
-                        exception.AddPart(o.Value.ToString()).With(Theme.Text);
+                        exception.AddPart(JsonConvert.SerializeObject(o.Value)).With(Theme.Text);
                         exception.AddPart("}").With(Theme.Punctuation);
                         isFirstEntry = false;
                     }
