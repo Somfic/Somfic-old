@@ -28,12 +28,13 @@ namespace Somfic.Database.MySql
         }
 
         /// <inheritdoc />
-        public Task<T> GetAsync<T>(Query query, IDbTransaction transaction = null) where T : class
+        public async Task<T> GetAsync<T>(Query query, IDbTransaction transaction = null) where T : class
         {
             try
             {
                 var db = CreateFactory();
-                return db.FirstOrDefaultAsync<T>(query, transaction);
+                var result = await db.FirstOrDefaultAsync<T>(query, transaction);
+                return result;
             }
             catch (Exception ex)
             {
@@ -44,12 +45,13 @@ namespace Somfic.Database.MySql
         }
 
         /// <inheritdoc />
-        public Task<IEnumerable<T>> GetListAsync<T>(Query query, IDbTransaction transaction = null) where T : class
+        public async Task<IEnumerable<T>> GetListAsync<T>(Query query, IDbTransaction transaction = null) where T : class
         {
             try
             {
                 var db = CreateFactory();
-                return db.GetAsync<T>(query, transaction);
+                var result = await db.GetAsync<T>(query, transaction);
+                return result;
             }
             catch (Exception ex)
             {
@@ -60,12 +62,13 @@ namespace Somfic.Database.MySql
         }
 
         /// <inheritdoc />
-        public Task<int> InsertAsync(Query query, IDbTransaction transaction = null)
+        public async Task<int> InsertAsync(Query query, IDbTransaction transaction = null)
         {
             try
             {
                 var db = CreateFactory();
-                return db.ExecuteAsync(query, transaction);
+                var result = await db.ExecuteAsync(query, transaction);
+                return result;
             }
             catch (Exception ex)
             {
@@ -76,12 +79,13 @@ namespace Somfic.Database.MySql
         }
 
         /// <inheritdoc />
-        public Task<int> UpdateAsync(Query query, IDbTransaction transaction = null)
+        public async Task<int> UpdateAsync(Query query, IDbTransaction transaction = null)
         {
             try
             {
                 var db = CreateFactory();
-                return db.ExecuteAsync(query, transaction);
+                var result = await db.ExecuteAsync(query, transaction);
+                return result;
             }
             catch (Exception ex)
             {
@@ -92,12 +96,13 @@ namespace Somfic.Database.MySql
         }
 
         /// <inheritdoc />
-        public Task<int> DeleteAsync(Query query, IDbTransaction transaction = null)
+        public async Task<int> DeleteAsync(Query query, IDbTransaction transaction = null)
         {
             try
             {
                 var db = CreateFactory();
-                return db.ExecuteAsync(query, transaction);
+                var result = await db.ExecuteAsync(query, transaction);
+                return result;
             }
             catch (Exception ex)
             {
