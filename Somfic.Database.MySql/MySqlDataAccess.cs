@@ -3,13 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
-using Dapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SqlKata;
 using SqlKata.Compilers;
 using SqlKata.Execution;
-using SqlKata.Extensions;
 
 namespace Somfic.Database.MySql
 {
@@ -32,14 +30,18 @@ namespace Somfic.Database.MySql
         {
             try
             {
-                var db = CreateFactory();
-                var result = await db.FirstOrDefaultAsync<T>(query, transaction);
+                QueryFactory db = CreateFactory();
+                T result = await db.FirstOrDefaultAsync<T>(query, transaction);
                 return result;
             }
             catch (Exception ex)
             {
-                ex.Data.Add("SQL", CreateCompiler().Compile(query).Sql);
-                _log.LogError(ex, "Could not create record in database");
+                SqlResult compiled = CreateCompiler().Compile(query);
+
+                ex.Data.Add("SQL", compiled.Sql);
+                ex.Data.Add("Keys", compiled.NamedBindings);
+                _log.LogTrace(ex, "Could not get record from database");
+                ex.Data.Remove("Keys");
                 throw;
             }
         }
@@ -49,14 +51,18 @@ namespace Somfic.Database.MySql
         {
             try
             {
-                var db = CreateFactory();
-                var result = await db.GetAsync<T>(query, transaction);
+                QueryFactory db = CreateFactory();
+                IEnumerable<T> result = await db.GetAsync<T>(query, transaction);
                 return result;
             }
             catch (Exception ex)
             {
-                ex.Data.Add("SQL", CreateCompiler().Compile(query).Sql);
-                _log.LogError(ex, "Could not get records from database");
+                SqlResult compiled = CreateCompiler().Compile(query);
+
+                ex.Data.Add("SQL", compiled.Sql);
+                ex.Data.Add("Keys", compiled.NamedBindings);
+                _log.LogTrace(ex, "Could not get records from database");
+                ex.Data.Remove("Keys");
                 throw;
             }
         }
@@ -66,14 +72,18 @@ namespace Somfic.Database.MySql
         {
             try
             {
-                var db = CreateFactory();
-                var result = await db.ExecuteAsync(query, transaction);
+                QueryFactory db = CreateFactory();
+                int result = await db.ExecuteAsync(query, transaction);
                 return result;
             }
             catch (Exception ex)
             {
-                ex.Data.Add("SQL", CreateCompiler().Compile(query).Sql);
-                _log.LogError(ex, "Could not insert record in database");
+                SqlResult compiled = CreateCompiler().Compile(query);
+
+                ex.Data.Add("SQL", compiled.Sql);
+                ex.Data.Add("Keys", compiled.NamedBindings);
+                _log.LogTrace(ex, "Could not insert record in database");
+                ex.Data.Remove("Keys");
                 throw;
             }
         }
@@ -83,14 +93,18 @@ namespace Somfic.Database.MySql
         {
             try
             {
-                var db = CreateFactory();
-                var result = await db.ExecuteAsync(query, transaction);
+                QueryFactory db = CreateFactory();
+                int result = await db.ExecuteAsync(query, transaction);
                 return result;
             }
             catch (Exception ex)
             {
-                ex.Data.Add("SQL", CreateCompiler().Compile(query).Sql);
-                _log.LogError(ex, "Could not update record in database");
+                SqlResult compiled = CreateCompiler().Compile(query);
+
+                ex.Data.Add("SQL", compiled.Sql);
+                ex.Data.Add("Keys", compiled.NamedBindings);
+                _log.LogTrace(ex, "Could not update record in database");
+                ex.Data.Remove("Keys");
                 throw;
             }
         }
@@ -100,14 +114,18 @@ namespace Somfic.Database.MySql
         {
             try
             {
-                var db = CreateFactory();
-                var result = await db.ExecuteAsync(query, transaction);
+                QueryFactory db = CreateFactory();
+                int result = await db.ExecuteAsync(query, transaction);
                 return result;
             }
             catch (Exception ex)
             {
-                ex.Data.Add("SQL", CreateCompiler().Compile(query).Sql);
-                _log.LogError(ex, "Could not delete record from database");
+                SqlResult compiled = CreateCompiler().Compile(query);
+
+                ex.Data.Add("SQL", compiled.Sql);
+                ex.Data.Add("Keys", compiled.NamedBindings);
+                _log.LogTrace(ex, "Could not delete record from database");
+                ex.Data.Remove("Keys");
                 throw;
             }
         }
