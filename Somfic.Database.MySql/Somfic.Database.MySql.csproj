@@ -10,7 +10,7 @@
     <Product>Database.MySql</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>Somfic Database MySql Injection</PackageTags>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
     <Description>Provides a MySql wrapper that works with dependency injection</Description>
     <Copyright>© Somfic 2020</Copyright>
   </PropertyGroup>
