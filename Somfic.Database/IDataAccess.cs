@@ -17,7 +17,7 @@ namespace Somfic.Database
         /// <param name="query">The SQL query</param>
         /// <param name="transaction">The database transaction</param>
         /// <returns>The rows</returns>
-        public Task<T> GetAsync<T>(Query query, IDbTransaction transaction = null) where T : class;
+        public Task<T> FirstAsync<T>(Query query, IDbTransaction transaction = null) where T : class;
 
         /// <summary>
         /// Updates a record in the database
@@ -26,7 +26,7 @@ namespace Somfic.Database
         /// <param name="query">The SQL query</param>
         /// <param name="transaction">The database transaction</param>
         /// <returns>The amount of affected rows</returns>
-        public Task<IEnumerable<T>> GetListAsync<T>(Query query, IDbTransaction transaction = null) where T : class;
+        public Task<IEnumerable<T>> ListAsync<T>(Query query, IDbTransaction transaction = null) where T : class;
 
         /// <summary>
         /// Creates a record in the database
@@ -51,11 +51,5 @@ namespace Somfic.Database
         /// <param name="transaction">The database transaction</param>
         /// <returns>The amount of affected rows</returns>
         public Task<int> DeleteAsync(Query query, IDbTransaction transaction = null);
-
-        /// <summary>
-        /// Creates a <seealso cref="IDbConnection"/>
-        /// </summary>
-        /// <returns>The connection</returns>
-        public IDbConnection CreateConnection();
     }
 }
