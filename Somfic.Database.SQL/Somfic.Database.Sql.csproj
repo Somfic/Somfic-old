@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Somfic</Authors>
+    <Company>Somfic</Company>
+    <Product>Database.Sql</Product>
+    <Description>Provides a Sql database wrapper that works with dependency injection</Description>
+    <Copyright>© Somfic 2020</Copyright>
+    <PackageIcon>logo_black_shine.jpg</PackageIcon>
+    <RepositoryUrl>https://github.com/Somfic/Somfic</RepositoryUrl>
+    <PackageTags>Somfic Database Sql Injection</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\Lucas\Documents\GitHub\Somfic\Somfic.Database.SQL\Somfic.Database.Sql.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Somfic.Database\Somfic.Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Icons\logo_black_shine.jpg">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

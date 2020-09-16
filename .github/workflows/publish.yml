@@ -26,6 +26,13 @@ jobs:
         PROJECT_FILE_PATH: Somfic.Database.MySql/Somfic.Database.MySql.csproj
         PACKAGE_NAME: Somfic.Database.Mysql
         NUGET_KEY: ${{ secrets.NUGET_KEY }}
+
+    - name: Publish Somfic.Database.Sql
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: Somfic.Database.Sql/Somfic.Database.Sql.csproj
+        PACKAGE_NAME: Somfic.Database.Sql
+        NUGET_KEY: ${{ secrets.NUGET_KEY }}
         
     - name: Publish Somfic.Http
       uses: brandedoutcast/publish-nuget@v2.5.5

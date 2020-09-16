@@ -35,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GUI", "GUI", "{790E541F-F0A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Somfic.Gui.Console", "Somfic.Gui.Console\Somfic.Gui.Console.csproj", "{4709339F-F0D4-4049-9CEB-5F12BDF6CFCB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Somfic.Database.Sql", "Somfic.Database.SQL\Somfic.Database.Sql.csproj", "{C6B25E71-2CC1-4291-BC57-91CE9CB667B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{4709339F-F0D4-4049-9CEB-5F12BDF6CFCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4709339F-F0D4-4049-9CEB-5F12BDF6CFCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4709339F-F0D4-4049-9CEB-5F12BDF6CFCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6B25E71-2CC1-4291-BC57-91CE9CB667B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6B25E71-2CC1-4291-BC57-91CE9CB667B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6B25E71-2CC1-4291-BC57-91CE9CB667B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6B25E71-2CC1-4291-BC57-91CE9CB667B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,6 +103,7 @@ Global
 		{FFDAA3A8-0504-4A14-BBF4-7ED4D43F0290} = {06841BC9-E286-40EA-A110-51A144F3855A}
 		{B8B6DD34-5D7B-45CC-9B03-6C612A24E429} = {C7061F3F-3EFB-440D-842E-CFBA7C76511B}
 		{4709339F-F0D4-4049-9CEB-5F12BDF6CFCB} = {790E541F-F0AD-4994-93E3-7F93D14F6A1B}
+		{C6B25E71-2CC1-4291-BC57-91CE9CB667B1} = {8A1F38CE-8981-470A-805D-61A1A5C9C00D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9855E1DC-3865-41BD-B88D-ADAC772BB248}
