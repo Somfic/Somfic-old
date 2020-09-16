@@ -25,6 +25,10 @@ namespace Somfic.Database
             _config = config;
         }
 
+        /// <summary>
+        /// Creates a connection to the database
+        /// </summary>
+        /// <param name="connectionString">The connection string configured</param>
         protected abstract IDbConnection MakeDbConnection(string connectionString);
 
         /// <inheritdoc />
@@ -57,7 +61,7 @@ namespace Somfic.Database
             return await ExecuteAsync(query, transaction, "Could not delete record");
         }
 
-        protected async Task<int> ExecuteAsync(Query query, IDbTransaction transaction, string errorMessage)
+        private async Task<int> ExecuteAsync(Query query, IDbTransaction transaction, string errorMessage)
         {
             try
             {
@@ -76,7 +80,7 @@ namespace Somfic.Database
             }
         }
 
-        protected async Task<T> FirstAsync<T>(Query query, IDbTransaction transaction, string errorMessage)
+        private async Task<T> FirstAsync<T>(Query query, IDbTransaction transaction, string errorMessage)
         {
             try
             {
@@ -91,7 +95,7 @@ namespace Somfic.Database
             }
         }
 
-        protected async Task<IEnumerable<T>> ListAsync<T>(Query query, IDbTransaction transaction, string errorMessage)
+        private async Task<IEnumerable<T>> ListAsync<T>(Query query, IDbTransaction transaction, string errorMessage)
         {
             try
             {
