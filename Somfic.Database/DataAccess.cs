@@ -31,6 +31,11 @@ namespace Somfic.Database
         /// <param name="connectionString">The connection string configured</param>
         protected abstract IDbConnection MakeDbConnection(string connectionString);
 
+        /// <summary>
+        /// Creates a sql compiler
+        /// </summary>
+        protected abstract Compiler MakeCompiler();
+
         /// <inheritdoc />
         public async Task<T> FirstAsync<T>(Query query, IDbTransaction transaction = null) where T : class
         {
@@ -71,7 +76,7 @@ namespace Somfic.Database
             }
             catch (Exception ex)
             {
-                SqlResult compiled = CreateCompiler().Compile(query);
+                SqlResult compiled = MakeCompiler().Compile(query);
 
                 AddExceptionData(ex, compiled);
                 _log.LogTrace(ex, errorMessage);
@@ -112,7 +117,7 @@ namespace Somfic.Database
 
         private void HandleException(Exception ex, Query query, string message)
         {
-            SqlResult compiled = CreateCompiler().Compile(query);
+            SqlResult compiled = MakeCompiler().Compile(query);
 
             AddExceptionData(ex, compiled);
             _log.LogTrace(ex, message);
@@ -160,22 +165,9 @@ namespace Somfic.Database
             return connectionString;
         }
 
-        private Compiler CreateCompiler()
-        {
-            try
-            {
-                return new MySqlCompiler();
-            }
-            catch (Exception ex)
-            {
-                _log.LogTrace(ex, "Could not create MySqlCompiler");
-                throw;
-            }
-        }
-
         private QueryFactory CreateFactory()
         {
-            return new QueryFactory(GetConnection(), CreateCompiler())
+            return new QueryFactory(GetConnection(), MakeCompiler())
             {
                 Logger = LogQuery
             };
