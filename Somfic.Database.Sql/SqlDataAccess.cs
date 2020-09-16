@@ -7,7 +7,7 @@ namespace Somfic.Database.Sql
 {
     public class SqlDataAccess : DataAccess
     {
-        public SqlDataAccess(ILogger log, IConfiguration config) : base(log, config)
+        public SqlDataAccess(ILogger<SqlDataAccess> log, IConfiguration config) : base(log, config)
         {
         }
 

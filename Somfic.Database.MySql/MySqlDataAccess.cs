@@ -9,7 +9,7 @@ namespace Somfic.Database.MySql
     /// <inheritdoc />
     public class MySqlDataAccess : DataAccess
     {
-        public MySqlDataAccess(ILogger log, IConfiguration config) : base(log, config)
+        public MySqlDataAccess(ILogger<MySqlDataAccess> log, IConfiguration config) : base(log, config)
         {
         }
 

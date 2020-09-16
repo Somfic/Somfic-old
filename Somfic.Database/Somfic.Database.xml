@@ -4,6 +4,37 @@
         <name>Somfic.Database</name>
     </assembly>
     <members>
+        <member name="T:Somfic.Database.DataAccess">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Database.DataAccess.MakeDbConnection(System.String)">
+            <summary>
+            Creates a connection to the database
+            </summary>
+            <param name="connectionString">The connection string configured</param>
+        </member>
+        <member name="M:Somfic.Database.DataAccess.FirstAsync``1(SqlKata.Query,System.Data.IDbTransaction)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Database.DataAccess.ListAsync``1(SqlKata.Query,System.Data.IDbTransaction)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Database.DataAccess.InsertAsync(SqlKata.Query,System.Data.IDbTransaction)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Database.DataAccess.UpdateAsync(SqlKata.Query,System.Data.IDbTransaction)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Database.DataAccess.DeleteAsync(SqlKata.Query,System.Data.IDbTransaction)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Database.DataAccessServiceCollection.AddDataAccess``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds an <seealso cref="T:Somfic.Database.IDataAccess"/> class to the <seealso cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>
+            </summary>
+            <typeparam name="T">The <see cref="T:Somfic.Database.IDataAccess"/> implementation</typeparam>
+            <returns></returns>
+        </member>
         <member name="T:Somfic.Database.IDataAccess">
             <summary>
             Interface for accessing data from a database
