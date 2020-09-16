@@ -185,6 +185,9 @@ namespace Somfic.Logging.Console
                 case "My sql":
                     output = "MySQL";
                     break;
+                case "Sql":
+                    output = "SQL";
+                    break;
             }
 
             return output;
