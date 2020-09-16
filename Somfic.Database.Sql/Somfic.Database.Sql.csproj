@@ -2,23 +2,26 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <RepositoryUrl>https://github.com/Somfic/Somfic</RepositoryUrl>
+    <PackageIcon>logo_black_shine.jpg</PackageIcon>
     <Authors>Somfic</Authors>
     <Company>Somfic</Company>
     <Product>Database.Sql</Product>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageTags>Somfic Database Sql Injection</PackageTags>
+    <Version>1.0.0</Version>
     <Description>Provides a Sql database wrapper that works with dependency injection</Description>
     <Copyright>© Somfic 2020</Copyright>
-    <PackageIcon>logo_black_shine.jpg</PackageIcon>
-    <RepositoryUrl>https://github.com/Somfic/Somfic</RepositoryUrl>
-    <PackageTags>Somfic Database Sql Injection</PackageTags>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\Lucas\Documents\GitHub\Somfic\Somfic.Database.SQL\Somfic.Database.Sql.xml</DocumentationFile>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\Lucas\Documents\GitHub\Somfic\Somfic.Database.Sql\Somfic.Database.Sql.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.8" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.8" />
   </ItemGroup>
 
   <ItemGroup>
