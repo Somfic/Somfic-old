@@ -13,6 +13,11 @@
             </summary>
             <param name="connectionString">The connection string configured</param>
         </member>
+        <member name="M:Somfic.Database.DataAccess.MakeCompiler">
+            <summary>
+            Creates a sql compiler
+            </summary>
+        </member>
         <member name="M:Somfic.Database.DataAccess.FirstAsync``1(SqlKata.Query,System.Data.IDbTransaction)">
             <inheritdoc />
         </member>

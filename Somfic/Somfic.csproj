@@ -1,11 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Costura.Fody" Version="4.1.0" />
+    <PackageReference Include="Fody" Version="6.2.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.8" />
@@ -18,6 +23,7 @@
     <ProjectReference Include="..\Somfic.Http\Somfic.Http.csproj" />
     <ProjectReference Include="..\Somfic.Logging.Console\Somfic.Logging.Console.csproj" />
     <ProjectReference Include="..\Somfic.Logging\Somfic.Logging.csproj" />
+    <ProjectReference Include="..\Somfic.VoiceAttack\Somfic.VoiceAttack.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,5 +31,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy C:\Users\Lucas\Documents\GitHub\Somfic\Somfic\bin\Debug\netcoreapp3.1\Somfic.dll C:\Program Files (x86)\Steam\steamapps\common\VoiceAttack\Apps\Somfic\Somfic.dll /Y" />
+  </Target>
 
 </Project>

@@ -54,3 +54,10 @@ jobs:
         PROJECT_FILE_PATH: Somfic.Logging/Somfic.Logging.csproj
         PACKAGE_NAME: Somfic.Logging
         NUGET_KEY: ${{ secrets.NUGET_KEY }}
+
+    - name: Publish Somfic.VoiceAttack
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: Somfic.VoiceAttack/Somfic.VoiceAttack.csproj
+        PACKAGE_NAME: Somfic.VoiceAttack
+        NUGET_KEY: ${{ secrets.NUGET_KEY }}
