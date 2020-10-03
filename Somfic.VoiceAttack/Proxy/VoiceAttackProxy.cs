@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Somfic.VoiceAttack.Audio;
+using Somfic.VoiceAttack.Commands;
 using Somfic.VoiceAttack.Log;
 using Somfic.VoiceAttack.Options;
 using Somfic.VoiceAttack.Paths;
@@ -25,6 +26,8 @@ namespace Somfic.VoiceAttack.Proxy
             Paths = new VoiceAttackPaths(vaProxy);
             Options = new VoiceAttackOptions(vaProxy);
             Speech = new VoiceAttackSpeech(vaProxy);
+            Command = new VoiceAttackCommand(vaProxy);
+            Commands = new VoiceAttackCommands(vaProxy);
         }
 
         /// <inheritdoc />
@@ -56,6 +59,12 @@ namespace Somfic.VoiceAttack.Proxy
 
         /// <inheritdoc />
         public VoiceAttackSpeech Speech { get; }
+
+        /// <inheritdoc />
+        public VoiceAttackCommands Commands { get; }
+
+        /// <inheritdoc />
+        public VoiceAttackCommand Command { get; }
 
         /// <inheritdoc />
         public Task<IReadOnlyCollection<string>> GeneratePhrases(string query, bool trimSpaces = false, bool lowercase = false)

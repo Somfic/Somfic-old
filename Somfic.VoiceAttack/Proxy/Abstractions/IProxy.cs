@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Somfic.VoiceAttack.Audio;
+using Somfic.VoiceAttack.Commands;
 using Somfic.VoiceAttack.Log;
 using Somfic.VoiceAttack.Options;
 using Somfic.VoiceAttack.Paths;
@@ -56,6 +57,16 @@ namespace Somfic.VoiceAttack.Proxy.Abstractions
         /// Container for all speech information
         /// </summary>
         VoiceAttackSpeech Speech { get; }
+
+        /// <summary>
+        /// Container for all command information
+        /// </summary>
+        VoiceAttackCommands Commands { get; }
+
+        /// <summary>
+        /// Container for executing command information
+        /// </summary>
+        VoiceAttackCommand Command { get; }
 
         /// <summary>
         /// Generates a collection of phrases based on a query

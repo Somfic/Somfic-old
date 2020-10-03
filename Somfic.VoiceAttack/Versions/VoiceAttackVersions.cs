@@ -24,7 +24,7 @@ namespace Somfic.VoiceAttack.Versions
         /// <summary>
         /// Whether this is a stable VoiceAttack release
         /// </summary>
-        public bool IsStableRelease => _proxy.IsStable;
+        public bool IsStableRelease => _proxy.IsRelease;
 
         /// <summary>
         /// Whether this is the trial version
