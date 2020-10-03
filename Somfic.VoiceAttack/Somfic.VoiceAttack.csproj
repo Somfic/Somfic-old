@@ -9,6 +9,7 @@
     <PackageIcon>logo_black_shine.jpg</PackageIcon>
     <RepositoryType>https://github.com/Somfic/Somfic</RepositoryType>
     <PackageTags>Somfic VoiceAttack VaProxy Plugin</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
