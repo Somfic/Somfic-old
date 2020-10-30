@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Somfic.Logging.VoiceAttack</name>
+    </assembly>
+    <members>
+        <member name="T:Somfic.Logging.VoiceAttack.VoiceAttackLogger">
+            <summary>
+            A pretty console logger
+            </summary>
+        </member>
+        <member name="M:Somfic.Logging.VoiceAttack.VoiceAttackLogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.VoiceAttack.VoiceAttackLogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.VoiceAttack.VoiceAttackLogger.BeginScope``1(``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Logging.VoiceAttack.VoiceAttackLoggerExtensions.AddVoiceAttack(Microsoft.Extensions.Logging.ILoggingBuilder,System.Object)">
+            <summary>
+            Adds VoiceAttack logging to the <seealso cref="T:Microsoft.Extensions.Logging.ILoggingBuilder"/>
+            </summary>
+            <param name="vaProxy">VoiceAttack's proxy</param>
+        </member>
+    </members>
+</doc>
