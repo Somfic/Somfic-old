@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Somfic.Logging.Console
+namespace Somfic.Logging
 {
     /// <summary>
     /// NoopDisposable helper class
