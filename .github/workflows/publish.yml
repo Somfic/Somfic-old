@@ -1,0 +1,70 @@
+name: Publish to NuGet
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    name: Publish to NuGet
+    
+    steps:
+    - uses: actions/checkout@v2
+
+    # Publish to NuGet
+    - name: Publish Somfic.Database
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: Somfic.Database/Somfic.Database.csproj
+        PACKAGE_NAME: Somfic.Database
+        NUGET_KEY: ${{ secrets.NUGET_KEY }}
+        
+    - name: Publish Somfic.Database.MySql
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: Somfic.Database.MySql/Somfic.Database.MySql.csproj
+        PACKAGE_NAME: Somfic.Database.Mysql
+        NUGET_KEY: ${{ secrets.NUGET_KEY }}
+
+    - name: Publish Somfic.Database.Sql
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: Somfic.Database.Sql/Somfic.Database.Sql.csproj
+        PACKAGE_NAME: Somfic.Database.Sql
+        NUGET_KEY: ${{ secrets.NUGET_KEY }}
+        
+    - name: Publish Somfic.Http
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: Somfic.Http/Somfic.Http.csproj
+        PACKAGE_NAME: Somfic.Http
+        NUGET_KEY: ${{ secrets.NUGET_KEY }}
+        
+    - name: Publish Somfic.Logging.Console
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: Somfic.Logging.Console/Somfic.Logging.Console.csproj
+        PACKAGE_NAME: Somfic.Logging.Console
+        NUGET_KEY: ${{ secrets.NUGET_KEY }}
+        
+    - name: Publish Somfic.Logging
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: Somfic.Logging/Somfic.Logging.csproj
+        PACKAGE_NAME: Somfic.Logging
+        NUGET_KEY: ${{ secrets.NUGET_KEY }}
+
+    - name: Publish Somfic.VoiceAttack
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: Somfic.VoiceAttack/Somfic.VoiceAttack.csproj
+        PACKAGE_NAME: Somfic.VoiceAttack
+        NUGET_KEY: ${{ secrets.NUGET_KEY }}
+
+    - name: Publish Somfic.Logging.VoiceAttack
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: Somfic.Logging.VoiceAttack/Somfic.Logging.VoiceAttack.csproj
+        PACKAGE_NAME: Somfic.Logging.VoiceAttack
+        NUGET_KEY: ${{ secrets.NUGET_KEY }}

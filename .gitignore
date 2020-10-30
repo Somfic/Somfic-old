@@ -338,6 +338,4 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
-Somfic
-Somfic/
-Somfic/Somfic.csproj
+.vscode/
