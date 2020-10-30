@@ -10,7 +10,7 @@
     <PackageIcon>logo_black_shine.jpg</PackageIcon>
     <PackageTags>Somfic VoiceAttack Logging</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

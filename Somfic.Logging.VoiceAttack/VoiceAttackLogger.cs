@@ -64,7 +64,7 @@ namespace Somfic.Logging.VoiceAttack
         /// <inheritdoc />
         public bool IsEnabled(LogLevel logLevel)
         {
-            return true;
+            return logLevel >= LogLevel.Information;
         }
 
         /// <inheritdoc />
