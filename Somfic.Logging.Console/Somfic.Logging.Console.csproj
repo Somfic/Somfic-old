@@ -11,7 +11,7 @@
     <PackageTags>Somfic</PackageTags>
     <Description>A colorful depedency injection console logger with support of ANSI themes</Description>
     <PackageReleaseNotes>Somfic Logging File Console ANSI Injection</PackageReleaseNotes>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Copyright>© Somfic 2020</Copyright>
   </PropertyGroup>
 
@@ -31,7 +31,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.8" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>

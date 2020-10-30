@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -7,22 +7,21 @@
     <PackageIcon>logo_black_shine.jpg</PackageIcon>
     <Authors>Somfic</Authors>
     <Company>Somfic</Company>
-    <Product>Database.MySql</Product>
+    <Product>Database.Sql</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageTags>Somfic Database MySql Injection</PackageTags>
-    <Version>1.3.2</Version>
-    <Description>Provides a MySql database wrapper that works with dependency injection</Description>
+    <PackageTags>Somfic Database Sql Injection</PackageTags>
+    <Version>1.0.2</Version>
+    <Description>Provides a Sql database wrapper that works with dependency injection</Description>
     <Copyright>© Somfic 2020</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Users\Lucas\Documents\GitHub\Somfic\Somfic.Database.MySql\Somfic.Database.MySql.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\Lucas\Documents\GitHub\Somfic\Somfic.Database.Sql\Somfic.Database.Sql.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.8" />
-    <PackageReference Include="MySql.Data" Version="8.0.21" />
   </ItemGroup>
 
   <ItemGroup>

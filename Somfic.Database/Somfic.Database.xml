@@ -4,83 +4,88 @@
         <name>Somfic.Database</name>
     </assembly>
     <members>
-        <member name="T:Somfic.Database.IDatabaseConnection">
+        <member name="T:Somfic.Database.DataAccess">
+            <inheritdoc />
+        </member>
+        <member name="M:Somfic.Database.DataAccess.MakeDbConnection(System.String)">
             <summary>
-            An abstract database connection service
+            Creates a connection to the database
+            </summary>
+            <param name="connectionString">The connection string configured</param>
+        </member>
+        <member name="M:Somfic.Database.DataAccess.MakeCompiler">
+            <summary>
+            Creates a sql compiler
             </summary>
         </member>
-        <member name="M:Somfic.Database.IDatabaseConnection.Get``1(System.Object,System.Data.IDbTransaction)">
-            <summary>
-            Gets a record from a table
-            </summary>
-            <typeparam name="T">The type of record</typeparam>
-            <param name="id">The id of the record</param>
-            <param name="transaction">The transaction this task is part of</param>
-            <returns>The record</returns>
+        <member name="M:Somfic.Database.DataAccess.FirstAsync``1(SqlKata.Query,System.Data.IDbTransaction)">
+            <inheritdoc />
         </member>
-        <member name="M:Somfic.Database.IDatabaseConnection.Get``1(System.Func{``0,System.Boolean},System.Data.IDbTransaction)">
-            <summary>
-            Gets multiple records from a table
-            </summary>
-            <typeparam name="T">The type of record</typeparam>
-            <param name="filter">The predicate of the filter</param>
-            <param name="transaction">The transaction this task is part of</param>
-            <returns>A list of records</returns>
+        <member name="M:Somfic.Database.DataAccess.ListAsync``1(SqlKata.Query,System.Data.IDbTransaction)">
+            <inheritdoc />
         </member>
-        <member name="M:Somfic.Database.IDatabaseConnection.Get``1(System.Func{``0,System.Boolean},System.Int32,System.Int32,System.Data.IDbTransaction)">
-            <summary>
-            Gets multiple records from a table with pagination
-            </summary>
-            <typeparam name="T">The type of record</typeparam>
-            <param name="resultsPerPage">The amount of results per page</param>
-            <param name="page">The page index</param>
-            <param name="filter">The predicate of the filter</param>
-            <param name="transaction">The transaction this task is part of</param>
-            <returns>A list of records</returns>
+        <member name="M:Somfic.Database.DataAccess.InsertAsync(SqlKata.Query,System.Data.IDbTransaction)">
+            <inheritdoc />
         </member>
-        <member name="M:Somfic.Database.IDatabaseConnection.Count``1(System.Func{``0,System.Boolean},System.Data.IDbTransaction)">
-            <summary>
-            Counts the amount of records against a predicate
-            </summary>
-            <typeparam name="T">The type of record</typeparam>
-            <param name="filter">The predicate of the filter</param>
-            <param name="transaction">The transaction this task is part of</param>
-            <returns>The amount of records</returns>
+        <member name="M:Somfic.Database.DataAccess.UpdateAsync(SqlKata.Query,System.Data.IDbTransaction)">
+            <inheritdoc />
         </member>
-        <member name="M:Somfic.Database.IDatabaseConnection.Insert``1(``0,System.Data.IDbTransaction)">
-            <summary>
-            Inserts a record
-            </summary>
-            <typeparam name="T">The type of record</typeparam>
-            <param name="entity">The record to be inserted</param>
-            <param name="transaction">The transaction this task is part of</param>
-            <returns>The inserted Id</returns>
+        <member name="M:Somfic.Database.DataAccess.DeleteAsync(SqlKata.Query,System.Data.IDbTransaction)">
+            <inheritdoc />
         </member>
-        <member name="M:Somfic.Database.IDatabaseConnection.Insert``1(System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.DataAccessServiceCollection.AddDataAccess``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
-            Inserts multiple records
+            Adds an <seealso cref="T:Somfic.Database.IDataAccess"/> class to the <seealso cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>
             </summary>
-            <typeparam name="T">The type of record</typeparam>
-            <param name="entities">The records to be inserted</param>
-            <param name="transaction">The transaction this task is part of</param>
+            <typeparam name="T">The <see cref="T:Somfic.Database.IDataAccess"/> implementation</typeparam>
+            <returns></returns>
         </member>
-        <member name="M:Somfic.Database.IDatabaseConnection.Update``1(``0,System.Data.IDbTransaction)">
+        <member name="T:Somfic.Database.IDataAccess">
             <summary>
-            Updates a record
+            Interface for accessing data from a database
             </summary>
-            <typeparam name="T">The type of record</typeparam>
-            <param name="entity">The record to be updated</param>
-            <param name="transaction">The transaction this task is part of</param>
-            <returns>Whether the update was a success</returns>
         </member>
-        <member name="M:Somfic.Database.IDatabaseConnection.Delete``1(``0,System.Data.IDbTransaction)">
+        <member name="M:Somfic.Database.IDataAccess.FirstAsync``1(SqlKata.Query,System.Data.IDbTransaction)">
             <summary>
-            Deletes a record
+            Reads a record from the database
             </summary>
-            <typeparam name="T">The type of record</typeparam>
-            <param name="entity">The record to be deleted</param>
-            <param name="transaction">The transaction this task is part of</param>
-            <returns>Whether the deletion was a success</returns>
+            <typeparam name="T">The model</typeparam>
+            <param name="query">The SQL query</param>
+            <param name="transaction">The database transaction</param>
+            <returns>The rows</returns>
+        </member>
+        <member name="M:Somfic.Database.IDataAccess.ListAsync``1(SqlKata.Query,System.Data.IDbTransaction)">
+            <summary>
+            Updates a record in the database
+            </summary>
+            <typeparam name="T">The model</typeparam>
+            <param name="query">The SQL query</param>
+            <param name="transaction">The database transaction</param>
+            <returns>The amount of affected rows</returns>
+        </member>
+        <member name="M:Somfic.Database.IDataAccess.InsertAsync(SqlKata.Query,System.Data.IDbTransaction)">
+            <summary>
+            Creates a record in the database
+            </summary>
+            <param name="query">The SQL query</param>
+            <param name="transaction">The database transaction</param>
+            <returns>The amount of affected rows</returns>
+        </member>
+        <member name="M:Somfic.Database.IDataAccess.UpdateAsync(SqlKata.Query,System.Data.IDbTransaction)">
+            <summary>
+            Updates a record in the database
+            </summary>
+            <param name="query">The SQL query</param>
+            <param name="transaction">The database transaction</param>
+            <returns>The amount of affected rows</returns>
+        </member>
+        <member name="M:Somfic.Database.IDataAccess.DeleteAsync(SqlKata.Query,System.Data.IDbTransaction)">
+            <summary>
+            Deletes a record from the database
+            </summary>
+            <param name="query">The SQL query</param>
+            <param name="transaction">The database transaction</param>
+            <returns>The amount of affected rows</returns>
         </member>
     </members>
 </doc>
