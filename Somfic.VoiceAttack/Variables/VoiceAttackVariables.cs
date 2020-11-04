@@ -61,7 +61,7 @@ namespace Somfic.VoiceAttack.Variables
                     break;
 
                 default:
-                    _log?.LogWarning("Could not set {name} variable because the type {type} is not supported", code.ToString());
+                    _log?.LogWarning("Could not set {name} variable because the type {type} is not supported", name, code.ToString());
                     break;
             }
         }
@@ -105,7 +105,7 @@ namespace Somfic.VoiceAttack.Variables
                     return (T)Convert.ChangeType(GetInt(name), typeof(T));
 
                 default:
-                    _log?.LogWarning("Could not get {name} variable because the type {type} is not supported", code.ToString());
+                    _log?.LogWarning("Could not get {name} variable because the type {type} is not supported", name, code.ToString());
                     return default;
             }
         }
