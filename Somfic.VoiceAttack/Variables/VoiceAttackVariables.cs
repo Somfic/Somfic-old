@@ -142,37 +142,37 @@ namespace Somfic.VoiceAttack.Variables
 
         private void SetShort(string name, short? value)
         {
-            _log?.LogTrace("Setting {{SMALL:{name}}} to {value}", name, value);
+            _log?.LogTrace("Setting {name} to {value}", $"{{SHORT:{name}}}", name, value);
             _proxy.SetSmall(name, value);
         }
 
         private void SetInt(string name, int? value)
         {
-            _log?.LogTrace("Setting {{INT:{name}}} to {value}", name, value);
+            _log?.LogTrace("Setting {name} to {value}", $"{{INT:{name}}}", name, value);
             _proxy.SetInt(name, value);
         }
 
         private void SetText(string name, string value)
         {
-            _log?.LogTrace("Setting {{TXT:{name}}} to {value}", name, value);
+            _log?.LogTrace("Setting {name} to {value}", $"{{TXT:{name}}}", name, value);
             _proxy.SetText(name, value);
         }
 
         private void SetDecimal(string name, decimal? value)
         {
-            _log?.LogTrace("Setting {{DEC:{name}}} to {value}", name, value);
+            _log?.LogTrace("Setting {name} to {value}", $"{{DEC:{name}}}", name, value);
             _proxy.SetDecimal(name, value);
         }
 
         private void SetBoolean(string name, bool? value)
         {
-            _log?.LogTrace("Setting {{BOOL:{name}}} to {value}", name, value);
+            _log?.LogTrace("Setting {name} to {value}", $"{{BOOL:{name}}}", name, value); 
             _proxy.SetBoolean(name, value);
         }
 
         private void SetDate(string name, DateTime? value)
         {
-            _log?.LogTrace("Setting {{DATE:{name}}} to {value}", name, value);
+            _log?.LogTrace("Setting {name} to {value}", $"{{DATE:{name}}}", name, value);
             _proxy.SetDate(name, value);
         }
     }
