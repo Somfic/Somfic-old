@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Somfic.VoiceAttack.Log
 {
@@ -6,7 +7,7 @@ namespace Somfic.VoiceAttack.Log
     {
         private readonly dynamic _proxy;
 
-        internal VoiceAttackLog(dynamic proxy)
+        internal VoiceAttackLog(dynamic proxy, IServiceProvider services)
         {
             _proxy = proxy;
         }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Somfic.VoiceAttack.Audio;
 using Somfic.VoiceAttack.Commands;
 using Somfic.VoiceAttack.Log;
@@ -16,18 +18,18 @@ namespace Somfic.VoiceAttack.Proxy
     {
         private readonly dynamic _vaProxy;
 
-        public VoiceAttackProxy(dynamic vaProxy)
+        public VoiceAttackProxy(dynamic vaProxy, IServiceProvider services = null)
         {
             _vaProxy = vaProxy;
 
-            Variables = new VoiceAttackVariables(vaProxy);
-            Versions = new VoiceAttackVersions(vaProxy);
-            Log = new VoiceAttackLog(vaProxy);
-            Paths = new VoiceAttackPaths(vaProxy);
-            Options = new VoiceAttackOptions(vaProxy);
-            Speech = new VoiceAttackSpeech(vaProxy);
-            Command = new VoiceAttackCommand(vaProxy);
-            Commands = new VoiceAttackCommands(vaProxy);
+            Variables = new VoiceAttackVariables(vaProxy, services);
+            Versions = new VoiceAttackVersions(vaProxy, services);
+            Log = new VoiceAttackLog(vaProxy, services);
+            Paths = new VoiceAttackPaths(vaProxy, services);
+            Options = new VoiceAttackOptions(vaProxy, services);
+            Speech = new VoiceAttackSpeech(vaProxy, services);
+            Command = new VoiceAttackCommand(vaProxy, services);
+            Commands = new VoiceAttackCommands(vaProxy, services);
         }
 
         /// <inheritdoc />

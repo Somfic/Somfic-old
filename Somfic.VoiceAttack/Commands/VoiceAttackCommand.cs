@@ -6,7 +6,7 @@ namespace Somfic.VoiceAttack.Commands
     {
         private readonly dynamic _proxy;
 
-        internal VoiceAttackCommand(dynamic proxy)
+        internal VoiceAttackCommand(dynamic proxy, IServiceProvider services)
         {
             _proxy = proxy;
         }

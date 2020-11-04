@@ -1,16 +1,18 @@
 ﻿using System;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Somfic.VoiceAttack.Variables
 {
-    //todo: there must be a cleaner way than this... perhaps with a factory?
-
     public class VoiceAttackVariables
     {
         private readonly dynamic _proxy;
+        private readonly ILogger<VoiceAttackVariables> _log;
 
-        internal VoiceAttackVariables(dynamic proxy)
+        internal VoiceAttackVariables(dynamic vaProxy, IServiceProvider services)
         {
-            _proxy = proxy;
+            _proxy = vaProxy;
+            _log = services.GetService<ILogger<VoiceAttackVariables>>();
         }
 
         /// <summary>
@@ -21,39 +23,45 @@ namespace Somfic.VoiceAttack.Variables
         /// <param name="value">The value of the variable</param>
         public void Set<T>(string name, T value)
         {
-            switch (Type.GetTypeCode(typeof(T)))
+            var code = Type.GetTypeCode(typeof(T));
+
+            switch (code)
             {
                 case TypeCode.Boolean:
-                    SetBoolean(name, (dynamic)value);
+                    SetBoolean(name, (bool?)Convert.ChangeType(value, typeof(bool?)));
                     break;
 
                 case TypeCode.DateTime:
-                    SetDate(name, (dynamic)value);
+                    SetDate(name, (DateTime?)Convert.ChangeType(value, typeof(DateTime?)));
                     break;
 
                 case TypeCode.Single:
                 case TypeCode.Decimal:
                 case TypeCode.Double:
-                    SetDecimal(name, (dynamic)value);
+                    SetDecimal(name, (decimal?)Convert.ChangeType(value, typeof(decimal?)));
                     break;
 
                 case TypeCode.Char:
                 case TypeCode.String:
-                    SetText(name, value.ToString());
+                    SetText(name, (string)Convert.ChangeType(value, typeof(string)));
                     break;
 
                 case TypeCode.Byte:
                 case TypeCode.Int16:
                 case TypeCode.UInt16:
                 case TypeCode.SByte:
-                    SetShort(name, (dynamic)value);
+                    SetShort(name, (short?)Convert.ChangeType(value, typeof(short?)));
                     break;
 
                 case TypeCode.Int32:
                 case TypeCode.UInt32:
                 case TypeCode.Int64:
                 case TypeCode.UInt64:
-                    SetInt(name, (dynamic)value);
+                    SetInt(name, (int?)Convert.ChangeType(value, typeof(int?)));
+                    break;
+
+                default:
+                    _log.LogWarning("Could not set {name} variable because the type {type} is not supported", code.ToString());
                     break;
             }
         }
@@ -65,52 +73,107 @@ namespace Somfic.VoiceAttack.Variables
         /// <param name="name">The name of the variable</param>
         public T Get<T>(string name)
         {
-            switch (Type.GetTypeCode(typeof(T)))
+            var code = Type.GetTypeCode(typeof(T));
+
+            switch (code)
             {
                 case TypeCode.Boolean:
-                    return (dynamic)GetBoolean(name);
+                    return (T)Convert.ChangeType(GetBoolean(name), typeof(T));
 
                 case TypeCode.DateTime:
-                    return (dynamic)GetDate(name);
+                    return (T)Convert.ChangeType(GetDate(name), typeof(T));
 
                 case TypeCode.Single:
                 case TypeCode.Decimal:
                 case TypeCode.Double:
-                    return (dynamic)GetDecimal(name);
+                    return (T)Convert.ChangeType(GetDecimal(name), typeof(T));
 
                 case TypeCode.Char:
                 case TypeCode.String:
-                    return (dynamic)GetText(name);
+                    return (T)Convert.ChangeType(GetText(name), typeof(T));
 
                 case TypeCode.Byte:
                 case TypeCode.Int16:
                 case TypeCode.UInt16:
                 case TypeCode.SByte:
-                    return (dynamic)GetShort(name);
+                    return (T)Convert.ChangeType(GetShort(name), typeof(T));
 
                 case TypeCode.Int32:
                 case TypeCode.UInt32:
                 case TypeCode.Int64:
                 case TypeCode.UInt64:
-                    return (dynamic)GetInt(name);
+                    return (T)Convert.ChangeType(GetInt(name), typeof(T));
 
                 default:
-                    return (dynamic) null;
+                    _log.LogWarning("Could not get {name} variable because the type {type} is not supported", code.ToString());
+                    return default;
             }
         }
 
-        private short? GetShort(string name) => _proxy.GetSmall(name);
-        private int? GetInt(string name) => _proxy.GetInt(name);
-        private string GetText(string name) => _proxy.GetText(name);
-        private decimal? GetDecimal(string name) => _proxy.GetDecimal(name);
-        private bool? GetBoolean(string name) => _proxy.GetBoolean(name);
-        private DateTime? GetDate(string name) => _proxy.GetDate(name); 
-        
-        private void SetShort(string name, short? value) => _proxy.GetSmall(name, value);
-        private void SetInt(string name, int? value) => _proxy.GetInt(name, value);
-        private void SetText(string name, string value) => _proxy.SetText(name, value);
-        private void SetDecimal(string name, decimal? value) => _proxy.GetDecimal(name, value);
-        private void SetBoolean(string name, bool? value) => _proxy.GetBoolean(name, value);
-        private void SetDate(string name, DateTime? value) => _proxy.GetDate(name,value);
+        private short? GetShort(string name)
+        {
+            return _proxy.GetSmall(name);
+        }
+
+        private int? GetInt(string name)
+        {
+            return _proxy.GetInt(name);
+        }
+
+        private string GetText(string name)
+        {
+            return _proxy.GetText(name);
+        }
+
+        private decimal? GetDecimal(string name)
+        {
+            return _proxy.GetDecimal(name);
+        }
+
+        private bool? GetBoolean(string name)
+        {
+            return _proxy.GetBoolean(name);
+        }
+
+        private DateTime? GetDate(string name)
+        {
+            return _proxy.GetDate(name);
+        }
+
+        private void SetShort(string name, short? value)
+        {
+            _log.LogTrace("Setting {{SMALL:{name}}} to {value}", name, value);
+            _proxy.SetSmall(name, value);
+        }
+
+        private void SetInt(string name, int? value)
+        {
+            _log.LogTrace("Setting {{INT:{name}}} to {value}", name, value);
+            _proxy.SetInt(name, value);
+        }
+
+        private void SetText(string name, string value)
+        {
+            _log.LogTrace("Setting {{TXT:{name}}} to {value}", name, value);
+            _proxy.SetText(name, value);
+        }
+
+        private void SetDecimal(string name, decimal? value)
+        {
+            _log.LogTrace("Setting {{DEC:{name}}} to {value}", name, value);
+            _proxy.SetDecimal(name, value);
+        }
+
+        private void SetBoolean(string name, bool? value)
+        {
+            _log.LogTrace("Setting {{BOOL:{name}}} to {value}", name, value);
+            _proxy.SetBoolean(name, value);
+        }
+
+        private void SetDate(string name, DateTime? value)
+        {
+            _log.LogTrace("Setting {{DATE:{name}}} to {value}", name, value);
+            _proxy.SetDate(name, value);
+        }
     }
 }
