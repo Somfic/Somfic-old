@@ -8,7 +8,7 @@ namespace Somfic.VoiceAttack.Audio
     {
         private readonly dynamic _proxy;
 
-        internal VoiceAttackSpeech(dynamic proxy, IServiceProvider services)
+        internal VoiceAttackSpeech(dynamic proxy, IServiceProvider services = null)
         {
             _proxy = proxy;
         }

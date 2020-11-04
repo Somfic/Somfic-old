@@ -7,7 +7,7 @@ namespace Somfic.VoiceAttack.Log
     {
         private readonly dynamic _proxy;
 
-        internal VoiceAttackLog(dynamic proxy, IServiceProvider services)
+        internal VoiceAttackLog(dynamic proxy, IServiceProvider services = null)
         {
             _proxy = proxy;
         }
