@@ -1,6 +1,7 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+
+using System;
 
 namespace Somfic.VoiceAttack.Variables
 {
@@ -23,8 +24,12 @@ namespace Somfic.VoiceAttack.Variables
         /// <param name="value">The value of the variable</param>
         public void Set<T>(string name, T value)
         {
-            var code = Convert.GetTypeCode(value);
+            TypeCode code = Convert.GetTypeCode(value);
+            Set(name, value, code);
+        }
 
+        private void Set(string name, object value, TypeCode code)
+        {
             switch (code)
             {
                 case TypeCode.Boolean:
@@ -60,11 +65,17 @@ namespace Somfic.VoiceAttack.Variables
                     SetInt(name, (int?)Convert.ChangeType(value, typeof(int?)));
                     break;
 
+                case TypeCode.Object:
+                    var newCode = Convert.GetTypeCode(value);
+                    Set(name, value, newCode);
+                    break;
+
                 default:
                     _log?.LogWarning("Could not set {name} variable because the type {type} is not supported", name, code.ToString());
                     break;
             }
         }
+
 
         /// <summary>
         /// Get a variable
@@ -73,7 +84,7 @@ namespace Somfic.VoiceAttack.Variables
         /// <param name="name">The name of the variable</param>
         public T Get<T>(string name)
         {
-            var code = Type.GetTypeCode(typeof(T));
+            TypeCode code = Type.GetTypeCode(typeof(T));
 
             switch (code)
             {
@@ -166,7 +177,7 @@ namespace Somfic.VoiceAttack.Variables
 
         private void SetBoolean(string name, bool? value)
         {
-            _log?.LogTrace("Setting {name} to {value}", $"{{BOOL:{name}}}", name, value); 
+            _log?.LogTrace("Setting {name} to {value}", $"{{BOOL:{name}}}", name, value);
             _proxy.SetBoolean(name, value);
         }
 
