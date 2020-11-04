@@ -70,8 +70,12 @@ namespace Somfic.VoiceAttack.Variables
                     Set(name, value, newCode);
                     break;
 
+                case TypeCode.Empty:
+                    _log?.LogTrace("Skipping {name} because it was empty", name);
+                    break;
+
                 default:
-                    _log?.LogWarning("Could not set {name} variable because the type {type} is not supported", name, code.ToString());
+                    _log?.LogWarning("Could not set {name} variable to {value} because the type {type} is not supported", name, value, code.ToString());
                     break;
             }
         }
@@ -153,37 +157,37 @@ namespace Somfic.VoiceAttack.Variables
 
         private void SetShort(string name, short? value)
         {
-            _log?.LogTrace("Setting {name} to {value}", $"{{SHORT:{name}}}", name, value);
+            _log?.LogTrace("Setting {name} to {value}", $"{{SHORT:{name}}}", value);
             _proxy.SetSmall(name, value);
         }
 
         private void SetInt(string name, int? value)
         {
-            _log?.LogTrace("Setting {name} to {value}", $"{{INT:{name}}}", name, value);
+            _log?.LogTrace("Setting {name} to {value}", $"{{INT:{name}}}", value);
             _proxy.SetInt(name, value);
         }
 
         private void SetText(string name, string value)
         {
-            _log?.LogTrace("Setting {name} to {value}", $"{{TXT:{name}}}", name, value);
+            _log?.LogTrace("Setting {name} to {value}", $"{{TXT:{name}}}", value);
             _proxy.SetText(name, value);
         }
 
         private void SetDecimal(string name, decimal? value)
         {
-            _log?.LogTrace("Setting {name} to {value}", $"{{DEC:{name}}}", name, value);
+            _log?.LogTrace("Setting {name} to {value}", $"{{DEC:{name}}}", value);
             _proxy.SetDecimal(name, value);
         }
 
         private void SetBoolean(string name, bool? value)
         {
-            _log?.LogTrace("Setting {name} to {value}", $"{{BOOL:{name}}}", name, value);
+            _log?.LogTrace("Setting {name} to {value}", $"{{BOOL:{name}}}", value);
             _proxy.SetBoolean(name, value);
         }
 
         private void SetDate(string name, DateTime? value)
         {
-            _log?.LogTrace("Setting {name} to {value}", $"{{DATE:{name}}}", name, value);
+            _log?.LogTrace("Setting {name} to {value}", $"{{DATE:{name}}}", value);
             _proxy.SetDate(name, value);
         }
     }
