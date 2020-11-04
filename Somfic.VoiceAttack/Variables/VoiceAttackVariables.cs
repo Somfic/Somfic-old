@@ -23,7 +23,7 @@ namespace Somfic.VoiceAttack.Variables
         /// <param name="value">The value of the variable</param>
         public void Set<T>(string name, T value)
         {
-            var code = Type.GetTypeCode(typeof(T));
+            var code = Convert.GetTypeCode(value);
 
             switch (code)
             {
