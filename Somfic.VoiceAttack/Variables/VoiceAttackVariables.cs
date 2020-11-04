@@ -127,7 +127,7 @@ namespace Somfic.VoiceAttack.Variables
 
         private short? GetShort(string name)
         {
-            return _proxy.GetSmall(name);
+            return _proxy.GetSmallInt(name);
         }
 
         private int? GetInt(string name)
@@ -158,12 +158,12 @@ namespace Somfic.VoiceAttack.Variables
         private void SetShort(string name, short? value)
         {
             _log?.LogTrace("Set '{name}' to '{value}'", $"{{SHORT:{name}}}", value);
-            _proxy.SetSmall(name, value);
+            _proxy.SetSmallInt(name, value);
         }
 
         private void SetInt(string name, int? value)
         {
-            _log?.LogTrace("Set '{name}' to '{value}'}", $"{{INT:{name}}}", value);
+            _log?.LogTrace("Set '{name}' to '{value}'", $"{{INT:{name}}}", value);
             _proxy.SetInt(name, value);
         }
 
