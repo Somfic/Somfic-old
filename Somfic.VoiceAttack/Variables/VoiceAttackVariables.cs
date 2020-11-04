@@ -71,11 +71,11 @@ namespace Somfic.VoiceAttack.Variables
                     break;
 
                 case TypeCode.Empty:
-                    _log?.LogTrace("Skipping {name} because it was empty", name);
+                    _log?.LogTrace("Skipping '{name}' because it was empty", name);
                     break;
 
                 default:
-                    _log?.LogWarning("Could not set {name} variable to {value} because the type {type} is not supported", name, value, code.ToString());
+                    _log?.LogWarning("Could not set '{name}' to '{value}' because the type '{type}' is not supported", name, value, code.ToString());
                     break;
             }
         }
@@ -120,7 +120,7 @@ namespace Somfic.VoiceAttack.Variables
                     return (T)Convert.ChangeType(GetInt(name), typeof(T));
 
                 default:
-                    _log?.LogWarning("Could not get {name} variable because the type {type} is not supported", name, code.ToString());
+                    _log?.LogWarning("Could not get '{name}' because the type '{type}' is not supported", name, code.ToString());
                     return default;
             }
         }
@@ -157,25 +157,25 @@ namespace Somfic.VoiceAttack.Variables
 
         private void SetShort(string name, short? value)
         {
-            _log?.LogTrace("Setting {name} to {value}", $"{{SHORT:{name}}}", value);
+            _log?.LogTrace("Set '{name}' to '{value}'", $"{{SHORT:{name}}}", value);
             _proxy.SetSmall(name, value);
         }
 
         private void SetInt(string name, int? value)
         {
-            _log?.LogTrace("Setting {name} to {value}", $"{{INT:{name}}}", value);
+            _log?.LogTrace("Set '{name}' to '{value}'}", $"{{INT:{name}}}", value);
             _proxy.SetInt(name, value);
         }
 
         private void SetText(string name, string value)
         {
-            _log?.LogTrace("Setting {name} to {value}", $"{{TXT:{name}}}", value);
+            _log?.LogTrace("Set '{name}' to '{value}'", $"{{TXT:{name}}}", value);
             _proxy.SetText(name, value);
         }
 
         private void SetDecimal(string name, decimal? value)
         {
-            _log?.LogTrace("Setting {name} to {value}", $"{{DEC:{name}}}", value);
+            _log?.LogTrace("Set '{name}' to '{value}'", $"{{DEC:{name}}}", value);
             _proxy.SetDecimal(name, value);
         }
 
@@ -187,7 +187,7 @@ namespace Somfic.VoiceAttack.Variables
 
         private void SetDate(string name, DateTime? value)
         {
-            _log?.LogTrace("Setting {name} to {value}", $"{{DATE:{name}}}", value);
+            _log?.LogTrace("Set '{name}' to '{value}'", $"{{DATE:{name}}}", value);
             _proxy.SetDate(name, value);
         }
     }
