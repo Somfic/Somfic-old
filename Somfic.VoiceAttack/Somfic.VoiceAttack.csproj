@@ -10,7 +10,7 @@
     <RepositoryType>https://github.com/Somfic/Somfic</RepositoryType>
     <PackageTags>Somfic VoiceAttack VaProxy Plugin</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.8</Version>
+    <Version>1.0.9</Version>
   </PropertyGroup>
 
   <ItemGroup>

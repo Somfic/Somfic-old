@@ -33,17 +33,17 @@ namespace Somfic.VoiceAttack.Variables
             switch (code)
             {
                 case TypeCode.Boolean:
-                    SetBoolean(name, (bool?)Convert.ChangeType(value, typeof(bool?)));
+                    SetBoolean(name, (bool)Convert.ChangeType(value, typeof(bool)));
                     break;
 
                 case TypeCode.DateTime:
-                    SetDate(name, (DateTime?)Convert.ChangeType(value, typeof(DateTime?)));
+                    SetDate(name, (DateTime)Convert.ChangeType(value, typeof(DateTime)));
                     break;
 
                 case TypeCode.Single:
                 case TypeCode.Decimal:
                 case TypeCode.Double:
-                    SetDecimal(name, (decimal?)Convert.ChangeType(value, typeof(decimal?)));
+                    SetDecimal(name, (decimal)Convert.ChangeType(value, typeof(decimal)));
                     break;
 
                 case TypeCode.Char:
@@ -55,14 +55,14 @@ namespace Somfic.VoiceAttack.Variables
                 case TypeCode.Int16:
                 case TypeCode.UInt16:
                 case TypeCode.SByte:
-                    SetShort(name, (short?)Convert.ChangeType(value, typeof(short?)));
+                    SetShort(name, (short)Convert.ChangeType(value, typeof(short)));
                     break;
 
                 case TypeCode.Int32:
                 case TypeCode.UInt32:
                 case TypeCode.Int64:
                 case TypeCode.UInt64:
-                    SetInt(name, (int?)Convert.ChangeType(value, typeof(int?)));
+                    SetInt(name, (int)Convert.ChangeType(value, typeof(int)));
                     break;
 
                 case TypeCode.Object:
