@@ -7,7 +7,7 @@ namespace Somfic.VoiceAttack.Paths
     {
         private readonly dynamic _proxy;
 
-        internal VoiceAttackPaths(dynamic proxy, IServiceProvider services)
+        internal VoiceAttackPaths(dynamic proxy, IServiceProvider services = null)
         {
             _proxy = proxy;
         }

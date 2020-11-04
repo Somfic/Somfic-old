@@ -9,10 +9,10 @@ namespace Somfic.VoiceAttack.Variables
         private readonly dynamic _proxy;
         private readonly ILogger<VoiceAttackVariables> _log;
 
-        internal VoiceAttackVariables(dynamic vaProxy, IServiceProvider services)
+        internal VoiceAttackVariables(dynamic vaProxy, IServiceProvider services = null)
         {
             _proxy = vaProxy;
-            _log = services.GetService<ILogger<VoiceAttackVariables>>();
+            _log = services?.GetService<ILogger<VoiceAttackVariables>>();
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Somfic.VoiceAttack.Variables
                     break;
 
                 default:
-                    _log.LogWarning("Could not set {name} variable because the type {type} is not supported", code.ToString());
+                    _log?.LogWarning("Could not set {name} variable because the type {type} is not supported", code.ToString());
                     break;
             }
         }
@@ -105,7 +105,7 @@ namespace Somfic.VoiceAttack.Variables
                     return (T)Convert.ChangeType(GetInt(name), typeof(T));
 
                 default:
-                    _log.LogWarning("Could not get {name} variable because the type {type} is not supported", code.ToString());
+                    _log?.LogWarning("Could not get {name} variable because the type {type} is not supported", code.ToString());
                     return default;
             }
         }
@@ -142,37 +142,37 @@ namespace Somfic.VoiceAttack.Variables
 
         private void SetShort(string name, short? value)
         {
-            _log.LogTrace("Setting {{SMALL:{name}}} to {value}", name, value);
+            _log?.LogTrace("Setting {{SMALL:{name}}} to {value}", name, value);
             _proxy.SetSmall(name, value);
         }
 
         private void SetInt(string name, int? value)
         {
-            _log.LogTrace("Setting {{INT:{name}}} to {value}", name, value);
+            _log?.LogTrace("Setting {{INT:{name}}} to {value}", name, value);
             _proxy.SetInt(name, value);
         }
 
         private void SetText(string name, string value)
         {
-            _log.LogTrace("Setting {{TXT:{name}}} to {value}", name, value);
+            _log?.LogTrace("Setting {{TXT:{name}}} to {value}", name, value);
             _proxy.SetText(name, value);
         }
 
         private void SetDecimal(string name, decimal? value)
         {
-            _log.LogTrace("Setting {{DEC:{name}}} to {value}", name, value);
+            _log?.LogTrace("Setting {{DEC:{name}}} to {value}", name, value);
             _proxy.SetDecimal(name, value);
         }
 
         private void SetBoolean(string name, bool? value)
         {
-            _log.LogTrace("Setting {{BOOL:{name}}} to {value}", name, value);
+            _log?.LogTrace("Setting {{BOOL:{name}}} to {value}", name, value);
             _proxy.SetBoolean(name, value);
         }
 
         private void SetDate(string name, DateTime? value)
         {
-            _log.LogTrace("Setting {{DATE:{name}}} to {value}", name, value);
+            _log?.LogTrace("Setting {{DATE:{name}}} to {value}", name, value);
             _proxy.SetDate(name, value);
         }
     }
