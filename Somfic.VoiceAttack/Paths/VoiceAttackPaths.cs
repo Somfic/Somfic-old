@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace Somfic.VoiceAttack.Paths
 {
@@ -6,7 +7,7 @@ namespace Somfic.VoiceAttack.Paths
     {
         private readonly dynamic _proxy;
 
-        internal VoiceAttackPaths(dynamic proxy)
+        internal VoiceAttackPaths(dynamic proxy, IServiceProvider services)
         {
             _proxy = proxy;
         }

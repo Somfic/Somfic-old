@@ -6,9 +6,9 @@ namespace Somfic.VoiceAttack.Versions
     {
         private readonly dynamic _proxy;
 
-        internal VoiceAttackVersions(dynamic proxy)
+        internal VoiceAttackVersions(dynamic vaProxy, IServiceProvider services)
         {
-            _proxy = proxy;
+            _proxy = vaProxy;
         }
 
         /// <summary>

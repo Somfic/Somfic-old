@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Somfic.VoiceAttack.Audio
@@ -7,7 +8,7 @@ namespace Somfic.VoiceAttack.Audio
     {
         private readonly dynamic _proxy;
 
-        internal VoiceAttackSpeech(dynamic proxy)
+        internal VoiceAttackSpeech(dynamic proxy, IServiceProvider services)
         {
             _proxy = proxy;
         }
