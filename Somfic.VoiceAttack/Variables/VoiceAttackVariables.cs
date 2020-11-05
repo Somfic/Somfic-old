@@ -181,7 +181,7 @@ namespace Somfic.VoiceAttack.Variables
 
         private void SetBoolean(string name, bool? value)
         {
-            _log?.LogTrace("Setting {name} to {value}", $"{{BOOL:{name}}}", value);
+            _log?.LogTrace("Set {name} to {value}", $"{{BOOL:{name}}}", value);
             _proxy.SetBoolean(name, value);
         }
 
